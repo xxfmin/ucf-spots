@@ -1,0 +1,165 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BA1"
+      },
+      "geometry": {
+        "coordinates": [-81.199122530337, 28.60105093035935],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "BA2"
+      },
+      "geometry": {
+        "coordinates": [-81.19955492048229, 28.601025564074135],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CB1"
+      },
+      "geometry": {
+        "coordinates": [-81.2004793829981, 28.603708812547353],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CB2"
+      },
+      "geometry": {
+        "coordinates": [-81.20012878379234, 28.604255525109153],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CROL"
+      },
+      "geometry": {
+        "coordinates": [-81.19715335026663, 28.601268376308226],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ENG1"
+      },
+      "geometry": {
+        "coordinates": [-81.19837712228876, 28.601514985329487],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ENG2"
+      },
+      "geometry": {
+        "coordinates": [-81.19838319711081, 28.601914998103638],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HEC"
+      },
+      "geometry": {
+        "coordinates": [-81.19766246868244, 28.60054028319702],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HS1"
+      },
+      "geometry": {
+        "coordinates": [-81.1986766519433, 28.603036942437555],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MSB"
+      },
+      "geometry": {
+        "coordinates": [-81.20051014877143, 28.599643432069612],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NSC"
+      },
+      "geometry": {
+        "coordinates": [-81.2029093894736, 28.603914888559046],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PAC"
+      },
+      "geometry": {
+        "coordinates": [-81.2045136972501, 28.602073634431335],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "PSY"
+      },
+      "geometry": {
+        "coordinates": [-81.19967608771309, 28.60476537721344],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "TA"
+      },
+      "geometry": {
+        "coordinates": [-81.20403520178917, 28.599284405118922],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "TCH"
+      },
+      "geometry": {
+        "coordinates": [-81.20327686649989, 28.601811525240677],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "VAB"
+      },
+      "geometry": {
+        "coordinates": [-81.20317253774803, 28.602861724000036],
+        "type": "Point"
+      }
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "BA1": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "BA2": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "BHC": {
+    "M-TH": "8:00AM-10:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "10:00AM-8:00PM"
+  },
+  "BIO": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "BSFS": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "CB1": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "CB2": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "CMB": {
+    "M-TH": "8:00AM-9:00PM",
+    "F": "8:00AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "CROL": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "CSB": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "D530": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "DPAC": {
+    "M-TH": "8:00AM-9:00PM",
+    "F": "8:00AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "ED": {
+    "M-TH": "7:30AM-11:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "ENG1": {
+    "M-TH": "7:30AM-11:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "ENG2": {
+    "M-TH": "7:30AM-11:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "FC": {
+    "M-TH": "24 HOURS",
+    "F": "24 HOURS",
+    "SAT": "11:00AM-10:00PM",
+    "SUN": "11:00AM-24 HOURS"
+  },
+  "HEC": {
+    "M-TH": "7:30AM-11:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "HPH": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "HS1": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "HS2": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "MSB": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "NSC": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "PAC": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "PSY": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "R1": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "RH": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "RSH": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "TA": {
+    "M-TH": "8:00AM-5:00PM",
+    "F": "8:00AM-5:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "TCH": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "TH": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "UWCV": {
+    "M-TH": "8:00AM-9:00PM",
+    "F": "8:00AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "VAB": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
+  "VW11": {
+    "M-TH": "8:00AM-6:00PM",
+    "F": "8:00AM-3:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  }
+}

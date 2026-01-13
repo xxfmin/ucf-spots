@@ -1,0 +1,176 @@
+{
+  "last_updated": "2026-01-12T21:48:46.820525",
+  "term": "Spring 2026",
+  "subjects": [
+    {
+      "code": "LIT",
+      "courses": [
+        {
+          "number": "LIT 3368",
+          "title": "Magical Realism in Literature",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0107"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "LIT 3932",
+          "title": "Topics in Popular Fiction",
+          "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0108"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "LIT 3933",
+          "title": "Literature and Law",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O212"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MUL",
+      "courses": [
+        {
+          "number": "MUL 2010",
+          "title": "Enjoyment of Music",
+          "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O207"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MUL 2720",
+          "title": "Music of the World",
+          "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MUL 3401",
+          "title": "Piano Literature II",
+          "sections": [
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0132"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "PUP",
+      "courses": [
+        {
+          "number": "PUP 3203",
+          "title": "Environmental Politics",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0130A"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

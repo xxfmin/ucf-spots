@@ -189,6 +189,9 @@ def scrape_search_results(html_content: str) -> List[Course]:
     
     for header in course_headers:
         title = header.get('title', '')
+        # Ensure title is a string
+        if not isinstance(title, str):
+            continue
         # Extract "ACG 2021 - Principles of Financial Accounting" from title
         match = re.search(r'Collapse section ([A-Z]{3} \d{4}) - (.+)', title)
         if not match:
@@ -462,7 +465,7 @@ def expand_all_sections(driver: webdriver.Chrome):
 
 def save_data(subjects: List[Subject], term: str = "Spring 2026"):
     """Save scraped data to JSON file."""
-    data_dir = Path(__file__).parent / "data"
+    data_dir = Path(__file__).parent / "archive"
     data_dir.mkdir(exist_ok=True)
 
     data = {
@@ -471,7 +474,7 @@ def save_data(subjects: List[Subject], term: str = "Spring 2026"):
         "subjects": [asdict(subject) for subject in subjects]
     }
 
-    output_file = data_dir / "ucf_courses.json"
+    output_file = data_dir / "courses_SP26.json"
     with open(output_file, "w") as f:
         json.dump(data, f, indent=2)
 
@@ -481,7 +484,7 @@ def save_data(subjects: List[Subject], term: str = "Spring 2026"):
 def scrape_all_subjects(
     headless: bool = True,
     debug: bool = False,
-    subject_codes: List[str] = None
+    subject_codes: Optional[List[str]] = None
 ) -> List[Subject]:
     """Main scraping function."""
     if subject_codes is None:

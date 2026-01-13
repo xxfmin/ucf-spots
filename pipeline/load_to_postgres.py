@@ -249,7 +249,7 @@ def bulk_insert(table_name: str, records: List[Dict], upsert: bool = False) -> i
         )
 
     # Verify final count
-    final_count = supabase.table(table_name).select("*", count="exact").execute().count
+    final_count = supabase.table(table_name).select("*", count="exact").execute().count  # type: ignore
     print(f"  ✓ {table_name}: {total_processed} records processed, {final_count} total in table")
     
     return total_processed
@@ -269,8 +269,8 @@ def clear_table(table_name: str) -> None:
         key = primary_keys.get(table_name, "id")
         supabase.table(table_name).delete().not_.is_(key, "null").execute()
 
-        count = supabase.table(table_name).select("*", count="exact").execute().count
-        if count != 0:
+        count = supabase.table(table_name).select("*", count="exact").execute().count  # type: ignore
+        if count is None or count != 0:
             raise DataValidationError(
                 f"Failed to clear table {table_name}. {count} records remaining."
             )
@@ -284,26 +284,29 @@ def verify_database_contents(
     buildings: List[Dict], rooms: List[Dict], schedules: List[Dict]
 ) -> None:
     """Verify that the database contains the expected data."""
-    db_buildings = supabase.table("buildings").select("*", count="exact").execute()
-    if db_buildings.count < len(buildings):
+    db_buildings = supabase.table("buildings").select("*", count="exact").execute()  # type: ignore
+    buildings_count = db_buildings.count or 0
+    if buildings_count < len(buildings):
         raise DataValidationError(
-            f"Building count issue. Expected at least: {len(buildings)}, Got: {db_buildings.count}"
+            f"Building count issue. Expected at least: {len(buildings)}, Got: {buildings_count}"
         )
-    print(f"  ✓ Buildings: {db_buildings.count} in database")
+    print(f"  ✓ Buildings: {buildings_count} in database")
 
-    db_rooms = supabase.table("rooms").select("*", count="exact").execute()
-    if db_rooms.count < len(rooms):
+    db_rooms = supabase.table("rooms").select("*", count="exact").execute()  # type: ignore
+    rooms_count = db_rooms.count or 0
+    if rooms_count < len(rooms):
         raise DataValidationError(
-            f"Room count issue. Expected at least: {len(rooms)}, Got: {db_rooms.count}"
+            f"Room count issue. Expected at least: {len(rooms)}, Got: {rooms_count}"
         )
-    print(f"  ✓ Rooms: {db_rooms.count} in database")
+    print(f"  ✓ Rooms: {rooms_count} in database")
 
-    db_schedules = supabase.table("class_schedule").select("*", count="exact").execute()
-    if db_schedules.count != len(schedules):
+    db_schedules = supabase.table("class_schedule").select("*", count="exact").execute()  # type: ignore
+    schedules_count = db_schedules.count or 0
+    if schedules_count != len(schedules):
         raise DataValidationError(
-            f"Schedule count mismatch. Expected: {len(schedules)}, Got: {db_schedules.count}"
+            f"Schedule count mismatch. Expected: {len(schedules)}, Got: {schedules_count}"
         )
-    print(f"  ✓ Class schedules: {db_schedules.count} in database")
+    print(f"  ✓ Class schedules: {schedules_count} in database")
 
 
 def main():

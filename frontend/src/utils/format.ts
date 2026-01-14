@@ -157,3 +157,48 @@ export const isTimePast = (time: string, referenceTime: string): boolean => {
 
   return parseTime(time) < parseTime(referenceTime);
 };
+
+/**
+ * Maps building codes to full names
+ */
+export const BUILDING_NAMES: Record<string, string> = {
+  BA1: "Business Administration I",
+  BA2: "Business Administration II",
+  BHC: "Burnett Honors College",
+  BIO: "Biological Sciences",
+  BSFS: "Burnett School of Biomedical Sciences",
+  CB1: "Classroom Building I",
+  CB2: "Classroom Building II",
+  CMB: "Communications & Media Building",
+  CROL: "CREOL",
+  CSB: "Computer Science Building",
+  DPAC: "Dr. Phillips Academic Commons",
+  ED: "Education Complex",
+  ENG1: "Engineering I",
+  ENG2: "Engineering II",
+  FC: "Florida Center",
+  HEC: "L3Harris Engineering Center",
+  HPH: "Health & Public Affairs I",
+  HS1: "Health Sciences I",
+  HS2: "Health Sciences II",
+  MSB: "Mathematical Sciences Building",
+  NSC: "Nicholson School of Communication",
+  PAC: "Performing Arts Center",
+  PSY: "Psychology Building",
+  R1: "Research I",
+  TA: "Teaching Academy",
+  TCH: "Trevor Colbourn Hall",
+  TH: "Theatre",
+  UWCV: "UCF Welcome Center",
+  VAB: "Visual Arts Building",
+};
+
+/**
+ * Formats a building code to show both code and full name
+ * @param code - Building code (e.g., "BA1")
+ * @returns Formatted name (e.g., "BA1 - Business Administration I") or just code if not found
+ */
+export const formatBuildingName = (code: string): string => {
+  const fullName = BUILDING_NAMES[code];
+  return fullName ? `${code} - ${fullName}` : code;
+};

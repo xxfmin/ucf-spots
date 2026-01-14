@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "UCF Spots",
-  description: "Find available study spaces and classrooms at UCF",
+  title: "ucfSpots",
+  description:
+    "Find available UCF study spaces and empty classrooms in real-time. Interactive campus map showing open rooms at University of Central Florida.",
 };
 
 export default function RootLayout({

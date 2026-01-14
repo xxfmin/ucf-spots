@@ -21,6 +21,7 @@ class BuildingDataFilter:
         self.excluded_buildings = {
             "DPAC",
             "RSH",
+            "CROL",
         }
         # Minimum number of rooms (inclusive)
         self.min_rooms = 4

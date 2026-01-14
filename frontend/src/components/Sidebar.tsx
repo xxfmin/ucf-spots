@@ -356,23 +356,27 @@ export default function Sidebar({
             </button>
           </PopoverTrigger>
           <PopoverContent className="w-80 bg-zinc-900 border-zinc-800 text-zinc-200">
-            <div className="space-y-3">
-              <h3 className="font-bold text-zinc-100">Important Notes:</h3>
-              <ul className="space-y-2 text-sm text-zinc-300 list-disc list-inside">
-                <li>
+            <div className="space-y-4">
+              <h3 className="font-semibold text-base text-zinc-100">
+                Important Notes:
+              </h3>
+              <ul className="space-y-2.5 text-sm text-zinc-300 pl-4 list-disc">
+                <li className="leading-relaxed">
                   Building/room access may be restricted to specific colleges or
                   departments
                 </li>
-                <li>
+                <li className="leading-relaxed">
                   Displayed availability only reflects official class schedules
                   and events
                 </li>
-                <li>
+                <li className="leading-relaxed">
                   Rooms may be occupied by unofficial meetings or study groups
                 </li>
-                <li>Different schedules may apply during exam periods</li>
+                <li className="leading-relaxed">
+                  Different schedules may apply during exam periods
+                </li>
               </ul>
-              <div className="pt-2 border-t border-zinc-800 space-y-2">
+              <div className="pt-3 border-t border-zinc-800 space-y-1.5">
                 <a
                   href={GITHUB_REPO_URL}
                   target="_blank"

@@ -29,6 +29,7 @@ export default function Home() {
   const {
     data: facilityData,
     isLoading,
+    isFetching,
     error,
   } = useQuery({
     queryKey: ["facilities", formattedDate, formattedTime],
@@ -47,8 +48,14 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="text-white text-lg">Loading...</div>
+      <div className="h-screen flex items-center justify-center bg-zinc-950">
+        <div className="flex flex-col items-center gap-3">
+          <div className="relative w-12 h-12">
+            <div className="absolute inset-0 border-4 border-zinc-700 rounded-full"></div>
+            <div className="absolute inset-0 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <p className="text-sm text-zinc-400">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -79,6 +86,7 @@ export default function Home() {
           setExpandedItems={setExpandedItems}
           onBuildingClick={handleBuildingClick}
           scrollToBuildingId={scrollToBuildingId}
+          isFetching={isFetching && !isLoading}
         />
       </div>
     </main>

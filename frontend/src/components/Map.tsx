@@ -408,15 +408,7 @@ export default function Map({
             "text-halo-color": "#000000",
             "text-halo-width": 1.5,
             "text-halo-blur": 0.5,
-            "text-opacity": [
-              "interpolate",
-              ["linear"],
-              ["zoom"],
-              14.5,
-              0,
-              15.5,
-              1,
-            ],
+            "text-opacity": 1, // Always visible regardless of zoom level
           },
         });
 

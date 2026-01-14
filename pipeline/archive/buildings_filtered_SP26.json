@@ -23527,23 +23527,23 @@
       "hours": {
         "monday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "tuesday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "wednesday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "thursday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "friday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "18:00"
         },
         "saturday": {
           "open": null,

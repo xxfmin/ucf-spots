@@ -8687,8 +8687,8 @@
         }
       },
       "coordinates": {
-        "longitude": -81.199122530337,
-        "latitude": 28.60105093035935
+        "longitude": -81.19912209796122,
+        "latitude": 28.601047058360223
       }
     },
     "BA2": {
@@ -9590,8 +9590,8 @@
         }
       },
       "coordinates": {
-        "longitude": -81.19955492048229,
-        "latitude": 28.601025564074135
+        "longitude": -81.19868520155846,
+        "latitude": 28.60082929442494
       }
     },
     "PSY": {
@@ -23571,23 +23571,23 @@
       "hours": {
         "monday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "tuesday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "wednesday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "thursday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "22:00"
         },
         "friday": {
           "open": "08:00",
-          "close": "17:00"
+          "close": "18:00"
         },
         "saturday": {
           "open": null,

@@ -162,8 +162,8 @@
     "SUN": "LOCKED"
   },
   "TA": {
-    "M-TH": "8:00AM-5:00PM",
-    "F": "8:00AM-5:00PM",
+    "M-TH": "8:00AM-10:00PM",
+    "F": "8:00AM-6:00PM",
     "SAT": "LOCKED",
     "SUN": "LOCKED"
   },

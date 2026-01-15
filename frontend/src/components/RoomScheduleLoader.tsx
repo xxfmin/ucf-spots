@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { RoomScheduleBlock } from "@/types";
 import HourlyTimeBlocks from "./HourlyTimeBlocks";
+import { useDateTimeContext } from "@/lib/DateTimeContext";
 
 interface RoomScheduleLoaderProps {
   buildingId: string;
@@ -15,11 +16,15 @@ interface RoomScheduleLoaderProps {
 
 async function fetchRoomSchedule(
   buildingId: string,
-  roomNumber: string
+  roomNumber: string,
+  date: string,
+  time: string
 ): Promise<RoomScheduleBlock[]> {
   const params = new URLSearchParams({
     buildingId,
     roomNumber,
+    date,
+    time,
   });
 
   const response = await fetch(`/api/room-schedule?${params}`);
@@ -36,9 +41,11 @@ export default function RoomScheduleLoader({
   roomNumber,
   buildingHours,
 }: RoomScheduleLoaderProps) {
+  const { formattedDate, formattedTime } = useDateTimeContext();
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["room-schedule", buildingId, roomNumber],
-    queryFn: () => fetchRoomSchedule(buildingId, roomNumber),
+    queryKey: ["room-schedule", buildingId, roomNumber, formattedDate, formattedTime],
+    queryFn: () => fetchRoomSchedule(buildingId, roomNumber, formattedDate, formattedTime),
     staleTime: 60 * 1000, // Cache for 1 minute
     retry: 1,
   });

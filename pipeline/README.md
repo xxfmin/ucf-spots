@@ -90,7 +90,7 @@ Web Data → courses_{TERM}.json → buildings_derived_{TERM}.json → buildings
 
 - Minimum 4 rooms per building
 - Certain buildings explicitly excluded (see [`filter_buildings.py`](filter_buildings.py))
-  - Currently excluded: DPAC, RSH, CROL
+  - Currently excluded: DPAC, RSH, CROL, PAC
 
 ## Database Schema
 

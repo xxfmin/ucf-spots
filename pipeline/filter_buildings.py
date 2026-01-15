@@ -22,6 +22,7 @@ class BuildingDataFilter:
             "DPAC",
             "RSH",
             "CROL",
+            "PAC",
         }
         # Minimum number of rooms (inclusive)
         self.min_rooms = 4

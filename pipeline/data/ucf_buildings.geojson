@@ -114,16 +114,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "PAC"
-      },
-      "geometry": {
-        "coordinates": [-81.2045136972501, 28.602073634431335],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "PSY"
       },
       "geometry": {

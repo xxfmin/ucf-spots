@@ -21,7 +21,6 @@ import {
   Filter,
   ListFilter,
   CalendarClock,
-  Github,
   MessageSquare,
 } from "lucide-react";
 import { formatBuildingName, formatTime, formatDuration } from "@/utils/format";
@@ -31,9 +30,6 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import RoomScheduleLoader from "./RoomScheduleLoader";
 import FeedbackDialog from "./FeedbackDialog";
 import moment from "moment-timezone";
-
-// GitHub repository URL
-const GITHUB_REPO_URL = "https://github.com/xxfmin/ucf-spots";
 
 interface SidebarProps {
   facilityData: FacilityStatus | null;
@@ -377,15 +373,6 @@ export default function Sidebar({
                 </li>
               </ul>
               <div className="pt-3 border-t border-zinc-800 space-y-1.5">
-                <a
-                  href={GITHUB_REPO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer"
-                >
-                  <Github className="h-4 w-4" />
-                  <span>View on GitHub</span>
-                </a>
                 <button
                   onClick={() => setFeedbackDialogOpen(true)}
                   className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer w-full"

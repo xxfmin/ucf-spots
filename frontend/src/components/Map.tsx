@@ -400,7 +400,7 @@ export default function Map({
             ],
             "text-anchor": "top",
             "text-offset": [0, 0.8],
-            "text-allow-overlap": false,
+            "text-allow-overlap": true,
             "text-max-width": 8,
           },
           paint: {

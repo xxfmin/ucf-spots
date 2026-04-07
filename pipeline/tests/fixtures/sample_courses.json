@@ -1,0 +1,128 @@
+{
+  "last_updated": "2026-01-15T10:00:00",
+  "term": "Spring 2026",
+  "subjects": [
+    {
+      "code": "ACG",
+      "courses": [
+        {
+          "number": "ACG 2021",
+          "title": "Principles of Financial Accounting",
+          "sections": [
+            {
+              "time": {"start": "10:30", "end": "11:50"},
+              "location": {"building": "BA1", "room": "O107"},
+              "days": ["M", "W"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "09:00", "end": "09:50"},
+              "location": {"building": "BA1", "room": "O107"},
+              "days": ["T", "R"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "ACG 2071",
+          "title": "Managerial Accounting",
+          "sections": [
+            {
+              "time": {"start": "13:30", "end": "14:20"},
+              "location": {"building": "BA1", "room": "O209"},
+              "days": ["M", "W", "F"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "COP",
+      "courses": [
+        {
+          "number": "COP 3502",
+          "title": "Computer Science I",
+          "sections": [
+            {
+              "time": {"start": "12:00", "end": "13:15"},
+              "location": {"building": "ENG1", "room": "0383"},
+              "days": ["M", "W"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "12:00", "end": "12:50"},
+              "location": {"building": "ENG1", "room": "0383"},
+              "days": ["F"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "COP 3223",
+          "title": "Intro to C Programming",
+          "sections": [
+            {
+              "time": {"start": "07:30", "end": "08:50"},
+              "location": {"building": "ENG1", "room": "0227"},
+              "days": ["T", "R"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "10:00", "end": "10:50"},
+              "location": {"building": "ENG2", "room": "0102"},
+              "days": ["M", "W", "F"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "PSY",
+      "courses": [
+        {
+          "number": "PSY 2012",
+          "title": "General Psychology",
+          "sections": [
+            {
+              "time": {"start": "14:30", "end": "15:45"},
+              "location": {"building": "PSY", "room": "0108"},
+              "days": ["M", "W"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "16:00", "end": "17:15"},
+              "location": {"building": "PSY", "room": "0108"},
+              "days": ["T", "R"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "09:00", "end": "09:50"},
+              "location": {"building": "PSY", "room": "0110"},
+              "days": ["M", "W", "F"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {"start": "11:00", "end": "12:15"},
+              "location": {"building": "PSY", "room": "0110"},
+              "days": ["T", "R"],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

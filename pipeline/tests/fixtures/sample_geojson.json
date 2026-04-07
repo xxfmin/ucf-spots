@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {"name": "BA1"},
+      "geometry": {"coordinates": [-81.19912, 28.60105], "type": "Point"}
+    },
+    {
+      "type": "Feature",
+      "properties": {"name": "ENG1"},
+      "geometry": {"coordinates": [-81.19838, 28.60151], "type": "Point"}
+    },
+    {
+      "type": "Feature",
+      "properties": {"name": "ENG2"},
+      "geometry": {"coordinates": [-81.19838, 28.60191], "type": "Point"}
+    },
+    {
+      "type": "Feature",
+      "properties": {"name": "PSY"},
+      "geometry": {"coordinates": [-81.19968, 28.60477], "type": "Point"}
+    }
+  ]
+}

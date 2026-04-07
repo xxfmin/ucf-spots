@@ -12,6 +12,10 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 
+MIDNIGHT_CLOSE = "23:59"
+ALL_DAY_OPEN = "00:00"
+
+
 class BuildingHoursProcessor:
     def __init__(self, term_code: str = "SP26"):
         self.term_code = term_code
@@ -52,7 +56,7 @@ class BuildingHoursProcessor:
 
         # Handle midnight edge case
         if time_str.upper() in ["12AM", "12:00AM"]:
-            return "23:59"
+            return MIDNIGHT_CLOSE
 
         try:
             # Try parsing with colon (e.g., "7:30AM")
@@ -85,6 +89,12 @@ class BuildingHoursProcessor:
                     formatted_hours[day] = {"open": None, "close": None}
                 continue
 
+            # Handle "24 HOURS" (building open all day)
+            if hours.strip() == "24 HOURS":
+                for day in self.days_mapping[day_group]:
+                    formatted_hours[day] = {"open": ALL_DAY_OPEN, "close": MIDNIGHT_CLOSE}
+                continue
+
             # Split on last hyphen to handle times like "10:00PM"
             parts = hours.rsplit("-", 1)
             if len(parts) != 2:
@@ -93,7 +103,12 @@ class BuildingHoursProcessor:
 
             start_time, end_time = parts
             start_time_24h = self.convert_time_format(start_time.strip())
-            end_time_24h = self.convert_time_format(end_time.strip())
+
+            # Handle "24 HOURS" in the close-time position (e.g., "11:00AM-24 HOURS")
+            if end_time.strip() == "24 HOURS":
+                end_time_24h = MIDNIGHT_CLOSE
+            else:
+                end_time_24h = self.convert_time_format(end_time.strip())
 
             for day in self.days_mapping[day_group]:
                 formatted_hours[day] = {"open": start_time_24h, "close": end_time_24h}

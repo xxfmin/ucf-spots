@@ -6,3 +6,21 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+pipeline/.coverage
+pipeline/__pycache__/
+pipeline/debug
+.coverage
+__pycache__/
+
+CLAUDE.md
+
+# Python
+.venv/
+.pytest_cache/
+*.pyc
+
+# Env files
+.env
+.env.local
+.env.*.local

@@ -1,81 +1,80 @@
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict
 from datetime import datetime
 import json
+import logging
 from pathlib import Path
-import re
 import time
 from typing import List, Optional
 
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import (
+    TimeoutException,
+    NoSuchElementException,
+    StaleElementReferenceException,
+    ElementNotInteractableException,
+    JavascriptException,
+    WebDriverException,
+)
 
+from parsers import (
+    TimeSlot,
+    Location,
+    Section,
+    Course,
+    Subject,
+    parse_days,
+    parse_time,
+    parse_location,
+    parse_dates,
+    scrape_search_results,
+)
 
-@dataclass
-class TimeSlot:
-    start: str  # "09:30"
-    end: str    # "10:50"
-
-
-@dataclass
-class Location:
-    building: str  # "BA1"
-    room: str      # "O107"
-
-
-@dataclass
-class Section:
-    time: Optional[TimeSlot]
-    location: Optional[Location]
-    days: List[str]    # ["M", "W", "R"]
-    start_date: str    # "2026-01-12"
-    end_date: str      # "2026-05-05"
-
-
-@dataclass
-class Course:
-    number: str                    # "ACG 2021"
-    title: Optional[str] = None    # "Principles of Financial Accounting"
-    sections: List[Section] = field(default_factory=list)
-
-
-@dataclass
-class Subject:
-    code: str  # "ACG"
-    courses: List[Course] = field(default_factory=list)
+logger = logging.getLogger(__name__)
 
 
 SUBJECT_CODES = [
-    'ACG', 'ADE', 'ADV', 'AFA', 'AFH', 'AFR', 'AMH', 'AML', 'ANT', 'APK', 'ARA',
-    'ARC', 'ARE', 'ARH', 'ART', 'ASH', 'ASL', 'AST', 'ATR', 'BCH', 'BME', 'BOT',
-    'BSC', 'BTE', 'BUL', 'CAI', 'CAP', 'CCE', 'CCJ', 'CDA', 'CEG', 'CEN', 'CES',
-    'CGN', 'CGS', 'CHI', 'CHM', 'CHS', 'CIS', 'CJC', 'CJE', 'CJJ', 'CJL', 'CJT',
-    'CLP', 'CLT', 'CNT', 'COM', 'COP', 'COT', 'CPO', 'CRW', 'CWR', 'DAA', 'DAE',
-    'DAN', 'DEP', 'DIG', 'DSC', 'EAB', 'EAP', 'EAS', 'ECM', 'ECO', 'ECP', 'ECS',
-    'ECT', 'ECW', 'EDE', 'EDF', 'EDG', 'EDP', 'EEC', 'EEE', 'EEL', 'EES', 'EEX',
-    'EGM', 'EGN', 'EGS', 'EIN', 'EMA', 'EME', 'EML', 'ENC', 'ENG', 'ENL', 'ENT',
-    'ENV', 'ENY', 'ESE', 'ESI', 'EUH', 'EVR', 'EXP', 'FIL', 'FIN', 'FLE', 'FOL',
-    'FRE', 'FRT', 'FRW', 'FSS', 'GEA', 'GEB', 'GEO', 'GER', 'GEW', 'GEY', 'GIS',
-    'GLY', 'GRA', 'HAI', 'HAT', 'HBR', 'HCW', 'HFT', 'HIM', 'HIS', 'HLP', 'HSA',
-    'HSC', 'HUM', 'HUN', 'IDH', 'IDS', 'IHS', 'INP', 'INR', 'ISC', 'ITA', 'ITT',
-    'ITW', 'JOU', 'JPN', 'JST', 'KOR', 'LAE', 'LAH', 'LAS', 'LDR', 'LIN', 'LIT',
-    'MAA', 'MAC', 'MAD', 'MAE', 'MAN', 'MAP', 'MAR', 'MAS', 'MAT', 'MCB', 'MET',
-    'MGF', 'MHF', 'MHS', 'MLS', 'MMC', 'MSL', 'MTG', 'MUC', 'MUE', 'MUG', 'MUH',
-    'MUL', 'MUM', 'MUN', 'MUO', 'MUS', 'MUT', 'MVB', 'MVJ', 'MVK', 'MVP', 'MVS',
-    'MVV', 'MVW', 'NSP', 'NUR', 'OCE', 'OSE', 'PAD', 'PAZ', 'PCB', 'PCO', 'PEL',
-    'PEM', 'PEO', 'PET', 'PGY', 'PHH', 'PHI', 'PHM', 'PHP', 'PHT', 'PHY', 'PHZ',
-    'PLA', 'POR', 'POS', 'POT', 'PPE', 'PSB', 'PSC', 'PSY', 'PUP', 'PUR', 'QMB',
-    'RED', 'REE', 'REL', 'RMI', 'RTV', 'RUS', 'RUT', 'SCC', 'SCE', 'SLS', 'SOP',
-    'SOW', 'SPA', 'SPB', 'SPC', 'SPM', 'SPN', 'SPT', 'SPW', 'SSE', 'STA', 'SYA',
-    'SYD', 'SYG', 'SYO', 'SYP', 'TAX', 'THE', 'TPA', 'TPP', 'TSL', 'TTE', 'VIC',
+    'ACG', 'ADE', 'ADV', 'AFA', 'AFH', 'AFR', 'AMH', 'AML', 'ANG', 'ANT', 'APK',
+    'ARA', 'ARC', 'ARE', 'ARH', 'ART', 'ASH', 'ASL', 'AST', 'ATR', 'AVM', 'BCH',
+    'BME', 'BMS', 'BOT', 'BSC', 'BTE', 'BUL', 'CAI', 'CAP', 'CBH', 'CCE', 'CCJ',
+    'CDA', 'CEG', 'CEN', 'CES', 'CGN', 'CGS', 'CHI', 'CHM', 'CHS', 'CIS', 'CJC',
+    'CJE', 'CJJ', 'CJL', 'CJT', 'CLA', 'CLP', 'CLT', 'CNT', 'COM', 'COP', 'COT',
+    'CPO', 'CRW', 'CWR', 'CYP', 'DAA', 'DAE', 'DAN', 'DEP', 'DIE', 'DIG', 'DSC',
+    'EAB', 'EAP', 'EAS', 'EBD', 'ECM', 'ECO', 'ECP', 'ECS', 'ECT', 'ECW', 'EDA',
+    'EDE', 'EDF', 'EDG', 'EDH', 'EDM', 'EDP', 'EDS', 'EEC', 'EEE', 'EEL', 'EES',
+    'EEX', 'EGC', 'EGI', 'EGM', 'EGN', 'EGS', 'EIN', 'ELD', 'EMA', 'EME', 'EML',
+    'EMR', 'ENC', 'ENG', 'ENL', 'ENT', 'ENV', 'ENY', 'ESE', 'ESI', 'EUH', 'EVR',
+    'EXP', 'FIL', 'FIN', 'FLE', 'FOL', 'FRE', 'FRT', 'FRW', 'FSS', 'GEA', 'GEB',
+    'GEO', 'GER', 'GEW', 'GEY', 'GIS', 'GLY', 'GMS', 'GRA', 'HAI', 'HAT', 'HBR',
+    'HCW', 'HFT', 'HIM', 'HIS', 'HLP', 'HMG', 'HSA', 'HSC', 'HUM', 'HUN', 'IDC',
+    'IDH', 'IDS', 'IHS', 'INP', 'INR', 'ISC', 'ISM', 'ITA', 'ITT', 'ITW', 'JOU',
+    'JPN', 'JST', 'KOR', 'LAE', 'LAH', 'LAS', 'LDR', 'LEI', 'LIN', 'LIT', 'MAA',
+    'MAC', 'MAD', 'MAE', 'MAN', 'MAP', 'MAR', 'MAS', 'MAT', 'MCB', 'MDC', 'MDE',
+    'MDI', 'MDR', 'MDX', 'MET', 'MGF', 'MHF', 'MHS', 'MLS', 'MMC', 'MSL', 'MTG',
+    'MUC', 'MUE', 'MUG', 'MUH', 'MUL', 'MUM', 'MUN', 'MUO', 'MUS', 'MUT', 'MVB',
+    'MVJ', 'MVK', 'MVO', 'MVP', 'MVS', 'MVV', 'MVW', 'NGR', 'NSP', 'NUR', 'OCE',
+    'OSE', 'PAD', 'PAF', 'PAZ', 'PCB', 'PCO', 'PEL', 'PEM', 'PEO', 'PET', 'PGY',
+    'PHC', 'PHH', 'PHI', 'PHM', 'PHP', 'PHT', 'PHY', 'PHZ', 'PLA', 'POR', 'POS',
+    'POT', 'PPE', 'PSB', 'PSC', 'PSY', 'PUP', 'PUR', 'QMB', 'RED', 'REE', 'REL',
+    'RMI', 'RTV', 'RUS', 'RUT', 'SCC', 'SCE', 'SDS', 'SLS', 'SOP', 'SOW', 'SPA',
+    'SPB', 'SPC', 'SPM', 'SPN', 'SPS', 'SPT', 'SPW', 'SSE', 'STA', 'SYA', 'SYD',
+    'SYG', 'SYO', 'SYP', 'TAX', 'THE', 'TPA', 'TPP', 'TSL', 'TTE', 'URP', 'VIC',
     'WOH', 'WST', 'ZOO'
 ]
 
 BASE_URL = "https://csprod-ss.net.ucf.edu/psc/CSPROD/EMPLOYEE/SA/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL"
+
+TERM_LABELS = {
+    'SP26': 'Spring 2026',
+    'SU26': 'Summer 2026',
+    'FA26': 'Fall 2026',
+    'SP25': 'Spring 2025',
+    'SU25': 'Summer 2025',
+    'FA25': 'Fall 2025',
+}
 
 
 def setup_driver(headless: bool = True) -> webdriver.Chrome:
@@ -98,176 +97,18 @@ def wait_for_page_load(driver: webdriver.Chrome, timeout: int = 30):
     WebDriverWait(driver, timeout).until(
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
-    time.sleep(1)
+    time.sleep(0.3)
 
 
-def parse_days(day_str: str) -> List[str]:
-    """Parse day string like 'TuTh 10:30AM' into list of day codes."""
-    day_mapping = {
-        'Mo': 'M',
-        'Tu': 'T',
-        'We': 'W',
-        'Th': 'R',
-        'Fr': 'F',
-        'Sa': 'S',
-        'Su': 'U'
-    }
-    days = []
-    for abbrev, code in day_mapping.items():
-        if abbrev in day_str:
-            days.append(code)
-    # Handle single-letter formats (M, W, F without o/e/r suffix)
-    if not days:
-        if 'M' in day_str and 'Mo' not in day_str:
-            days.append('M')
-        if 'W' in day_str and 'We' not in day_str:
-            days.append('W')
-        if 'F' in day_str and 'Fr' not in day_str:
-            days.append('F')
-    return days
+# Career levels to search. PeopleSoft defaults to UGRD and "blank" is a no-op
+# (does not actually return all careers). We search twice per subject:
+#   1. UGRD (the default, captures undergraduate courses)
+#   2. GRAD (captures graduate courses; most grad-only subjects like NUR live here)
+# MED and OTHR careers are extremely rare and not covered.
+CAREER_LEVELS = ["UGRD", "GRAD"]
 
 
-def parse_time(time_str: str) -> Optional[TimeSlot]:
-    """Parse time string like '10:30AM - 11:50AM' into TimeSlot."""
-    if not time_str or 'TBA' in time_str or 'ARR' in time_str:
-        return None
-
-    time_match = re.search(r'(\d{1,2}:\d{2}[AP]M)\s*-\s*(\d{1,2}:\d{2}[AP]M)', time_str)
-    if not time_match:
-        return None
-
-    start_str, end_str = time_match.groups()
-
-    try:
-        start_24 = datetime.strptime(start_str, '%I:%M%p').strftime('%H:%M')
-        end_24 = datetime.strptime(end_str, '%I:%M%p').strftime('%H:%M')
-        return TimeSlot(start=start_24, end=end_24)
-    except ValueError:
-        return None
-
-
-def parse_location(room_str: str) -> Optional[Location]:
-    """Parse room string like 'ENG2 0302' into Location."""
-    if not room_str or 'TBA' in room_str or 'WEB' in room_str:
-        return None
-
-    parts = room_str.strip().split()
-    if len(parts) >= 2:
-        building = parts[0]
-        room = parts[1]
-        return Location(building=building, room=room)
-    return None
-
-
-def parse_dates(date_str: str) -> tuple:
-    """Parse date range like '01/12/2026 - 05/05/2026' into (start, end) as YYYY-MM-DD."""
-    if not date_str:
-        return ('', '')
-
-    # UCF format: MM/DD/YYYY - MM/DD/YYYY
-    date_match = re.search(r'(\d{2}/\d{2}/\d{4})\s*-\s*(\d{2}/\d{2}/\d{4})', date_str)
-    if date_match:
-        start_str, end_str = date_match.groups()
-        # Convert MM/DD/YYYY to YYYY-MM-DD
-        try:
-            start_date = datetime.strptime(start_str, '%m/%d/%Y').strftime('%Y-%m-%d')
-            end_date = datetime.strptime(end_str, '%m/%d/%Y').strftime('%Y-%m-%d')
-            return (start_date, end_date)
-        except ValueError:
-            pass
-
-    return ('', '')
-
-
-def scrape_search_results(html_content: str) -> List[Course]:
-    """Parse the UCF PeopleSoft search results HTML into Course objects."""
-    soup = BeautifulSoup(html_content, 'html.parser')
-    courses = []
-
-    # Find all course header divs (contain course name in title attribute)
-    course_headers = soup.find_all('a', attrs={'title': re.compile(r'Collapse section [A-Z]{3} \d{4}')})
-    
-    for header in course_headers:
-        title = header.get('title', '')
-        # Ensure title is a string
-        if not isinstance(title, str):
-            continue
-        # Extract "ACG 2021 - Principles of Financial Accounting" from title
-        match = re.search(r'Collapse section ([A-Z]{3} \d{4}) - (.+)', title)
-        if not match:
-            continue
-            
-        course_code = match.group(1)
-        course_title = match.group(2)
-        course = Course(number=course_code, title=course_title)
-        
-        # Find the parent groupbox div to scope section search
-        parent_div = header.find_parent('div', id=re.compile(r'win0divSSR_CLSRSLT_WRK_GROUPBOX2\$\d+'))
-        if not parent_div:
-            continue
-            
-        # Find section rows within this course's groupbox
-        section_rows = parent_div.find_all('tr', id=re.compile(r'trSSR_CLSRCH_MTG1\$\d+_row\d+'))
-        
-        for row in section_rows:
-            try:
-                # Extract days/times from MTG_DAYTIME span (use separator to handle <br> tags)
-                daytime_span = row.find('span', id=re.compile(r'MTG_DAYTIME\$\d+'))
-                days_times_list = daytime_span.get_text(separator='\n', strip=True).split('\n') if daytime_span else []
-                
-                # Extract room from MTG_ROOM span
-                room_span = row.find('span', id=re.compile(r'MTG_ROOM\$\d+'))
-                room_list = room_span.get_text(separator='\n', strip=True).split('\n') if room_span else []
-                
-                # Extract meeting dates from MTG_TOPIC span
-                dates_span = row.find('span', id=re.compile(r'MTG_TOPIC\$\d+'))
-                dates_list = dates_span.get_text(separator='\n', strip=True).split('\n') if dates_span else []
-                
-                # Create a section for EACH meeting entry (they can have different dates/rooms/times)
-                num_entries = max(len(days_times_list), len(room_list), len(dates_list))
-                
-                for i in range(num_entries):
-                    daytime_str = days_times_list[i].strip() if i < len(days_times_list) else ''
-                    room_str = room_list[i].strip() if i < len(room_list) else ''
-                    date_str = dates_list[i].strip() if i < len(dates_list) else ''
-                    
-                    # Parse time and location
-                    time_slot = parse_time(daytime_str)
-                    location = parse_location(room_str)
-                    days = parse_days(daytime_str)
-                    
-                    # Parse date range (format: MM/DD/YYYY - MM/DD/YYYY)
-                    start_date = ''
-                    end_date = ''
-                    date_match = re.search(r'(\d{2}/\d{2}/\d{4})\s*-\s*(\d{2}/\d{2}/\d{4})', date_str)
-                    if date_match:
-                        try:
-                            start_date = datetime.strptime(date_match.group(1), '%m/%d/%Y').strftime('%Y-%m-%d')
-                            end_date = datetime.strptime(date_match.group(2), '%m/%d/%Y').strftime('%Y-%m-%d')
-                        except ValueError:
-                            pass
-                    
-                    # Only add sections with valid location (physical rooms) and time
-                    if location and time_slot:
-                        section = Section(
-                            time=time_slot,
-                            location=location,
-                            days=days,
-                            start_date=start_date,
-                            end_date=end_date
-                        )
-                        course.sections.append(section)
-                    
-            except Exception as e:
-                continue
-        
-        if course.sections:
-            courses.append(course)
-
-    return courses
-
-
-def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool = True, debug: bool = False) -> str:
+def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "UGRD", debug: bool = False) -> str:
     """
     Execute search for a specific subject and return the results HTML.
     
@@ -283,45 +124,32 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
     debug_dir = Path(__file__).parent / "debug"
     
     try:
-        if is_first:
-            # Navigate to search page (first time only)
-            driver.get(BASE_URL)
-            wait_for_page_load(driver)
+        # Always navigate fresh to the search page. The "Modify Search" path
+        # has proved unreliable: for subjects with no results, the modify-search
+        # page transition hangs and times out. Fresh navigation is ~2s slower
+        # but 100% reliable.
+        driver.get(BASE_URL)
+        wait_for_page_load(driver)
 
-            # Debug: Save initial page state
-            if debug:
-                debug_dir.mkdir(exist_ok=True)
-                driver.save_screenshot(str(debug_dir / f"{subject_code}_initial.png"))
-                with open(debug_dir / f"{subject_code}_initial.html", "w", encoding="utf-8") as f:
-                    f.write(driver.page_source)
-                print(f"  Debug files saved to {debug_dir}")
+        # Debug: Save initial page state
+        if debug:
+            debug_dir.mkdir(exist_ok=True)
+            driver.save_screenshot(str(debug_dir / f"{subject_code}_initial.png"))
+            with open(debug_dir / f"{subject_code}_initial.html", "w", encoding="utf-8") as f:
+                f.write(driver.page_source)
+            logger.debug("Debug files saved to %s", debug_dir)
 
-            # Wait for page to be interactive
-            time.sleep(3)
-        else:
-            # Use "Modify Search" button for subsequent searches (much faster!)
-            try:
-                modify_button = driver.find_element(By.ID, "CLASS_SRCH_WRK2_SSR_PB_MODIFY")
-                driver.execute_script("arguments[0].click();", modify_button)
-                print("  Clicked 'Modify Search'...")
-                
-                # Wait for search form to load
-                WebDriverWait(driver, 15).until(
-                    EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_SUBJECT$0"))
-                )
-                wait_for_page_load(driver)
-                time.sleep(1)  # Small buffer for form to be ready
-            except (NoSuchElementException, TimeoutException) as e:
-                print(f"  Could not find Modify Search button, navigating to base URL: {e}")
-                driver.get(BASE_URL)
-                wait_for_page_load(driver)
-                time.sleep(3)
+        # Wait for search form to be interactive
+        WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.ID, "CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH"))
+        )
+        time.sleep(0.5)  # PeopleSoft JS initialization buffer
 
         # Find elements with correct UCF PeopleSoft IDs
         try:
             search_button = driver.find_element(By.ID, "CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH")
         except NoSuchElementException:
-            print("  Could not find search button!")
+            logger.error("Could not find search button!")
             return ""
 
         # 1. Tick "Verify Search" checkbox
@@ -329,32 +157,40 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
             verify_checkbox = driver.find_element(By.ID, "FX_CLSSRCH_DER_FLAG")
             if not verify_checkbox.is_selected():
                 verify_checkbox.click()
-                print("  Checked verify search")
+                logger.info("Checked verify search")
         except NoSuchElementException:
-            print("  Verify checkbox not found (continuing anyway)")
+            logger.warning("Verify checkbox not found (continuing anyway)")
 
-        if is_first:
-            time.sleep(0.3)  # Only needed on first load
+        time.sleep(0.2)  # PeopleSoft checkbox AJAX buffer
 
         # 2. Enter subject code
         try:
             subject_field = driver.find_element(By.ID, "SSR_CLSRCH_WRK_SUBJECT$0")
             subject_field.clear()
             subject_field.send_keys(subject_code)
-            print(f"  Entered subject: {subject_code}")
+            logger.info("Entered subject: %s", subject_code)
         except NoSuchElementException:
-            print("  Could not find subject field!")
+            logger.error("Could not find subject field!")
             return ""
 
-        # 3. Set Course Career to empty (all careers)
+        # 3. Set Course Career. Only change it if different from current selection,
+        # since selecting the same value does not fire PeopleSoft's onchange AJAX
+        # and leaves the form in a stale state.
         try:
             career_dropdown = Select(driver.find_element(By.ID, "SSR_CLSRCH_WRK_ACAD_CAREER$3"))
-            career_dropdown.select_by_value("")  # Empty = all
-            print("  Set career to: All")
-            if is_first:
-                time.sleep(0.5)  # Only needed on first load
-        except (NoSuchElementException, Exception) as e:
-            print(f"  Career dropdown issue: {e}")
+            current_career = career_dropdown.first_selected_option.get_attribute("value")
+            if current_career != career:
+                career_dropdown.select_by_value(career)
+                logger.info("Set career to: %s (was %s)", career, current_career or "blank")
+                # Wait for the PeopleSoft AJAX page refresh after career change
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_SUBJECT$0"))
+                )
+                time.sleep(0.3)  # Additional buffer for AJAX
+            else:
+                logger.info("Career already %s, skipping re-selection", career)
+        except (NoSuchElementException, StaleElementReferenceException, TimeoutException) as e:
+            logger.warning("Career dropdown issue: %s", e)
 
         # 4. Select Location - Main Campus (Orlando)
         try:
@@ -363,22 +199,22 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
             for option in location_dropdown.options:
                 if 'Main' in option.text or 'Orlando' in option.text:
                     location_dropdown.select_by_visible_text(option.text)
-                    print(f"  Set location to: {option.text}")
+                    logger.info("Set location to: %s", option.text)
                     break
-            time.sleep(0.3)
-        except (NoSuchElementException, Exception) as e:
-            print(f"  Location dropdown issue (may be okay): {e}")
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_SSR_OPEN_ONLY$6"))
+            )
+        except (NoSuchElementException, StaleElementReferenceException, TimeoutException) as e:
+            logger.warning("Location dropdown issue (may be okay): %s", e)
 
         # 5. Untick "Show Open Classes Only"
         try:
             open_checkbox = driver.find_element(By.ID, "SSR_CLSRCH_WRK_SSR_OPEN_ONLY$6")
             if open_checkbox.is_selected():
                 open_checkbox.click()
-                print("  Unchecked 'Show Open Classes Only'")
+                logger.info("Unchecked 'Show Open Classes Only'")
         except NoSuchElementException:
-            print("  Open only checkbox not found")
-
-        time.sleep(0.2)  # Small buffer before search
+            logger.warning("Open only checkbox not found")
 
         # Debug: Save state before search
         if debug:
@@ -386,27 +222,31 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
 
         # 6. Click Search button
         driver.execute_script("arguments[0].click();", search_button)
-        print("  Clicked search...")
+        logger.info("Clicked search...")
 
-        # Wait for results page to load - look for "class section(s) found" text
+        # Wait for results page to load - look for EITHER results OR no-results message
         try:
             WebDriverWait(driver, 45).until(
-                EC.presence_of_element_located((By.XPATH, "//*[contains(text(), 'class section')]"))
+                lambda d: (
+                    d.find_elements(By.XPATH, "//*[contains(text(), 'class section')]")
+                    or d.find_elements(By.ID, "DERIVED_CLSMSG_ERROR_TEXT")
+                )
             )
-            print("  Results loaded!")
         except TimeoutException:
-            # Check for "no classes found" or similar
-            page_text = driver.page_source.lower()
-            if 'no classes found' in page_text or 'search returned no results' in page_text:
-                print(f"  No classes found for {subject_code}")
-                return ""
-            
             if debug:
                 driver.save_screenshot(str(debug_dir / f"{subject_code}_no_results.png"))
                 with open(debug_dir / f"{subject_code}_no_results.html", "w", encoding="utf-8") as f:
                     f.write(driver.page_source)
-            print("  Timeout waiting for results")
+            logger.warning("Timeout waiting for results for %s", subject_code)
             return ""
+
+        # Check if we got the no-results message
+        error_elements = driver.find_elements(By.ID, "DERIVED_CLSMSG_ERROR_TEXT")
+        if error_elements:
+            logger.info("No classes found for %s", subject_code)
+            return NO_RESULTS_SENTINEL
+
+        logger.info("Results loaded!")
 
         wait_for_page_load(driver)
 
@@ -422,7 +262,7 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
         return driver.page_source
 
     except TimeoutException as e:
-        print(f"Timeout while searching for {subject_code}: {e}")
+        logger.error("Timeout while searching for %s: %s", subject_code, e)
         if debug:
             debug_dir.mkdir(exist_ok=True)
             driver.save_screenshot(str(debug_dir / f"{subject_code}_timeout.png"))
@@ -430,15 +270,15 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, is_first: bool =
                 f.write(driver.page_source)
         return ""
     except Exception as e:
-        print(f"Error searching for {subject_code}: {e}")
+        logger.error("Error searching for %s: %s", subject_code, e)
         if debug:
             debug_dir.mkdir(exist_ok=True)
             try:
                 driver.save_screenshot(str(debug_dir / f"{subject_code}_error.png"))
                 with open(debug_dir / f"{subject_code}_error.html", "w", encoding="utf-8") as f:
                     f.write(driver.page_source)
-            except:
-                pass
+            except Exception as screenshot_err:
+                logger.debug("Failed to save debug screenshot: %s", screenshot_err)
         return ""
 
 
@@ -450,63 +290,284 @@ def expand_all_sections(driver: webdriver.Chrome):
             "a[id^='CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH']"
         )
 
+        # Batch-click all expand links, then wait once for page to settle
         for link in expand_links:
             try:
                 if link.is_displayed():
                     driver.execute_script("arguments[0].click();", link)
-                    time.sleep(0.3)
-            except:
+            except (StaleElementReferenceException, ElementNotInteractableException, JavascriptException) as expand_err:
+                logger.debug("Failed to expand section link: %s", expand_err)
                 continue
 
-        wait_for_page_load(driver)
+        if expand_links:
+            wait_for_page_load(driver)
     except Exception as e:
-        print(f"Error expanding sections: {e}")
+        logger.error("Error expanding sections: %s", e)
 
 
-def save_data(subjects: List[Subject], term: str = "Spring 2026"):
-    """Save scraped data to JSON file."""
+def save_data(subjects: List[Subject], term_code: str = "SP26", output_path: Optional[Path] = None):
+    """Save scraped data to JSON file.
+
+    Args:
+        subjects: Scraped subject data
+        term_code: Term code (used for default output filename)
+        output_path: Optional custom output path. If None, uses
+                     archive/courses_{term_code}.json (default behavior).
+    """
     data_dir = Path(__file__).parent / "archive"
     data_dir.mkdir(exist_ok=True)
 
+    term_label = TERM_LABELS.get(term_code, term_code)
+
     data = {
         "last_updated": datetime.now().isoformat(),
-        "term": term,
+        "term": term_label,
         "subjects": [asdict(subject) for subject in subjects]
     }
 
-    output_file = data_dir / "courses_SP26.json"
-    with open(output_file, "w") as f:
+    if output_path is None:
+        output_path = data_dir / f"courses_{term_code}.json"
+    with open(output_path, "w") as f:
         json.dump(data, f, indent=2)
 
-    print(f"Data saved to {output_file}")
+    logger.info("Data saved to %s", output_path)
+
+
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 2.0
+
+# Restart the browser every N subjects to prevent chromedriver memory/state
+# accumulation that causes crashes on long scraping runs.
+BROWSER_RESTART_INTERVAL = 40
+
+# Sentinel returned by search_subject when the search executed successfully
+# but PeopleSoft reported no matching classes (a legitimate empty result).
+NO_RESULTS_SENTINEL = "__NO_RESULTS__"
+
+
+def _checkpoint_path(term_code: str) -> Path:
+    return Path(__file__).parent / "archive" / f"checkpoint_{term_code}.json"
+
+
+def load_checkpoint(term_code: str) -> dict:
+    """Load checkpoint data for resumable scraping. Returns empty dict if none exists."""
+    cp_path = _checkpoint_path(term_code)
+    if cp_path.exists():
+        with open(cp_path, "r") as f:
+            return json.load(f)
+    return {}
+
+
+def save_checkpoint(term_code: str, completed: List[str], failed: List[str]):
+    """Save checkpoint with completed/failed subject lists."""
+    cp_path = _checkpoint_path(term_code)
+    cp_path.parent.mkdir(exist_ok=True)
+    data = {
+        "term": term_code,
+        "completed_subjects": completed,
+        "failed_subjects": failed,
+        "timestamp": datetime.now().isoformat(),
+    }
+    with open(cp_path, "w") as f:
+        json.dump(data, f, indent=2)
+
+
+def delete_checkpoint(term_code: str):
+    """Remove checkpoint file after successful completion."""
+    cp_path = _checkpoint_path(term_code)
+    if cp_path.exists():
+        cp_path.unlink()
+        logger.info("Checkpoint file removed: %s", cp_path)
+
+
+def _search_single_career_with_retry(
+    driver: webdriver.Chrome,
+    code: str,
+    career: str,
+    debug: bool,
+) -> str:
+    """Search a single career level with exponential backoff on failure."""
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            html_content = search_subject(driver, code, career=career, debug=debug)
+        except WebDriverException:
+            raise  # Let caller handle driver crashes
+        if html_content == NO_RESULTS_SENTINEL:
+            return NO_RESULTS_SENTINEL
+        if html_content:
+            return html_content
+        if attempt < MAX_RETRIES:
+            delay = RETRY_BASE_DELAY * (2 ** attempt)
+            logger.warning(
+                "Attempt %d/%d failed for %s [%s], retrying in %.1fs",
+                attempt + 1, MAX_RETRIES, code, career, delay,
+            )
+            time.sleep(delay)
+    return ""
+
+
+def scrape_subject_with_retry(
+    driver: webdriver.Chrome,
+    code: str,
+    debug: bool,
+    careers: Optional[List[str]] = None,
+) -> list:
+    """Scrape a subject across the given career levels and merge the courses.
+
+    PeopleSoft's "blank career" filter does not actually mean "all careers" --
+    it filters to undergraduate only. So we must query each career level
+    separately and merge the results.
+
+    Args:
+        careers: Career levels to query. Defaults to CAREER_LEVELS (UGRD + GRAD).
+                 Pass ["GRAD"] for graduate-only subjects to skip wasted UGRD searches.
+
+    Returns:
+        - List of Course objects (merged across all careers, deduped by number)
+        - Empty list if all career searches returned no results or failed
+    """
+    if careers is None:
+        careers = CAREER_LEVELS
+    all_courses: dict = {}  # course_number -> Course
+    any_results_or_no_results = False
+
+    for career in careers:
+        result = _search_single_career_with_retry(driver, code, career, debug)
+        if result == NO_RESULTS_SENTINEL:
+            any_results_or_no_results = True
+            logger.info("  [%s %s] No results", code, career)
+            continue
+        if not result:
+            logger.warning("  [%s %s] Failed after %d retries", code, career, MAX_RETRIES)
+            continue
+
+        any_results_or_no_results = True
+        courses = scrape_search_results(result)
+        for course in courses:
+            if course.number not in all_courses:
+                all_courses[course.number] = course
+            else:
+                # Merge sections from the same course found in multiple careers
+                # (rare but possible)
+                existing = all_courses[course.number]
+                existing.sections.extend(course.sections)
+        logger.info("  [%s %s] %d courses parsed", code, career, len(courses))
+
+    if not any_results_or_no_results:
+        return []  # Total failure - nothing succeeded
+    return list(all_courses.values())
 
 
 def scrape_all_subjects(
     headless: bool = True,
     debug: bool = False,
-    subject_codes: Optional[List[str]] = None
+    subject_codes: Optional[List[str]] = None,
+    delay: float = 1.0,
+    term_code: str = "SP26",
+    resume: bool = False,
+    careers: Optional[List[str]] = None,
 ) -> List[Subject]:
-    """Main scraping function."""
+    """Main scraping function with optional resume support."""
     if subject_codes is None:
         subject_codes = SUBJECT_CODES
 
+    # Resume: load checkpoint and skip already-completed subjects
+    completed_codes = []
+    subjects = []
+    failed_subjects = []
+
+    if resume:
+        checkpoint = load_checkpoint(term_code)
+        if checkpoint:
+            completed_codes = checkpoint.get("completed_subjects", [])
+            failed_subjects = checkpoint.get("failed_subjects", [])
+            logger.info("Resuming: %d subjects already completed, %d previously failed",
+                        len(completed_codes), len(failed_subjects))
+            # Load previously saved partial results
+            output_file = Path(__file__).parent / "archive" / f"courses_{term_code}.json"
+            if output_file.exists():
+                with open(output_file, "r") as f:
+                    prev_data = json.load(f)
+                for subj_data in prev_data.get("subjects", []):
+                    subj = Subject(
+                        code=subj_data["code"],
+                        courses=[
+                            Course(
+                                number=c["number"],
+                                title=c.get("title"),
+                                sections=[
+                                    Section(
+                                        time=TimeSlot(**s["time"]) if s.get("time") else None,
+                                        location=Location(**s["location"]) if s.get("location") else None,
+                                        days=s.get("days", []),
+                                        start_date=s.get("start_date", ""),
+                                        end_date=s.get("end_date", ""),
+                                    )
+                                    for s in c.get("sections", [])
+                                ],
+                            )
+                            for c in subj_data.get("courses", [])
+                        ],
+                    )
+                    subjects.append(subj)
+            # Derive completed_codes from actually loaded subjects to avoid drift
+            loaded_codes = {s.code for s in subjects}
+            completed_codes = list(loaded_codes)
+            failed_subjects = []
+            # Filter to only remaining subjects (previously failed get retried)
+            codes_to_scrape = [c for c in subject_codes if c not in loaded_codes]
+            logger.info("Remaining subjects to scrape: %d", len(codes_to_scrape))
+        else:
+            codes_to_scrape = list(subject_codes)
+            logger.info("No checkpoint found, starting fresh")
+    else:
+        codes_to_scrape = list(subject_codes)
+
     start_time = datetime.now()
     driver = setup_driver(headless=headless)
-    subjects = []
 
-    total_subjects = len(subject_codes)
-    total_courses = 0
-    total_sections = 0
+    total_subjects = len(codes_to_scrape)
+    total_courses = sum(len(s.courses) for s in subjects)
+    total_sections = sum(sum(len(c.sections) for c in s.courses) for s in subjects)
 
     try:
-        for i, code in enumerate(subject_codes, 1):
-            print(f"[{i}/{total_subjects}] Scraping subject: {code}")
+        for i, code in enumerate(codes_to_scrape, 1):
+            logger.info("[%d/%d] Scraping subject: %s", i, total_subjects, code)
 
-            html_content = search_subject(driver, code, is_first=(i == 1), debug=debug)
+            # Periodically restart the browser to prevent accumulated state
+            # from causing chromedriver crashes on long runs.
+            if i > 1 and (i - 1) % BROWSER_RESTART_INTERVAL == 0:
+                logger.info("Restarting browser after %d subjects to keep session fresh", i - 1)
+                try:
+                    driver.quit()
+                except Exception as e:
+                    logger.warning("Error quitting driver before restart: %s", e)
+                driver = setup_driver(headless=headless)
 
-            if html_content:
-                courses = scrape_search_results(html_content)
+            try:
+                courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers)
+            except WebDriverException as e:
+                logger.error("Driver crashed while scraping %s: %s. Restarting...", code, e)
+                try:
+                    driver.quit()
+                except Exception:
+                    pass
+                driver = setup_driver(headless=headless)
+                # Retry this subject once with the fresh driver
+                try:
+                    courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers)
+                except WebDriverException as e2:
+                    logger.error("Driver crashed again for %s: %s", code, e2)
+                    courses = None  # Signal total failure
 
+            if courses is None:
+                # Driver crash; actual failure
+                failed_subjects.append(code)
+            elif not courses:
+                # No results in any career level (legitimately empty or all failed)
+                logger.info("  No classes for %s", code)
+                completed_codes.append(code)
+            else:
                 # Filter courses with at least one section with a valid location
                 valid_courses = []
                 for course in courses:
@@ -524,21 +585,30 @@ def scrape_all_subjects(
                     total_courses += course_count
                     total_sections += section_count
 
-                    print(f"  Found {course_count} courses, {section_count} sections")
+                    logger.info("  Found %d courses, %d sections", course_count, section_count)
 
-            # Small delay between requests
-            time.sleep(1)
+                completed_codes.append(code)
+
+            # Save checkpoint after each subject
+            save_checkpoint(term_code, completed_codes, failed_subjects)
+
+            time.sleep(delay)
 
     except KeyboardInterrupt:
-        print("\nScraping interrupted, saving partial results...")
+        logger.warning("Scraping interrupted, saving partial results...")
+        interrupted = True
+    else:
+        interrupted = False
     finally:
         driver.quit()
 
     duration = datetime.now() - start_time
-    print(f"\nScraping complete in {duration.total_seconds():.1f}s")
-    print(f"Total: {len(subjects)} subjects, {total_courses} courses, {total_sections} sections")
+    logger.info("Scraping complete in %.1fs", duration.total_seconds())
+    logger.info("Total: %d subjects, %d courses, %d sections", len(subjects), total_courses, total_sections)
+    if failed_subjects:
+        logger.warning("Failed subjects (even after %d retries): %s", MAX_RETRIES, failed_subjects)
 
-    return subjects
+    return subjects, interrupted, failed_subjects
 
 
 if __name__ == "__main__":
@@ -553,22 +623,54 @@ if __name__ == "__main__":
                         help='Save debug screenshots and HTML')
     parser.add_argument('--subjects', nargs='+', default=None,
                         help='Specific subject codes to scrape (default: all)')
+    parser.add_argument('--term', default='SP26',
+                        help='Term code (e.g., SP26, FA25, SU25)')
     parser.add_argument('--test', action='store_true',
                         help='Test mode: scrape only first 3 subjects')
+    parser.add_argument('--resume', action='store_true',
+                        help='Resume from last checkpoint if available')
+    parser.add_argument('--delay', type=float, default=1.0,
+                        help='Delay between subject requests in seconds (default: 1.0)')
+    parser.add_argument('--output', default=None,
+                        help='Custom output file path (default: archive/courses_{term}.json). '
+                             'Use this to scrape into a separate file without overwriting existing data.')
+    parser.add_argument('--careers', nargs='+', default=None,
+                        choices=['UGRD', 'GRAD', 'MED', 'OTHR'],
+                        help='Career levels to query (default: UGRD GRAD). '
+                             'Pass --careers GRAD for graduate-only subjects.')
 
     args = parser.parse_args()
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+    )
 
     subject_codes = args.subjects
     if args.test:
         subject_codes = SUBJECT_CODES[:3]
 
-    print("Starting UCF course scraper...")
-    print("Press Ctrl+C to stop and save partial results\n")
+    logger.info("Starting UCF course scraper...")
+    logger.info("Press Ctrl+C to stop and save partial results")
 
-    subjects = scrape_all_subjects(
+    subjects, interrupted, failed = scrape_all_subjects(
         headless=args.headless,
         debug=args.debug,
-        subject_codes=subject_codes
+        subject_codes=subject_codes,
+        delay=args.delay,
+        term_code=args.term,
+        resume=args.resume,
+        careers=args.careers,
     )
 
-    save_data(subjects)
+    output_path = Path(args.output) if args.output else None
+    save_data(subjects, term_code=args.term, output_path=output_path)
+
+    # Only clean up checkpoint on full successful completion (no failures, not interrupted)
+    if not interrupted and not failed:
+        delete_checkpoint(args.term)
+    elif failed:
+        logger.warning(
+            "Checkpoint preserved so you can resume failed subjects with: python scraper.py --resume --term %s",
+            args.term,
+        )

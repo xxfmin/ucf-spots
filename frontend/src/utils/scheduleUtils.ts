@@ -211,7 +211,6 @@ export function findNextAvailableBlock(
 
   for (const block of scheduleData) {
     if (block.status === "available") {
-      const blockStart = moment.tz(`1970-01-01T${block.start}`, TIMEZONE);
       const blockEnd = moment.tz(`1970-01-01T${block.end}`, TIMEZONE);
 
       // Check if this block overlaps with or is after fromTime

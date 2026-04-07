@@ -17,7 +17,6 @@ const getDefaultZoom = (): number => {
   if (typeof window === "undefined") return 15.85; // SSR fallback
 
   const width = window.innerWidth;
-  const height = window.innerHeight;
 
   // Mobile (portrait): < 640px width
   if (width < 640) {

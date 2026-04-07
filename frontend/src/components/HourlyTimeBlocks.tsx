@@ -2,7 +2,7 @@
 
 import { RoomScheduleBlock, HourlyScheduleBlock, BlockSection } from "@/types";
 import { formatTime } from "@/utils/format";
-import { useMemo, useState, useRef, useEffect, useCallback } from "react";
+import { useMemo, useState, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 
 interface HourlyTimeBlocksProps {
@@ -147,12 +147,12 @@ function PortalTooltip({
   block: HourlyScheduleBlock;
   anchorRect: DOMRect;
 }) {
-  const tooltipRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  useEffect(() => {
-    if (tooltipRef.current) {
-      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+  const tooltipRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node) return;
+      const tooltipRect = node.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
 
       // Position above the block, centered
@@ -171,8 +171,9 @@ function PortalTooltip({
       }
 
       setPosition({ top, left });
-    }
-  }, [anchorRect]);
+    },
+    [anchorRect]
+  );
 
   return createPortal(
     <div

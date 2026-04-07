@@ -95,7 +95,7 @@ export default function FeedbackDialog({
         <DialogHeader>
           <DialogTitle>Leave Feedback</DialogTitle>
           <DialogDescription>
-            We'd love to hear your thoughts, suggestions, or report any issues.
+            We&apos;d love to hear your thoughts, suggestions, or report any issues.
           </DialogDescription>
         </DialogHeader>
         {submitSuccess ? (

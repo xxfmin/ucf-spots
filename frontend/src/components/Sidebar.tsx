@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import {
   Info,
   Search,
-  Filter,
   ListFilter,
   CalendarClock,
   MessageSquare,
@@ -129,7 +128,7 @@ const RoomAccordionItem = ({
                 ? `until ${formatTime(room.availableUntil)}`
                 : "open"
               : room.availableAt
-              ? `at ${formatTime(room.availableAt)}`
+              ? `free at ${formatTime(room.availableAt)}`
               : "busy"}
           </span>
         </div>

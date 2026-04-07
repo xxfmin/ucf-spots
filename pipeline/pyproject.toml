@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "integration: live tests that hit external services (UCF PeopleSoft, Supabase)",
+    "slow: long-running tests (e.g., browser automation)",
+]
+# Skip live integration tests by default. Run them explicitly with:
+#   pytest -m integration
+addopts = "-m 'not integration'"

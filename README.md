@@ -17,12 +17,12 @@ ucfSpots is a web application that helps UCF students find available study space
 - Combines official class schedules with daily university event data to determine whether a room is in use at a specific date/time.
 - A room is unavailable if any class or daily event overlaps the selected time; otherwise it's available. Availability ends at the earliest of the next class/event or building close. Very short gaps (< ~30 minutes) are not surfaced as "available" to avoid unusable slivers.
 - Time travel: daily events are included for past dates and for future dates up to 14 days ahead; for dates further in the future, only class schedules and building hours are used.
-- Timezone: all times are evaluated in campus local time (America/New_York), handling EST.
+- Timezone: all times are evaluated in campus local time (America/New_York), handling EST/EDT and DST transitions.
 
 ## Accuracy & Reliability
 
 - Sources: class data from UCF Class Search system and daily events from events.ucf.edu.
-- Freshness: daily events are scraped and updated regularly via a cron job; class/building data is refreshed via the data pipeline.
+- Freshness: class/building data is refreshed via the data pipeline. A daily-events scraper that keeps `daily_events` current is planned but not yet implemented.
 - Deterministic rules: availability for academic rooms is computed in SQL ([`database/functions/get_spots.sql`](database/functions/get_spots.sql)), using only official schedules + events and building hours.
 - Known limitations:
   - Unofficial use (study groups, ad‑hoc meetings) and last‑minute changes may not be reflected.
@@ -39,14 +39,14 @@ ucfSpots is a web application that helps UCF students find available study space
 
 ## Tech Stack
 
-- Frontend: Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, TanStack Query, Mapbox.
+- Frontend: Next.js 16, React 19, TypeScript, Tailwind CSS 4 (React Compiler enabled), shadcn/ui, TanStack Query, Mapbox.
 - Backend: Supabase (PostgreSQL), Next.js API Routes, SQL functions (`database/functions`).
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18.17+
+- Node.js 20.9+ (required by Next.js 16)
 - npm or yarn
 - Supabase project (PostgreSQL)
 
@@ -65,9 +65,11 @@ npm install
 - Create a database (e.g., via Supabase).
 - Apply schema: run [`database/schema/tables.sql`](database/schema/tables.sql) in the SQL editor.
 - Add cache tables: run [`database/schema/cache_tables.sql`](database/schema/cache_tables.sql).
+- Add feedback table: run [`database/schema/feedback.sql`](database/schema/feedback.sql).
 - Add functions: run [`database/functions/get_spots.sql`](database/functions/get_spots.sql) and [`database/functions/get_room_schedule.sql`](database/functions/get_room_schedule.sql).
 - Add cached versions: run [`database/functions/get_cached_spots.sql`](database/functions/get_cached_spots.sql) and [`database/functions/get_room_schedule_cached.sql`](database/functions/get_room_schedule_cached.sql).
 - Add cache refresh function: run [`database/functions/refresh_room_availability_cache.sql`](database/functions/refresh_room_availability_cache.sql).
+- Apply migrations in order from [`database/migrations/`](database/migrations) (currently `001_optimize_gap_computation.sql`, required by `get_cached_spots`).
 
 3. Environment
 

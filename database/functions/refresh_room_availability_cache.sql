@@ -113,8 +113,10 @@ BEGIN
             r.building_name,
             r.room_number,
             ra.busy_multirange,
-            CASE 
-                WHEN ra.activities_json IS NULL THEN 
+            vb.open_time,
+            vb.close_time,
+            CASE
+                WHEN ra.activities_json IS NULL THEN
                     -- Empty schedule, just one big available block
                     jsonb_build_array(
                         jsonb_build_object(
@@ -131,21 +133,66 @@ BEGIN
         FROM rooms r
         JOIN valid_buildings vb ON r.building_name = vb.building_name
         LEFT JOIN room_activities ra ON r.building_name = ra.building_name AND r.room_number = ra.room_number
+    ),
+    -- Pre-compute all gaps from busy_times multirange (filtering by min duration at read time)
+    gap_computation AS (
+        SELECT
+            cd.building_name,
+            cd.room_number,
+            array_agg(gap_start ORDER BY gap_start) as gap_starts_arr,
+            array_agg(gap_end ORDER BY gap_start) as gap_ends_arr,
+            array_agg(gap_mins ORDER BY gap_start) as gap_minutes_arr
+        FROM calculated_data cd
+        CROSS JOIN LATERAL (
+            -- Generate all gaps between busy periods, plus before first and after last
+            SELECT gap_start::time as gap_start, gap_end::time as gap_end,
+                   EXTRACT(EPOCH FROM (gap_end - gap_start)) / 60 as gap_mins
+            FROM (
+                -- Gaps between consecutive busy ranges
+                SELECT
+                    upper(range_val) as gap_start,
+                    COALESCE(
+                        LEAD(lower(range_val)) OVER (ORDER BY lower(range_val)),
+                        (target_date || ' ' || cd.close_time)::timestamp
+                    ) as gap_end
+                FROM unnest(COALESCE(cd.busy_multirange, tsmultirange())) as range_val
+
+                UNION ALL
+
+                -- Gap before the first busy range (from building open)
+                SELECT
+                    (target_date || ' ' || cd.open_time)::timestamp as gap_start,
+                    COALESCE(
+                        (SELECT MIN(lower(range_val)) FROM unnest(cd.busy_multirange) as range_val),
+                        (target_date || ' ' || cd.close_time)::timestamp
+                    ) as gap_end
+            ) all_gaps
+            WHERE gap_end > gap_start
+        ) gaps
+        GROUP BY cd.building_name, cd.room_number
     )
     INSERT INTO room_availability_cache (
-        building_name, 
-        room_number, 
-        check_date, 
-        busy_times, 
-        schedule_data
+        building_name,
+        room_number,
+        check_date,
+        busy_times,
+        schedule_data,
+        gap_starts,
+        gap_ends,
+        gap_minutes
     )
     SELECT
         cd.building_name,
         cd.room_number,
         target_date,
-        COALESCE(cd.busy_multirange, tsmultirange()), -- Empty multirange if no activities
-        cd.schedule_data
-    FROM calculated_data cd;
+        COALESCE(cd.busy_multirange, tsmultirange()),
+        cd.schedule_data,
+        gc.gap_starts_arr,
+        gc.gap_ends_arr,
+        gc.gap_minutes_arr
+    FROM calculated_data cd
+    LEFT JOIN gap_computation gc ON cd.building_name = gc.building_name
+        AND cd.room_number = gc.room_number;
 
 END;
 $$ LANGUAGE plpgsql;

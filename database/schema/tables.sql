@@ -65,10 +65,9 @@ CREATE TABLE class_schedule (
 -- Class schedule indexes for performance
 CREATE INDEX idx_class_schedule_day_time
     ON class_schedule(day_of_week, start_time, end_time);
-CREATE INDEX idx_class_schedule_next
-    ON class_schedule(day_of_week, start_time);
-CREATE INDEX idx_class_schedule_room_day
-    ON class_schedule(building_name, room_number, day_of_week);
+-- Covering index for gap analysis: avoids heap lookups when scanning future classes per room
+CREATE INDEX idx_class_schedule_room_day_times
+    ON class_schedule(building_name, room_number, day_of_week, start_time, end_time);
 CREATE INDEX idx_class_schedule_daterange
     ON class_schedule USING gist (date_range);
 

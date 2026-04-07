@@ -144,38 +144,54 @@ BEGIN
         ) combined
         ORDER BY building_name, room_number, start_time
     ),
-    remaining_occupancy AS (
+    -- All future occupancy for rooms in open buildings (classes + events)
+    all_future_occupancy AS (
+        SELECT building_name, room_number, start_time, end_time
+        FROM class_schedule
+        WHERE day_of_week = check_day
+          AND start_time > check_time
+          AND check_date <@ date_range
+          AND building_name IN (SELECT name FROM day_hours_with_status WHERE is_open)
+
+        UNION ALL
+
+        SELECT building_name, room_number,
+               (start_time AT TIME ZONE 'America/New_York')::TIME,
+               (end_time AT TIME ZONE 'America/New_York')::TIME
+        FROM daily_events
+        WHERE DATE(start_time AT TIME ZONE 'America/New_York') = check_date
+          AND (start_time AT TIME ZONE 'America/New_York')::TIME > check_time
+          AND building_name IN (SELECT name FROM day_hours_with_status WHERE is_open)
+    ),
+    -- Merge overlapping/adjacent time ranges per room using gaps-and-islands
+    merged_occupancy AS (
         SELECT
             building_name,
             room_number,
-            jsonb_agg(
-                jsonb_build_object(
-                    'start_time', start_time,
-                    'end_time', end_time
-                )
-                ORDER BY start_time
-            ) as class_sequence
+            MIN(start_time) as block_start,
+            MAX(end_time) as block_end
         FROM (
-            -- Remaining classes - only for open facilities
-            SELECT building_name, room_number, start_time, end_time
-            FROM class_schedule
-            WHERE day_of_week = check_day
-            AND start_time > check_time
-            AND check_date <@ date_range
-            AND building_name IN (SELECT name FROM day_hours_with_status WHERE is_open)
-
-            UNION ALL
-
-            -- Remaining events - only for open facilities
-            SELECT building_name, room_number, 
-                   (start_time AT TIME ZONE 'America/New_York')::TIME as start_time, 
-                   (end_time AT TIME ZONE 'America/New_York')::TIME as end_time
-            FROM daily_events
-            WHERE DATE(start_time AT TIME ZONE 'America/New_York') = check_date
-            AND (start_time AT TIME ZONE 'America/New_York')::TIME > check_time
-            AND building_name IN (SELECT name FROM day_hours_with_status WHERE is_open)
-        ) combined
-        GROUP BY building_name, room_number
+            SELECT
+                building_name, room_number, start_time, end_time,
+                SUM(new_group) OVER (
+                    PARTITION BY building_name, room_number
+                    ORDER BY start_time, end_time
+                ) as grp
+            FROM (
+                SELECT
+                    building_name, room_number, start_time, end_time,
+                    CASE
+                        WHEN start_time > MAX(end_time) OVER (
+                            PARTITION BY building_name, room_number
+                            ORDER BY start_time, end_time
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING
+                        ) THEN 1
+                        ELSE 0
+                    END as new_group
+                FROM all_future_occupancy
+            ) with_groups
+        ) grouped
+        GROUP BY building_name, room_number, grp
     ),
     room_status AS (
         SELECT
@@ -216,104 +232,46 @@ BEGIN
             AND r.room_number = no.room_number
         WHERE r.building_name IN (SELECT name FROM day_hours_with_status WHERE is_open)
     ),
-    meaningful_gap AS (
-        SELECT
+    -- Find first meaningful gap (>= minimum_useful_interval) for occupied rooms
+    -- Uses set-based LATERAL join instead of recursive CTE
+    meaningful_gap_parsed AS (
+        SELECT DISTINCT ON (rs.building_name, rs.room_number)
             rs.building_name,
             rs.room_number,
-            CASE
-                WHEN rs.status = 'occupied' THEN (
-                    WITH class_sequence AS (
-                        SELECT
-                            rs2.available_at as initial_time,
-                            rc.class_sequence,
-                            dh.close_time
-                        FROM room_status rs2
-                        LEFT JOIN remaining_occupancy rc
-                            ON rs2.building_name = rc.building_name
-                            AND rs2.room_number = rc.room_number
-                        CROSS JOIN day_hours_with_status dh
-                        WHERE dh.name = rs2.building_name
-                        AND rs2.building_name = rs.building_name
-                        AND rs2.room_number = rs.room_number
-                        LIMIT 1
-                    )
-                    SELECT
-                        CASE
-                            WHEN class_sequence IS NULL OR class_sequence.class_sequence IS NULL THEN
-                                jsonb_build_object(
-                                    'available_at', initial_time,
-                                    'next_class_start', NULL::time
-                                )
-                            ELSE (
-                                WITH RECURSIVE class_check(current_end, next_idx, found_gap, next_start) AS (
-                                    SELECT
-                                        initial_time,
-                                        0,
-                                        CASE
-                                            WHEN (class_sequence->0->>'start_time')::time - initial_time >= minimum_useful_interval
-                                            THEN true
-                                            ELSE false
-                                        END,
-                                        CASE
-                                            WHEN (class_sequence->0->>'start_time')::time - initial_time >= minimum_useful_interval
-                                            THEN (class_sequence->0->>'start_time')::time
-                                            ELSE NULL
-                                        END
-                                    FROM class_sequence
-
-                                    UNION ALL
-                                    SELECT
-                                        (class_sequence->next_idx->>'end_time')::time,
-                                        next_idx + 1,
-                                        CASE
-                                            WHEN next_idx + 1 >= jsonb_array_length(class_sequence) THEN true
-                                            WHEN (class_sequence->(next_idx + 1)->>'start_time')::time -
-                                                 (class_sequence->next_idx->>'end_time')::time >= minimum_useful_interval
-                                            THEN true
-                                            ELSE false
-                                        END,
-                                        CASE
-                                            WHEN next_idx + 1 >= jsonb_array_length(class_sequence) THEN NULL
-                                            WHEN (class_sequence->(next_idx + 1)->>'start_time')::time -
-                                                 (class_sequence->next_idx->>'end_time')::time >= minimum_useful_interval
-                                            THEN (class_sequence->(next_idx + 1)->>'start_time')::time
-                                            ELSE NULL
-                                        END
-                                    FROM class_check, class_sequence
-                                    WHERE NOT found_gap
-                                    AND next_idx < jsonb_array_length(class_sequence)
-                                )
-                                SELECT jsonb_build_object(
-                                    'available_at',
-                                    CASE
-                                        WHEN current_end > close_time THEN close_time
-                                        ELSE current_end
-                                    END,
-                                    'next_class_start',
-                                    CASE
-                                        WHEN current_end > close_time THEN NULL
-                                        ELSE next_start
-                                    END
-                                )
-                                FROM class_check
-                                WHERE found_gap
-                                ORDER BY current_end
-                                LIMIT 1
-                            )
-                        END
-                    FROM class_sequence
-                )
-                ELSE NULL
-            END as gap_info
+            gaps.gap_start as meaningful_available_at,
+            gaps.gap_end as next_class_start
         FROM room_status rs
-    ),
-    meaningful_gap_parsed AS (
-        SELECT
-            building_name,
-            room_number,
-            (gap_info->>'available_at')::time as meaningful_available_at,
-            (gap_info->>'next_class_start')::time as next_class_start
-        FROM meaningful_gap
+        CROSS JOIN day_hours_with_status dh
+        CROSS JOIN LATERAL (
+            -- Gaps between merged occupancy blocks
+            SELECT
+                COALESCE(
+                    LAG(mo.block_end) OVER (ORDER BY mo.block_start),
+                    rs.available_at
+                ) as gap_start,
+                mo.block_start as gap_end
+            FROM merged_occupancy mo
+            WHERE mo.building_name = rs.building_name
+              AND mo.room_number = rs.room_number
+
+            UNION ALL
+
+            -- Gap after the last occupancy block until building close
+            SELECT
+                COALESCE(
+                    (SELECT MAX(mo2.block_end) FROM merged_occupancy mo2
+                     WHERE mo2.building_name = rs.building_name
+                       AND mo2.room_number = rs.room_number),
+                    rs.available_at
+                ) as gap_start,
+                dh.close_time as gap_end
+        ) gaps
+        WHERE rs.status = 'occupied'
+          AND dh.name = rs.building_name
+          AND gaps.gap_start IS NOT NULL
+          AND gaps.gap_end > gaps.gap_start
+          AND (gaps.gap_end - gaps.gap_start) >= minimum_useful_interval
+        ORDER BY rs.building_name, rs.room_number, gaps.gap_start
     ),
     room_counts AS (
         SELECT

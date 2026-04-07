@@ -12,6 +12,9 @@ CREATE TABLE IF NOT EXISTS room_availability_cache (
     check_date DATE,
     busy_times tsmultirange,      -- Multirange of busy timestamps
     schedule_data JSONB,          -- Pre-computed schedule blocks as JSON
+    gap_starts TIME[],              -- Sorted array of meaningful gap start times (>= 30 min gaps)
+    gap_ends TIME[],                -- Parallel array of gap end times
+    gap_minutes REAL[],             -- Parallel array of gap durations in minutes
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     PRIMARY KEY (building_name, room_number, check_date)
 );

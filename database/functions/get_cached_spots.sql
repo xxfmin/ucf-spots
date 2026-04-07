@@ -52,18 +52,21 @@ BEGIN
             bi.close_time,
             c.schedule_data,
             c.busy_times,
+            c.gap_starts,
+            c.gap_ends,
+            c.gap_minutes,
             -- Is the room currently occupied?
             (c.busy_times @> check_timestamp) as is_occupied,
-            
+
             -- Find current class details from JSON
-            (SELECT item FROM jsonb_array_elements(c.schedule_data) as item 
-             WHERE (item->>'start')::time <= check_time_param AND (item->>'end')::time > check_time_param 
+            (SELECT item FROM jsonb_array_elements(c.schedule_data) as item
+             WHERE (item->>'start')::time <= check_time_param AND (item->>'end')::time > check_time_param
              LIMIT 1) as current_class_json,
-             
+
             -- Find next class details from JSON
-            (SELECT item FROM jsonb_array_elements(c.schedule_data) as item 
-             WHERE (item->>'start')::time > check_time_param 
-             ORDER BY (item->>'start')::time ASC 
+            (SELECT item FROM jsonb_array_elements(c.schedule_data) as item
+             WHERE (item->>'start')::time > check_time_param
+             ORDER BY (item->>'start')::time ASC
              LIMIT 1) as next_class_json
 
         FROM room_availability_cache c
@@ -86,34 +89,62 @@ BEGIN
             END as available_until_time
         FROM room_state rs
     ),
+    -- For occupied rooms, find the first meaningful gap from pre-computed arrays
+    occupied_gap AS (
+        SELECT
+            ca.building_name,
+            ca.room_number,
+            g.gap_start as meaningful_available_at,
+            g.gap_end as meaningful_available_until
+        FROM calculated_availability ca
+        CROSS JOIN LATERAL (
+            SELECT
+                ca.gap_starts[idx] as gap_start,
+                ca.gap_ends[idx] as gap_end
+            FROM generate_series(1, COALESCE(array_length(ca.gap_starts, 1), 0)) as idx
+            WHERE ca.gap_starts[idx] >= ca.current_end_time
+              AND ca.gap_minutes[idx] >= EXTRACT(EPOCH FROM min_interval) / 60
+            ORDER BY ca.gap_starts[idx]
+            LIMIT 1
+        ) g
+        WHERE ca.is_occupied
+          AND ca.gap_starts IS NOT NULL
+    ),
     final_metrics AS (
         SELECT
             ca.*,
-            CASE 
-                WHEN is_occupied THEN 'occupied' 
-                ELSE 'available' 
-            END as status_text,
-            
-            -- passingPeriod logic: Available, but for less than min interval
-            (NOT is_occupied AND (available_until_time - check_time_param) < min_interval) as is_passing_period,
-            
-            -- availableFor logic
-            CASE 
-                WHEN NOT is_occupied THEN 
-                    EXTRACT(EPOCH FROM (available_until_time - check_time_param))/60
-                ELSE 
-                    -- If occupied, complex logic for "when next available". 
-                    -- Simplified: Available at end of current class.
-                    -- Does NOT do recursive gap check (too complex for simple cache read)
-                    NULL
-            END as available_for_minutes,
-            
-            -- availableAt logic
             CASE
-                WHEN is_occupied THEN current_end_time
+                WHEN is_occupied THEN 'occupied'
+                ELSE 'available'
+            END as status_text,
+
+            -- passingPeriod logic: Available, but next class starts within min interval
+            -- Must check next_start_time IS NOT NULL to avoid false positives near closing
+            (NOT is_occupied AND next_start_time IS NOT NULL AND (next_start_time - check_time_param) < min_interval) as is_passing_period,
+
+            -- availableFor logic: now uses pre-computed gaps for occupied rooms
+            CASE
+                WHEN NOT is_occupied THEN
+                    EXTRACT(EPOCH FROM (available_until_time - check_time_param))/60
+                WHEN is_occupied AND og.meaningful_available_at IS NOT NULL THEN
+                    CASE
+                        WHEN og.meaningful_available_until IS NOT NULL THEN
+                            EXTRACT(EPOCH FROM (og.meaningful_available_until - og.meaningful_available_at))/60
+                        ELSE
+                            EXTRACT(EPOCH FROM (ca.close_time - og.meaningful_available_at))/60
+                    END
+                ELSE NULL
+            END as available_for_minutes,
+
+            -- availableAt logic: uses meaningful gap start for occupied rooms
+            -- Falls back to close_time when no meaningful gap exists (matches get_spots behavior)
+            CASE
+                WHEN is_occupied THEN COALESCE(og.meaningful_available_at, ca.close_time)
                 ELSE NULL
             END as available_at_time
         FROM calculated_availability ca
+        LEFT JOIN occupied_gap og ON ca.building_name = og.building_name
+            AND ca.room_number = og.room_number
     ),
     -- Aggregation per building
     building_agg AS (
@@ -132,6 +163,7 @@ BEGIN
                     fm.room_number,
                     jsonb_build_object(
                         'status', fm.status_text,
+                        'available', fm.status_text = 'available',
                         'passingPeriod', fm.is_passing_period,
                         'currentClass', fm.current_class_json->'details',
                         'nextClass', fm.next_class_json->'details',

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-12T23:28:14.181913",
+  "last_updated": "2026-04-07T15:51:51.969268",
   "term": "Spring 2026",
   "subjects": [
     {
@@ -246,8 +246,8 @@
               "days": [
                 "M"
               ],
-              "start_date": "2026-03-02",
-              "end_date": "2026-03-02"
+              "start_date": "2026-03-09",
+              "end_date": "2026-03-09"
             },
             {
               "time": {
@@ -548,6 +548,21 @@
               ],
               "start_date": "2026-04-22",
               "end_date": "2026-04-22"
+            },
+            {
+              "time": {
+                "start": "10:00",
+                "end": "11:15"
+              },
+              "location": {
+                "building": "UWCV",
+                "room": "0302"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -1202,8 +1217,8 @@
                 "end": "08:50"
               },
               "location": {
-                "building": "PSY",
-                "room": "0105"
+                "building": "BA2",
+                "room": "0210"
               },
               "days": [
                 "M",
@@ -2566,6 +2581,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:45"
+              },
+              "location": {
+                "building": "UWCV",
+                "room": "0302"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -3514,6 +3544,53 @@
       ]
     },
     {
+      "code": "ARC",
+      "courses": [
+        {
+          "number": "ARC 3743",
+          "title": "Architectural History 3",
+          "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "VW11",
+                "room": "0116"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "ARC 4620",
+          "title": "Environmental Technology 2",
+          "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "VW11",
+                "room": "0116"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "code": "ARE",
       "courses": [
         {
@@ -3989,8 +4066,8 @@
                 "end": "13:20"
               },
               "location": {
-                "building": "NSC",
-                "room": "O114"
+                "building": "CB1",
+                "room": "O212"
               },
               "days": [
                 "M",
@@ -4493,7 +4570,7 @@
               },
               "location": {
                 "building": "DPAC",
-                "room": "0348"
+                "room": "0358"
               },
               "days": [
                 "W"
@@ -5395,8 +5472,8 @@
                 "end": "13:20"
               },
               "location": {
-                "building": "NSC",
-                "room": "O110"
+                "building": "CB1",
+                "room": "O320"
               },
               "days": [
                 "M",
@@ -6089,7 +6166,7 @@
             {
               "time": {
                 "start": "16:30",
-                "end": "17:50"
+                "end": "17:45"
               },
               "location": {
                 "building": "HS1",
@@ -6209,8 +6286,8 @@
                 "end": "13:20"
               },
               "location": {
-                "building": "CB1",
-                "room": "O320"
+                "building": "NSC",
+                "room": "O110"
               },
               "days": [
                 "M",
@@ -6321,8 +6398,8 @@
                 "end": "10:15"
               },
               "location": {
-                "building": "PSY",
-                "room": "0108"
+                "building": "HS1",
+                "room": "O112"
               },
               "days": [
                 "M",
@@ -7159,8 +7236,8 @@
                 "end": "13:15"
               },
               "location": {
-                "building": "VAB",
-                "room": "0132"
+                "building": "CB2",
+                "room": "O207"
               },
               "days": [
                 "T",
@@ -7778,8 +7855,8 @@
                 "end": "16:15"
               },
               "location": {
-                "building": "CB1",
-                "room": "O113"
+                "building": "TCH",
+                "room": "0351"
               },
               "days": [
                 "M",
@@ -7985,7 +8062,7 @@
               },
               "location": {
                 "building": "TCH",
-                "room": "0102"
+                "room": "0107"
               },
               "days": [
                 "T",
@@ -8504,8 +8581,8 @@
                 "end": "10:15"
               },
               "location": {
-                "building": "CB2",
-                "room": "O204"
+                "building": "HS1",
+                "room": "O119"
               },
               "days": [
                 "T",
@@ -10216,8 +10293,8 @@
                 "end": "20:50"
               },
               "location": {
-                "building": "TA",
-                "room": "0130A"
+                "building": "PSY",
+                "room": "0106"
               },
               "days": [
                 "M"
@@ -10389,21 +10466,6 @@
           "number": "EDG 2940",
           "title": "Experiential Learning in Education",
           "sections": [
-            {
-              "time": {
-                "start": "18:00",
-                "end": "20:50"
-              },
-              "location": {
-                "building": "TCH",
-                "room": "0108"
-              },
-              "days": [
-                "T"
-              ],
-              "start_date": "2026-01-12",
-              "end_date": "2026-05-05"
-            },
             {
               "time": {
                 "start": "14:30",
@@ -11557,21 +11619,6 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-01-12"
-            },
-            {
-              "time": {
-                "start": "13:30",
-                "end": "16:20"
-              },
-              "location": {
-                "building": "BA1",
-                "room": "O214"
-              },
-              "days": [
-                "M"
-              ],
-              "start_date": "2026-01-12",
-              "end_date": "2026-05-05"
             },
             {
               "time": {
@@ -15072,6 +15119,115 @@
       ]
     },
     {
+      "code": "ENV",
+      "courses": [
+        {
+          "number": "ENV 3001",
+          "title": "Environmental Engineering",
+          "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O307"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0117"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "ENV 4120",
+          "title": "Air Pollution and Hazardous Waste Control",
+          "sections": [
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0108"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "ENV 4531",
+          "title": "Environmental Engineering Unit Operations & Processes",
+          "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "19:15"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O427"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "ENV 4561",
+          "title": "Advanced Environmental Engineering Operations & Processes",
+          "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O427"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "code": "ESI",
       "courses": [
         {
@@ -15363,7 +15519,7 @@
               },
               "location": {
                 "building": "DPAC",
-                "room": "0348"
+                "room": "0358"
               },
               "days": [
                 "W"
@@ -17160,8 +17316,8 @@
                 "end": "14:45"
               },
               "location": {
-                "building": "MSB",
-                "room": "0109"
+                "building": "TCH",
+                "room": "0358B"
               },
               "days": [
                 "T",
@@ -17368,6 +17524,21 @@
               "location": {
                 "building": "BA2",
                 "room": "0201"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O116"
               },
               "days": [
                 "W"
@@ -17693,6 +17864,21 @@
               },
               "days": [
                 "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0201"
+              },
+              "days": [
+                "F"
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
@@ -20631,7 +20817,7 @@
                 "T"
               ],
               "start_date": "2026-01-13",
-              "end_date": "2026-01-13"
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -21536,8 +21722,8 @@
                 "end": "13:15"
               },
               "location": {
-                "building": "BA1",
-                "room": "O213"
+                "building": "VAB",
+                "room": "0107"
               },
               "days": [
                 "T",
@@ -22082,7 +22268,7 @@
               },
               "location": {
                 "building": "TCH",
-                "room": "0107"
+                "room": "0101"
               },
               "days": [
                 "T",
@@ -22183,8 +22369,8 @@
                 "end": "14:50"
               },
               "location": {
-                "building": "TCH",
-                "room": "0151"
+                "building": "TA",
+                "room": "0322"
               },
               "days": [
                 "M",
@@ -23407,8 +23593,8 @@
                 "end": "17:45"
               },
               "location": {
-                "building": "TCH",
-                "room": "0108"
+                "building": "BA1",
+                "room": "O213"
               },
               "days": [
                 "T",
@@ -24355,8 +24541,8 @@
                 "end": "20:50"
               },
               "location": {
-                "building": "MSB",
-                "room": "0336"
+                "building": "BA2",
+                "room": "0221"
               },
               "days": [
                 "R"
@@ -24370,8 +24556,8 @@
                 "end": "14:50"
               },
               "location": {
-                "building": "TA",
-                "room": "0222"
+                "building": "MSB",
+                "room": "0306"
               },
               "days": [
                 "R"
@@ -25222,8 +25408,8 @@
                 "end": "11:45"
               },
               "location": {
-                "building": "PSY",
-                "room": "0111"
+                "building": "ENG2",
+                "room": "0203"
               },
               "days": [
                 "T",
@@ -26112,21 +26298,6 @@
               ],
               "start_date": "2026-03-24",
               "end_date": "2026-03-24"
-            },
-            {
-              "time": {
-                "start": "10:30",
-                "end": "11:50"
-              },
-              "location": {
-                "building": "BA1",
-                "room": "O107"
-              },
-              "days": [
-                "T"
-              ],
-              "start_date": "2026-04-07",
-              "end_date": "2026-04-07"
             },
             {
               "time": {
@@ -27337,11 +27508,263 @@
               },
               "location": {
                 "building": "BA1",
-                "room": "O213"
+                "room": "O221"
               },
               "days": [
                 "T",
                 "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MCB",
+      "courses": [
+        {
+          "number": "MCB 1310",
+          "title": "Introduction to Biotechnology and Genetic Engineering",
+          "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O121"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 3203",
+          "title": "Pathogenic Microbiology",
+          "sections": [
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0302"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 3903",
+          "title": "Explorations in Biomedical Science Research",
+          "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 3933",
+          "title": "Biomedical Sciences Careers",
+          "sections": [
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O307"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4204",
+          "title": "Cellular Microbiology: Host-Pathogen Interactions",
+          "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0208"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4224",
+          "title": "Molecular Biology of Diseases",
+          "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O126"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4276",
+          "title": "Epidemiology of Infectious Diseases",
+          "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0117"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4404",
+          "title": "Bacterial Genetics and Physiology",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "VAB",
+                "room": "0109"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4915",
+          "title": "Program for Undergraduate Research Experience",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O113"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MCB 4940",
+          "title": "Methodology in Biomedical Sciences",
+          "sections": [
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:00",
+                "end": "13:50"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0151"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "12:50"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "W"
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
@@ -27772,8 +28195,8 @@
                 "end": "20:50"
               },
               "location": {
-                "building": "TCH",
-                "room": "0257"
+                "building": "NSC",
+                "room": "O116"
               },
               "days": [
                 "M"
@@ -27803,7 +28226,7 @@
               },
               "location": {
                 "building": "NSC",
-                "room": "O147"
+                "room": "O228"
               },
               "days": [
                 "W"
@@ -27903,21 +28326,6 @@
           "number": "MUE 2211",
           "title": "Early Childhood Music and Movement",
           "sections": [
-            {
-              "time": {
-                "start": "13:30",
-                "end": "16:20"
-              },
-              "location": {
-                "building": "TA",
-                "room": "0222"
-              },
-              "days": [
-                "M"
-              ],
-              "start_date": "2026-01-12",
-              "end_date": "2026-05-05"
-            },
             {
               "time": {
                 "start": "13:30",
@@ -28199,6 +28607,80 @@
               "days": [
                 "M",
                 "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MUH",
+      "courses": [
+        {
+          "number": "MUH 2111",
+          "title": "Survey of Music History: Antiquity to 1750",
+          "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0150"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MUH 3212",
+          "title": "Survey of Music History: 1750 to Present",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0150"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "MUH 3633",
+          "title": "Music in the United States",
+          "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0261"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
@@ -30628,7 +31110,7 @@
                 "room": "M0120"
               },
               "days": [
-                "F"
+                "W"
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
@@ -33608,6 +34090,122 @@
       ]
     },
     {
+      "code": "PHZ",
+      "courses": [
+        {
+          "number": "PHZ 3113",
+          "title": "Introduction to Theoretical Methods of Physics",
+          "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O427"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "PHZ 3150",
+          "title": "Introduction to Numerical Computing",
+          "sections": [
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0108"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "PHZ 4404",
+          "title": "Solid State Physics",
+          "sections": [
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O212"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "PHZ 4624",
+          "title": "General Relativity",
+          "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0111"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        },
+        {
+          "number": "PHZ 4932",
+          "title": "Special Topics",
+          "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "code": "PLA",
       "courses": [
         {
@@ -34477,6 +35075,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O105"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -34489,6 +35102,54 @@
           "number": "PSB 3002",
           "title": "Physiological Psychology",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O112"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0210"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -34557,6 +35218,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O122"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -34575,8 +35251,25 @@
                 "end": "10:20"
               },
               "location": {
-                "building": "BA1",
-                "room": "O119"
+                "building": "NSC",
+                "room": "O117"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O117"
               },
               "days": [
                 "M",
@@ -34597,6 +35290,37 @@
           "number": "PSY 2012",
           "title": "General Psychology",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0125"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O106"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -34649,6 +35373,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0336"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -34656,6 +35396,22 @@
           "number": "PSY 4604",
           "title": "History and Systems of Psychology",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O119"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -34689,8 +35445,24 @@
                 "end": "11:50"
               },
               "location": {
-                "building": "TA",
-                "room": "0130A"
+                "building": "VAB",
+                "room": "0132"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "VAB",
+                "room": "0132"
               },
               "days": [
                 "T",
@@ -34710,6 +35482,51 @@
           "number": "PUR 3100",
           "title": "Writing for Public Relations",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O208"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O208"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O208"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -34775,6 +35592,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0107"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -34782,6 +35614,21 @@
           "number": "PUR 4000",
           "title": "Public Relations",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O207"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -34817,6 +35664,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O228"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -34824,6 +35686,21 @@
           "number": "PUR 4400",
           "title": "Crisis Communication",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "DPAC",
+                "room": "0152"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -34860,6 +35737,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O110"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -34872,6 +35765,546 @@
           "number": "QMB 3003",
           "title": "Quantitative Business Tools I",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-13",
+              "end_date": "2026-01-13"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-27",
+              "end_date": "2026-01-27"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-10",
+              "end_date": "2026-02-10"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-03",
+              "end_date": "2026-03-03"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-07",
+              "end_date": "2026-04-07"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-21",
+              "end_date": "2026-04-21"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-13",
+              "end_date": "2026-01-13"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-27",
+              "end_date": "2026-01-27"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-10",
+              "end_date": "2026-02-10"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-03",
+              "end_date": "2026-03-03"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-07",
+              "end_date": "2026-04-07"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-21",
+              "end_date": "2026-04-21"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-13",
+              "end_date": "2026-01-13"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-27",
+              "end_date": "2026-01-27"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-10",
+              "end_date": "2026-02-10"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-03",
+              "end_date": "2026-03-03"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-07",
+              "end_date": "2026-04-07"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-21",
+              "end_date": "2026-04-21"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-29",
+              "end_date": "2026-01-29"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-12",
+              "end_date": "2026-02-12"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-29",
+              "end_date": "2026-01-29"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-12",
+              "end_date": "2026-02-12"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-29",
+              "end_date": "2026-01-29"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-12",
+              "end_date": "2026-02-12"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -35957,6 +37390,546 @@
               ],
               "start_date": "2026-04-16",
               "end_date": "2026-04-16"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-20",
+              "end_date": "2026-01-20"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-03",
+              "end_date": "2026-02-03"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-24",
+              "end_date": "2026-02-24"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-10",
+              "end_date": "2026-03-10"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-31",
+              "end_date": "2026-03-31"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-14",
+              "end_date": "2026-04-14"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-20",
+              "end_date": "2026-01-20"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-03",
+              "end_date": "2026-02-03"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-24",
+              "end_date": "2026-02-24"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-10",
+              "end_date": "2026-03-10"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-31",
+              "end_date": "2026-03-31"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-14",
+              "end_date": "2026-04-14"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-20",
+              "end_date": "2026-01-20"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-03",
+              "end_date": "2026-02-03"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-24",
+              "end_date": "2026-02-24"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-10",
+              "end_date": "2026-03-10"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-31",
+              "end_date": "2026-03-31"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-14",
+              "end_date": "2026-04-14"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-22",
+              "end_date": "2026-01-22"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-26",
+              "end_date": "2026-02-26"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-12",
+              "end_date": "2026-03-12"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-02",
+              "end_date": "2026-04-02"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-16",
+              "end_date": "2026-04-16"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-22",
+              "end_date": "2026-01-22"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-26",
+              "end_date": "2026-02-26"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-12",
+              "end_date": "2026-03-12"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-02",
+              "end_date": "2026-04-02"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-16",
+              "end_date": "2026-04-16"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-22",
+              "end_date": "2026-01-22"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-26",
+              "end_date": "2026-02-26"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-12",
+              "end_date": "2026-03-12"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-02",
+              "end_date": "2026-04-02"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-16",
+              "end_date": "2026-04-16"
             }
           ]
         },
@@ -35964,6 +37937,22 @@
           "number": "QMB 3311",
           "title": "Python for Business Analytics",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O122"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -36435,6 +38424,456 @@
               ],
               "start_date": "2026-04-23",
               "end_date": "2026-04-23"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-13",
+              "end_date": "2026-01-13"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-03",
+              "end_date": "2026-02-03"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-17",
+              "end_date": "2026-02-17"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-03",
+              "end_date": "2026-03-03"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-07",
+              "end_date": "2026-04-07"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-21",
+              "end_date": "2026-04-21"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-13",
+              "end_date": "2026-01-13"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-03",
+              "end_date": "2026-02-03"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-02-17",
+              "end_date": "2026-02-17"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-03-03",
+              "end_date": "2026-03-03"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-07",
+              "end_date": "2026-04-07"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-04-21",
+              "end_date": "2026-04-21"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-19",
+              "end_date": "2026-02-19"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-19",
+              "end_date": "2026-02-19"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-15",
+              "end_date": "2026-01-15"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-05",
+              "end_date": "2026-02-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-02-19",
+              "end_date": "2026-02-19"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-03-05",
+              "end_date": "2026-03-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-09",
+              "end_date": "2026-04-09"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O239"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-04-23",
+              "end_date": "2026-04-23"
             }
           ]
         },
@@ -36442,6 +38881,21 @@
           "number": "QMB 4911",
           "title": "Capstone Project in Business Analytics",
           "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "11:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O115"
+              },
+              "days": [
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "09:00",
@@ -36468,6 +38922,21 @@
           "number": "RED 3012",
           "title": "Basic Foundations of Reading",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0222"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -36623,6 +39092,141 @@
               ],
               "start_date": "2026-04-22",
               "end_date": "2026-04-22"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-14",
+              "end_date": "2026-01-14"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-28",
+              "end_date": "2026-01-28"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-02-04",
+              "end_date": "2026-02-04"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-02-11",
+              "end_date": "2026-02-11"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-03-04",
+              "end_date": "2026-03-04"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-03-25",
+              "end_date": "2026-03-25"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-04-01",
+              "end_date": "2026-04-01"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-04-08",
+              "end_date": "2026-04-08"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-04-22",
+              "end_date": "2026-04-22"
             }
           ]
         },
@@ -36630,6 +39234,21 @@
           "number": "RED 4942",
           "title": "Practicum for Assessment and Instruction of Reading",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -36656,6 +39275,53 @@
           "number": "REE 3043",
           "title": "Fundamentals of Real Estate",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0207"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -36738,6 +39404,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O146"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O126"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -36745,6 +39441,21 @@
           "number": "REE 4103",
           "title": "Real Estate Appraisal and Valuation",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O126"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -36795,6 +39506,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O221"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0222"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -36802,6 +39543,21 @@
           "number": "REE 4312",
           "title": "Real Estate Market Analysis",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O224"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -36837,6 +39593,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -36849,6 +39620,22 @@
           "number": "REL 2300",
           "title": "World Religions",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -36891,6 +39678,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O103"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -36903,6 +39706,22 @@
           "number": "RTV 3110",
           "title": "Writing for Sports Media",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O211B"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -36939,6 +39758,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O211B"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -36946,6 +39780,21 @@
           "number": "RTV 3304",
           "title": "Electronic Journalism II",
           "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O161"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "09:30",
@@ -36996,6 +39845,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O152B"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O152B"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37003,6 +39882,21 @@
           "number": "RTV 3553",
           "title": "Audio Reporting & Podcasting",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O211B"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -37039,6 +39933,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O147"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37060,6 +39970,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O228"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37067,6 +39992,21 @@
           "number": "RTV 4800",
           "title": "Broadcast Management",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O210"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -37108,6 +40048,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O209"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37115,6 +40071,22 @@
           "number": "RUS 2201",
           "title": "Intermediate Russian Language and Civilization II",
           "sections": [
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O209"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:30",
@@ -37156,6 +40128,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0116"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -37168,6 +40155,54 @@
           "number": "SLS 1501",
           "title": "Strategies for Success in College",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "17:30",
+                "end": "18:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O307"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "17:30",
+                "end": "18:45"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0101"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -37332,6 +40367,112 @@
               ],
               "start_date": "2026-01-31",
               "end_date": "2026-01-31"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O106"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0210"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0107"
+              },
+              "days": [
+                "S"
+              ],
+              "start_date": "2026-01-31",
+              "end_date": "2026-01-31"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0111"
+              },
+              "days": [
+                "S"
+              ],
+              "start_date": "2026-01-31",
+              "end_date": "2026-01-31"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0106"
+              },
+              "days": [
+                "S"
+              ],
+              "start_date": "2026-01-31",
+              "end_date": "2026-01-31"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0108"
+              },
+              "days": [
+                "S"
+              ],
+              "start_date": "2026-01-31",
+              "end_date": "2026-01-31"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "S"
+              ],
+              "start_date": "2026-01-31",
+              "end_date": "2026-01-31"
             }
           ]
         }
@@ -37344,6 +40485,51 @@
           "number": "SOW 3111",
           "title": "Human Behavior and the Social Environment II",
           "sections": [
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O107"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O308"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O113"
+              },
+              "days": [
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:30",
@@ -37409,6 +40595,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O112"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37416,6 +40617,51 @@
           "number": "SOW 3352",
           "title": "Practice II: Interpersonal Skills in Social Work:",
           "sections": [
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O110"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:30",
@@ -37511,6 +40757,51 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37532,6 +40823,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O106"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37539,6 +40845,21 @@
           "number": "SOW 3808",
           "title": "Mindfulness in Social Work Practice",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0108"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -37604,6 +40925,51 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O112"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O303"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O218"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37611,6 +40977,21 @@
           "number": "SOW 4343",
           "title": "Macro-Level Roles and Interventions in Social Work",
           "sections": [
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O112"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:30",
@@ -37676,6 +41057,51 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O113"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37683,6 +41109,21 @@
           "number": "SOW 4650",
           "title": "Child Abuse: Treatment and Prevention",
           "sections": [
+            {
+              "time": {
+                "start": "18:30",
+                "end": "21:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O220"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:30",
@@ -37718,6 +41159,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O109"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -37730,6 +41186,21 @@
           "number": "SPA 3002",
           "title": "Introduction to Communication Sciences and Disorders",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O107"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -37780,6 +41251,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O112"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O120"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37787,6 +41288,36 @@
           "number": "SPA 3101",
           "title": "Anatomy and Physiology of Speech, Language, and Hearing",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O319"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O122"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -37853,6 +41384,37 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O122"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O116"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37875,6 +41437,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O319"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37882,6 +41460,37 @@
           "number": "SPA 3472",
           "title": "Behavioral Methods in Communication Disorders",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O220"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0103"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -37948,6 +41557,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O309"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -37955,6 +41594,37 @@
           "number": "SPA 4104",
           "title": "Neurological Bases of Speech, Language, and Hearing",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O220"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O116"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -38021,6 +41691,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O120"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O120"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38028,6 +41728,21 @@
           "number": "SPA 4400",
           "title": "Language Disorders Across the Life Span",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O319"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -38063,6 +41778,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O116"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38084,6 +41814,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O107"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38091,6 +41836,21 @@
           "number": "SPA 4803",
           "title": "Research Methods in Communication Sciences and Disorders",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O207"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -38148,6 +41908,38 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0207"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "HS1",
+                "room": "O107"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38169,6 +41961,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0117"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38176,6 +41983,21 @@
           "number": "SPB 3823",
           "title": "Sport and Entertainment Management",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0117"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -38212,6 +42034,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O218"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38219,6 +42057,37 @@
           "number": "SPB 4804",
           "title": "Sports Marketing",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA2",
+                "room": "0207"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O309"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -38459,6 +42328,141 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0201"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0201"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "VAB",
+                "room": "0113"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O119"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38477,6 +42481,21 @@
               },
               "days": [
                 "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0203"
+              },
+              "days": [
+                "W"
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
@@ -38516,6 +42535,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O218"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38523,6 +42557,21 @@
           "number": "SPC 3602",
           "title": "Advanced Public Communication",
           "sections": [
+            {
+              "time": {
+                "start": "12:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0406"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:30",
@@ -38558,6 +42607,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O113"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38579,6 +42643,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O121"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38586,6 +42665,21 @@
           "number": "SPC 4540",
           "title": "Persuasion and Communication",
           "sections": [
+            {
+              "time": {
+                "start": "12:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O113"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:30",
@@ -38626,6 +42720,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0117"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -38652,6 +42761,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O210"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38659,6 +42783,22 @@
           "number": "SPN 3760",
           "title": "Advanced Spanish Oral Communication",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O210"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -38696,6 +42836,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O210"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38703,6 +42859,22 @@
           "number": "SPN 4800",
           "title": "The Syntax of Spanish",
           "sections": [
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O210"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "11:30",
@@ -38745,6 +42917,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0111"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -38757,6 +42945,21 @@
           "number": "SSE 3312",
           "title": "Teaching Social Science in the Elementary School",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0130"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -38792,6 +42995,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0203"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -38804,6 +43022,91 @@
           "number": "STA 2014",
           "title": "Principles of Statistics",
           "sections": [
+            {
+              "time": {
+                "start": "08:30",
+                "end": "09:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O106"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O122"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0203"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0302"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0203"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "08:30",
@@ -38976,6 +43279,72 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O121"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O106"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:30",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O207"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O106"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -38983,6 +43352,22 @@
           "number": "STA 3032",
           "title": "Probability and Statistics for Engineers",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "19:15"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O206"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -39020,6 +43405,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O121"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39042,6 +43443,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O117"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39049,6 +43466,55 @@
           "number": "STA 4163",
           "title": "Statistical Methods II",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "19:15"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O206"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O307"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -39126,8 +43592,40 @@
                 "end": "14:45"
               },
               "location": {
-                "building": "NSC",
-                "room": "O113"
+                "building": "CB1",
+                "room": "O103"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0336"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O103"
               },
               "days": [
                 "W",
@@ -39142,6 +43640,22 @@
           "number": "STA 4184",
           "title": "Introduction to Derivative Markets",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -39179,6 +43693,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O103"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39186,6 +43716,22 @@
           "number": "STA 4321",
           "title": "Statistical Theory I",
           "sections": [
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0203"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "09:00",
@@ -39223,6 +43769,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O116"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39230,6 +43792,22 @@
           "number": "STA 4365",
           "title": "Statistical Foundations of Data Science and Artificial Intelligence II",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O104"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -39267,6 +43845,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0322"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39289,6 +43883,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O103"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39296,6 +43906,38 @@
           "number": "STA 4852",
           "title": "Applied Time Series",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0360"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O209"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -39354,6 +43996,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39361,6 +44019,22 @@
           "number": "SYA 4450",
           "title": "Data Analysis: Capstone",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "HPH",
+                "room": "O310"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -39388,6 +44062,22 @@
           "number": "SYD 3805",
           "title": "Sociology of Sexualities",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0302"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -39460,6 +44150,52 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:15"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0102"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0102"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0102"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -39472,6 +44208,22 @@
           "number": "SYO 4400",
           "title": "Medical Sociology",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0302"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -39513,6 +44265,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0105"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39520,6 +44287,22 @@
           "number": "SYP 3520",
           "title": "Criminology",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0117"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",
@@ -39548,8 +44331,24 @@
                 "end": "11:45"
               },
               "location": {
-                "building": "TA",
-                "room": "0130A"
+                "building": "ENG1",
+                "room": "O327"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:45"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O327"
               },
               "days": [
                 "T",
@@ -39607,8 +44406,55 @@
                 "end": "20:50"
               },
               "location": {
-                "building": "HS1",
-                "room": "O116"
+                "building": "BA1",
+                "room": "O122"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "ENG1",
+                "room": "O224"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0205"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O122"
               },
               "days": [
                 "T"
@@ -39622,6 +44468,21 @@
           "number": "TAX 4022",
           "title": "Individual Federal Income Tax",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O121"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -39664,6 +44525,23 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "ENG2",
+                "room": "0102"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39671,6 +44549,22 @@
           "number": "THE 2305",
           "title": "Script Analysis for Theatre",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0103"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -39708,6 +44602,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "10:00",
+                "end": "11:15"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39715,6 +44625,23 @@
           "number": "THE 3312",
           "title": "Theatre History and Dramatic Literature II",
           "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "VAB",
+                "room": "0111"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "09:30",
@@ -39754,6 +44681,23 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O209"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39761,6 +44705,22 @@
           "number": "THE 3760",
           "title": "Teaching Theatre",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0263"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -39798,6 +44758,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -39805,6 +44781,36 @@
           "number": "THE 4285",
           "title": "Period Costume, Architecture, and Decor II",
           "sections": [
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0244A"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0261"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:00",
@@ -39870,6 +44876,36 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:50"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0244A"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:50"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "M0261"
+              },
+              "days": [
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -39882,6 +44918,22 @@
           "number": "TPA 2211",
           "title": "Stagecraft II",
           "sections": [
+            {
+              "time": {
+                "start": "08:30",
+                "end": "09:50"
+              },
+              "location": {
+                "building": "TH",
+                "room": "0111"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "08:30",
@@ -39989,6 +45041,87 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "08:30",
+                "end": "09:45"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O108"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:30",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "VAB",
+                "room": "0109"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "08:30",
+                "end": "09:50"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0115"
+              },
+              "days": [
+                "M",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O108"
+              },
+              "days": [
+                "M",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40011,6 +45144,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40018,6 +45167,70 @@
           "number": "TPP 3245",
           "title": "Topics in Theatre Performance",
           "sections": [
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:45"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:30",
+                "end": "14:20"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0107"
+              },
+              "days": [
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:45"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:30",
@@ -40111,7 +45324,39 @@
               },
               "location": {
                 "building": "PAC",
-                "room": "T0115"
+                "room": "T0110"
+              },
+              "days": [
+                "M",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:30",
+                "end": "16:50"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0107"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:50"
+              },
+              "location": {
+                "building": "PAC",
+                "room": "T0110"
               },
               "days": [
                 "M",
@@ -40126,6 +45371,22 @@
           "number": "TPP 4221",
           "title": "Auditioning",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "12:20"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O108"
+              },
+              "days": [
+                "M",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -40168,6 +45429,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:45"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0106"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40175,6 +45452,21 @@
           "number": "TSL 4240",
           "title": "Issues in Second Language Acquisition",
           "sections": [
+            {
+              "time": {
+                "start": "10:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0106"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "10:30",
@@ -40210,6 +45502,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0106"
+              },
+              "days": [
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40217,6 +45524,21 @@
           "number": "TSL 4363",
           "title": "ESL Classroom Experiences",
           "sections": [
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "TCH",
+                "room": "0106"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "18:00",
@@ -40258,6 +45580,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "16:30",
+                "end": "17:45"
+              },
+              "location": {
+                "building": "TA",
+                "room": "0117"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40280,6 +45618,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "07:30",
+                "end": "08:45"
+              },
+              "location": {
+                "building": "CB1",
+                "room": "O120"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40287,6 +45641,22 @@
           "number": "TTE 4300",
           "title": "Transportation Analytics",
           "sections": [
+            {
+              "time": {
+                "start": "07:30",
+                "end": "08:45"
+              },
+              "location": {
+                "building": "MSB",
+                "room": "0360"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "07:30",
@@ -40328,6 +45698,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O103"
+              },
+              "days": [
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         }
@@ -40340,6 +45725,37 @@
           "number": "WOH 2012",
           "title": "World Civilization I",
           "sections": [
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O113"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "18:00",
+                "end": "20:50"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O113"
+              },
+              "days": [
+                "T"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "15:00",
@@ -40397,6 +45813,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "12:00",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0108"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40404,6 +45836,23 @@
           "number": "ZOO 3713",
           "title": "Comparative Vertebrate Anatomy",
           "sections": [
+            {
+              "time": {
+                "start": "12:30",
+                "end": "13:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O105"
+              },
+              "days": [
+                "M",
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "12:30",
@@ -40442,6 +45891,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "09:00",
+                "end": "10:15"
+              },
+              "location": {
+                "building": "NSC",
+                "room": "O101"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40464,6 +45929,22 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "14:30",
+                "end": "15:50"
+              },
+              "location": {
+                "building": "BSFS",
+                "room": "0102"
+              },
+              "days": [
+                "T",
+                "R"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40471,6 +45952,22 @@
           "number": "ZOO 4480",
           "title": "Mammalogy",
           "sections": [
+            {
+              "time": {
+                "start": "09:30",
+                "end": "11:20"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O201"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "09:30",
@@ -40524,6 +46021,38 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "13:00",
+                "end": "14:15"
+              },
+              "location": {
+                "building": "PSY",
+                "room": "0108"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "15:00",
+                "end": "16:20"
+              },
+              "location": {
+                "building": "HEC",
+                "room": "0125"
+              },
+              "days": [
+                "W",
+                "F"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40545,6 +46074,21 @@
               ],
               "start_date": "2026-01-12",
               "end_date": "2026-05-05"
+            },
+            {
+              "time": {
+                "start": "11:00",
+                "end": "12:15"
+              },
+              "location": {
+                "building": "BA1",
+                "room": "O146"
+              },
+              "days": [
+                "M"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
             }
           ]
         },
@@ -40552,6 +46096,22 @@
           "number": "ZOO 4735",
           "title": "Anatomy of the Head and Neck",
           "sections": [
+            {
+              "time": {
+                "start": "13:30",
+                "end": "14:50"
+              },
+              "location": {
+                "building": "CB2",
+                "room": "O206"
+              },
+              "days": [
+                "M",
+                "W"
+              ],
+              "start_date": "2026-01-12",
+              "end_date": "2026-05-05"
+            },
             {
               "time": {
                 "start": "13:30",

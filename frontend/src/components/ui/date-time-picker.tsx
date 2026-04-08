@@ -156,7 +156,7 @@ export function DateTimePicker({
     .format("M/D/YY h:mm A");
 
   return (
-    <div className="w-[280px] bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden">
+    <div className="w-[280px] bg-surface-raised rounded-lg border border-border-muted overflow-hidden">
       {/* Calendar Section */}
       <div className="p-3">
         {/* Month Header */}
@@ -238,7 +238,7 @@ export function DateTimePicker({
       </div>
 
       {/* Time Input Section */}
-      <div className="border-t border-zinc-800 p-3">
+      <div className="border-t border-border-muted p-3">
         <div className="flex items-center gap-3">
           <label className="text-xs text-zinc-300 whitespace-nowrap">
             Enter time
@@ -249,26 +249,26 @@ export function DateTimePicker({
               type="time"
               value={timeValue}
               onChange={handleTimeChange}
-              className="pl-9 bg-zinc-800 border-zinc-700 text-zinc-200 focus-visible:ring-zinc-600"
+              className="pl-9 bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
             />
           </div>
         </div>
       </div>
 
       {/* Bottom Section */}
-      <div className="border-t border-zinc-800 p-3 flex items-center justify-between">
+      <div className="border-t border-border-muted p-3 flex items-center justify-between">
         <p className="text-xs text-zinc-400">{previewText}</p>
         <div className="flex items-center gap-2">
           <button
             onClick={handleReset}
-            className="h-7 px-2 flex items-center gap-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700 text-xs font-medium transition-colors"
+            className="h-7 px-2 flex items-center gap-1 rounded-md bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover text-xs font-medium transition-colors"
           >
             <RotateCcw className="h-3 w-3" />
             Now
           </button>
           <button
             onClick={handleConfirm}
-            className="h-7 px-3 rounded-md bg-zinc-800 text-zinc-200 hover:bg-zinc-700 border border-zinc-700 text-xs font-medium transition-colors"
+            className="h-7 px-3 rounded-md bg-surface-raised text-zinc-200 hover:bg-surface-hover border border-border-muted text-xs font-medium transition-colors"
           >
             Confirm
           </button>

@@ -156,7 +156,7 @@ export function DateTimePicker({
     .format("M/D/YY h:mm A");
 
   return (
-    <div className="w-[280px] bg-surface-raised rounded-lg border border-border-muted overflow-hidden">
+    <div className="w-[min(280px,calc(100vw-1rem))] max-h-[calc(100svh-5rem)] overflow-y-auto bg-surface-raised rounded-lg border border-border-muted">
       {/* Calendar Section */}
       <div className="p-3">
         {/* Month Header */}

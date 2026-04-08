@@ -430,7 +430,12 @@ export default function Sidebar({
               </span>
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-surface-raised border-border-muted">
+          <PopoverContent
+            align="end"
+            sideOffset={8}
+            collisionPadding={8}
+            className="w-auto p-0 bg-surface-raised border-border-muted"
+          >
             <DateTimePicker
               initialDateTime={selectedDateTime}
               onDateTimeChange={(dateTime: Date) => {
@@ -463,7 +468,12 @@ export default function Sidebar({
               <span className="text-sm">Filter</span>
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 bg-surface-raised border-border-muted text-zinc-200">
+          <PopoverContent
+            align="end"
+            sideOffset={8}
+            collisionPadding={8}
+            className="w-[min(20rem,calc(100vw-1rem))] max-h-[calc(100svh-5rem)] overflow-y-auto bg-surface-raised border-border-muted text-zinc-200"
+          >
             <div className="space-y-4">
               <h3 className="font-semibold text-zinc-100 mb-3">
                 Filter Options

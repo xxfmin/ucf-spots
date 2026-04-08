@@ -91,7 +91,7 @@ export default function FeedbackDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-125 bg-zinc-900 border-zinc-800 text-zinc-200">
+      <DialogContent className="sm:max-w-125 bg-zinc-900 border text-zinc-200">
         <DialogHeader>
           <DialogTitle>Leave Feedback</DialogTitle>
           <DialogDescription>

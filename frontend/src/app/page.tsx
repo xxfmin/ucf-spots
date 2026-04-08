@@ -69,9 +69,9 @@ export default function Home() {
   }
 
   return (
-    <main className="h-screen flex flex-col md:flex-row">
+    <main className="h-[100dvh] overflow-hidden flex flex-col md:flex-row">
       {/* Map - Top on mobile, Right on desktop */}
-      <div className="h-[40vh] md:h-screen w-full md:w-[63%] order-1 md:order-2">
+      <div className="h-[40dvh] md:h-full w-full md:w-[63%] order-1 md:order-2 shrink-0">
         <Map
           facilityData={facilityData || null}
           onMarkerClick={handleMarkerClick}
@@ -79,7 +79,7 @@ export default function Home() {
       </div>
 
       {/* Sidebar - Bottom on mobile, Left on desktop */}
-      <div className="h-[60vh] md:h-screen w-full md:w-[37%] order-2 md:order-1 overflow-hidden border-t md:border-t-0 md:border-r border-gray-800">
+      <div className="flex-1 min-h-0 md:flex-none md:h-full w-full md:w-[37%] order-2 md:order-1 overflow-hidden border-t md:border-t-0 md:border-r border-gray-800">
         <Sidebar
           facilityData={facilityData || null}
           expandedItems={expandedItems}

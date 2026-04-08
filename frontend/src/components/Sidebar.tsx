@@ -16,13 +16,18 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import {
-  Info,
+  CircleQuestionMark,
   Search,
   ListFilter,
   CalendarClock,
   MessageSquare,
 } from "lucide-react";
-import { formatBuildingName, formatTime, formatDuration } from "@/utils/format";
+import {
+  formatBuildingName,
+  formatTime,
+  formatDuration,
+  BUILDING_NAMES,
+} from "@/utils/format";
 import { useDateTimeContext } from "@/lib/DateTimeContext";
 import { FilterCriteria, filterFacilities } from "@/utils/filterUtils";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
@@ -45,7 +50,7 @@ interface SidebarProps {
 const isWithinMinutes = (
   timeStr: string | undefined,
   referenceTime: string,
-  minutes: number
+  minutes: number,
 ): boolean => {
   if (!timeStr) return false;
 
@@ -111,25 +116,25 @@ const RoomAccordionItem = ({
 
   return (
     <AccordionItem value={roomId} className="border-none">
-      <AccordionTrigger className="py-2 px-3 hover:bg-zinc-800/50 rounded-md transition-colors cursor-pointer">
+      <AccordionTrigger className="py-2 px-3 hover:bg-surface-row-hover rounded-md transition-colors cursor-pointer">
         <div className="flex items-center justify-between w-full mr-2">
           <div className="flex items-center gap-3">
             <StatusDot
               status={isAvailable ? "available" : "occupied"}
               isEndingSoon={isEndingSoon}
             />
-            <span className="text-sm font-medium text-zinc-200">
+            <span className="text-sm font-medium font-mono text-foreground">
               {roomNumber}
             </span>
           </div>
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-secondary">
             {isAvailable
               ? room.availableUntil
                 ? `until ${formatTime(room.availableUntil)}`
                 : "open"
               : room.availableAt
-              ? `free at ${formatTime(room.availableAt)}`
-              : "busy"}
+                ? `free at ${formatTime(room.availableAt)}`
+                : "busy"}
           </span>
         </div>
       </AccordionTrigger>
@@ -228,6 +233,9 @@ export default function Sidebar({
   const [freeUntil, setFreeUntil] = useState<string>("");
   const [minDuration, setMinDuration] = useState<number | "">("");
 
+  const hasActiveFilter = Boolean(startTime || freeUntil || minDuration);
+  const isCustomDateTime = !isCurrentDateTime;
+
   // Scroll to building when scrollToBuildingId changes
   useEffect(() => {
     if (scrollToBuildingId && buildingRefs.current[scrollToBuildingId]) {
@@ -251,7 +259,7 @@ export default function Sidebar({
   const getBadgeVariant = (
     available: number,
     total: number,
-    isOpen: boolean
+    isOpen: boolean,
   ) => {
     if (!isOpen) return "outline";
     if (available === 0) return "error";
@@ -338,24 +346,23 @@ export default function Sidebar({
   return (
     <div className="h-full flex flex-col p-4 sm:px-6 sm:py-4 overflow-hidden">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">
+        {/* ml-0.5 nudges the "u" to optically align with elements below */}
+        <h1 className="text-2xl font-bold ml-0.5">
           <span className="text-gold">ucf</span>Spots
         </h1>
         <Popover>
           <PopoverTrigger asChild>
             <button
-              className="text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+              className="group cursor-pointer"
               aria-label="Important notes"
             >
-              <Info className="h-5 w-5" />
+              <CircleQuestionMark className="h-5 w-5 mr-1 text-secondary group-hover:text-primary transition-colors duration-300" />
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 bg-zinc-900 border-zinc-800 text-zinc-200">
+          <PopoverContent className="w-80 bg-surface-raised border-border-muted">
             <div className="space-y-4">
-              <h3 className="font-semibold text-base text-zinc-100">
-                Important Notes:
-              </h3>
-              <ul className="space-y-2.5 text-sm text-zinc-300 pl-4 list-disc">
+              <h3 className="font-semibold text-base">Important Notes:</h3>
+              <ul className="space-y-2.5 text-sm text-primary pl-4 list-disc">
                 <li className="leading-relaxed">
                   Building/room access may be restricted to specific colleges or
                   departments
@@ -371,12 +378,12 @@ export default function Sidebar({
                   Different schedules may apply during exam periods
                 </li>
               </ul>
-              <div className="pt-3 border-t border-zinc-800 space-y-1.5">
+              <div className="pt-3 border-t space-y-1.5">
                 <button
                   onClick={() => setFeedbackDialogOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer w-full"
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary hover:bg-surface-hover rounded-md transition-colors cursor-pointer w-full"
                 >
-                  <MessageSquare className="h-4 w-4" />
+                  <MessageSquare className="h-4 w-4 text-secondary" />
                   <span>Leave Feedback</span>
                 </button>
               </div>
@@ -391,12 +398,12 @@ export default function Sidebar({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
           <Input
             type="text"
-            placeholder="Search buildings..."
+            placeholder="Search..."
             value={searchQuery}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setSearchQuery(e.target.value)
             }
-            className="pl-9 bg-zinc-900 border-zinc-800 text-zinc-200 placeholder:text-zinc-500 focus-visible:ring-zinc-700"
+            className="pl-9 bg-surface-input border-border-subtle text-primary hover:border-border-strong placeholder:text-zinc-500 focus-visible:ring-zinc-700 transition-colors duration-300"
           />
         </div>
 
@@ -404,14 +411,16 @@ export default function Sidebar({
         <Popover open={dateTimePickerOpen} onOpenChange={setDateTimePickerOpen}>
           <PopoverTrigger asChild>
             <button
-              className={`px-3 py-2 rounded-md border transition-colors flex items-center gap-2 cursor-pointer ${
-                !isCurrentDateTime
+              className={`px-3 py-2 rounded-md border transition-colors duration-300 flex items-center gap-2 cursor-pointer ${
+                isCustomDateTime
                   ? "border-yellow-500/40 bg-yellow-500/5 text-yellow-400 hover:bg-yellow-500/10"
-                  : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:bg-zinc-800/50"
+                  : "border-border-subtle bg-surface-input text-primary hover:border-border-strong"
               }`}
               aria-label="Select date and time"
             >
-              <CalendarClock className="h-4 w-4" />
+              <CalendarClock
+                className={`h-4 w-4 ${isCustomDateTime ? "text-yellow-400" : "text-secondary"}`}
+              />
               <span className="text-sm whitespace-nowrap">
                 {isCurrentDateTime
                   ? "Now"
@@ -421,7 +430,7 @@ export default function Sidebar({
               </span>
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 border-zinc-800 bg-transparent">
+          <PopoverContent className="w-auto p-0 bg-surface-raised border-border-muted">
             <DateTimePicker
               initialDateTime={selectedDateTime}
               onDateTimeChange={(dateTime: Date) => {
@@ -441,18 +450,20 @@ export default function Sidebar({
         <Popover>
           <PopoverTrigger asChild>
             <button
-              className={`px-3 py-2 rounded-md border transition-colors flex items-center gap-2 cursor-pointer ${
-                startTime || freeUntil || minDuration
+              className={`px-3 py-2 rounded-md border transition-colors duration-300 flex items-center gap-2 cursor-pointer ${
+                hasActiveFilter
                   ? "border-yellow-500/40 bg-yellow-500/5 text-yellow-400 hover:bg-yellow-500/10"
-                  : "border-zinc-800 bg-zinc-900 text-zinc-300 hover:bg-zinc-800/50"
+                  : "border-border-subtle bg-surface-input text-primary hover:border-border-strong"
               }`}
               aria-label="Filter options"
             >
-              <ListFilter className="h-4 w-4" />
+              <ListFilter
+                className={`h-4 w-4 ${hasActiveFilter ? "text-yellow-400" : "text-secondary"}`}
+              />
               <span className="text-sm">Filter</span>
             </button>
           </PopoverTrigger>
-          <PopoverContent className="w-80 bg-zinc-900 border-zinc-800 text-zinc-200">
+          <PopoverContent className="w-80 bg-surface-raised border-border-muted text-zinc-200">
             <div className="space-y-4">
               <h3 className="font-semibold text-zinc-100 mb-3">
                 Filter Options
@@ -469,7 +480,7 @@ export default function Sidebar({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setStartTime(e.target.value)
                   }
-                  className="bg-zinc-800 border-zinc-700 text-zinc-200 focus-visible:ring-zinc-600"
+                  className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
                 />
                 {startTime && (
                   <button
@@ -492,7 +503,7 @@ export default function Sidebar({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFreeUntil(e.target.value)
                   }
-                  className="bg-zinc-800 border-zinc-800 text-zinc-200 focus-visible:ring-zinc-600"
+                  className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
                 />
                 {freeUntil && (
                   <button
@@ -524,7 +535,7 @@ export default function Sidebar({
                       className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                         minDuration === value
                           ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/40"
-                          : "bg-zinc-800 border border-zinc-700 text-zinc-300 hover:bg-zinc-700"
+                          : "bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover"
                       }`}
                     >
                       {label}
@@ -534,14 +545,14 @@ export default function Sidebar({
               </div>
 
               {/* Clear all filters */}
-              {(startTime || freeUntil || minDuration) && (
+              {hasActiveFilter && (
                 <button
                   onClick={() => {
                     setStartTime("");
                     setFreeUntil("");
                     setMinDuration("");
                   }}
-                  className="w-full mt-4 px-3 py-2 text-sm rounded-md border border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-colors"
+                  className="w-full mt-4 px-3 py-2 text-sm rounded-md border border-border-muted bg-surface-raised text-zinc-300 hover:bg-surface-hover transition-colors"
                 >
                   Clear All Filters
                 </button>
@@ -587,45 +598,67 @@ export default function Sidebar({
                   .sort((a, b) => a.id.localeCompare(b.id))
                   .map((facility) => {
                     const availableRooms = Object.entries(
-                      facility.rooms
+                      facility.rooms,
                     ).filter(
                       ([, room]) =>
                         room.status === RoomStatus.AVAILABLE ||
-                        room.status === RoomStatus.PASSING_PERIOD
+                        room.status === RoomStatus.PASSING_PERIOD,
                     );
                     const occupiedRooms = Object.entries(facility.rooms).filter(
                       ([, room]) =>
                         room.status === RoomStatus.OCCUPIED ||
-                        room.status === RoomStatus.OPENING_SOON
+                        room.status === RoomStatus.OPENING_SOON,
                     );
 
                     return (
                       <AccordionItem
                         key={facility.id}
                         value={facility.id}
+                        disabled={!facility.isOpen}
                         className="border-none"
                       >
                         <div
                           ref={(el) => {
                             buildingRefs.current[facility.id] = el;
                           }}
-                          className="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800/50"
+                          className="bg-surface rounded-lg overflow-hidden border border-border-subtle data-[disabled]:opacity-60 data-[disabled]:hover:border-border-subtle hover:border-border-strong transition-colors duration-300"
+                          data-disabled={!facility.isOpen ? "" : undefined}
+                          title={!facility.isOpen ? "Closed" : undefined}
+                          aria-label={
+                            !facility.isOpen
+                              ? `${facility.name} (closed)`
+                              : undefined
+                          }
                         >
                           <AccordionTrigger
-                            className="p-3 hover:bg-zinc-800/50 transition-colors py-3 px-4 cursor-pointer"
-                            onClick={() => handleToggle(facility.id)}
+                            className="p-3 py-3 px-4 cursor-pointer data-[disabled]:cursor-not-allowed data-[disabled]:[&>svg]:hidden"
+                            onClick={() => {
+                              if (!facility.isOpen) return;
+                              handleToggle(facility.id);
+                            }}
                           >
                             <div className="flex justify-between items-center w-full mr-2 text-left">
-                              <span className="font-medium text-zinc-100">
-                                {formatBuildingName(facility.name)}
-                              </span>
+                              <div className="font-normal flex flex-col sm:block min-w-0">
+                                <span className="font-mono font-semibold text-[13px]">
+                                  {facility.name}
+                                </span>
+                                {BUILDING_NAMES[facility.name] && (
+                                  <>
+                                    <span className="text-secondary/80 font-extralight mx-1 hidden sm:inline">
+                                      -
+                                    </span>
+                                    <span className="text-sm text-secondary/90 sm:text-primary">
+                                      {BUILDING_NAMES[facility.name]}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
                               <Badge
                                 variant={getBadgeVariant(
                                   facility.roomCounts.available,
                                   facility.roomCounts.total,
-                                  facility.isOpen
+                                  facility.isOpen,
                                 )}
-                                className="ml-2"
                               >
                                 {facility.isOpen
                                   ? `${facility.roomCounts.available}/${facility.roomCounts.total}`
@@ -637,7 +670,7 @@ export default function Sidebar({
                             <div className="space-y-3 pt-1">
                               {/* Available Rooms */}
                               <div>
-                                <h4 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1 px-3">
+                                <h4 className="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1 px-3">
                                   Available ({availableRooms.length})
                                 </h4>
                                 {availableRooms.length > 0 ? (
@@ -650,7 +683,7 @@ export default function Sidebar({
                                       .sort(([a], [b]) =>
                                         a.localeCompare(b, undefined, {
                                           numeric: true,
-                                        })
+                                        }),
                                       )
                                       .map(([roomNumber, room]) => (
                                         <RoomAccordionItem
@@ -661,7 +694,7 @@ export default function Sidebar({
                                           currentTime={formattedTime}
                                           isExpanded={isRoomExpanded(
                                             facility.id,
-                                            roomNumber
+                                            roomNumber,
                                           )}
                                         />
                                       ))}
@@ -675,7 +708,7 @@ export default function Sidebar({
 
                               {/* Occupied Rooms */}
                               <div>
-                                <h4 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-1 px-3">
+                                <h4 className="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1 px-3">
                                   Occupied ({occupiedRooms.length})
                                 </h4>
                                 {occupiedRooms.length > 0 ? (
@@ -688,7 +721,7 @@ export default function Sidebar({
                                       .sort(([a], [b]) =>
                                         a.localeCompare(b, undefined, {
                                           numeric: true,
-                                        })
+                                        }),
                                       )
                                       .map(([roomNumber, room]) => (
                                         <RoomAccordionItem
@@ -699,7 +732,7 @@ export default function Sidebar({
                                           currentTime={formattedTime}
                                           isExpanded={isRoomExpanded(
                                             facility.id,
-                                            roomNumber
+                                            roomNumber,
                                           )}
                                         />
                                       ))}

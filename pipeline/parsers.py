@@ -132,16 +132,19 @@ def scrape_search_results(html_content: str) -> List[Course]:
     soup = BeautifulSoup(html_content, 'html.parser')
     courses = []
 
-    # Find all course header divs (contain course name in title attribute)
-    course_headers = soup.find_all('a', attrs={'title': re.compile(r'Collapse section [A-Z]{3} \d{4}')})
+    # Find all course header divs (contain course name in title attribute).
+    # UCF course numbers are 4 digits, optionally followed by a trailing letter
+    # like "H" for honors (e.g. "IDH 4030H"). Subject codes are 3 or 4 letters.
+    course_headers = soup.find_all('a', attrs={'title': re.compile(r'Collapse section [A-Z]{3,4} \d{4}[A-Z]?')})
 
     for header in course_headers:
         title = header.get('title', '')
         # Ensure title is a string
         if not isinstance(title, str):
             continue
-        # Extract "ACG 2021 - Principles of Financial Accounting" from title
-        match = re.search(r'Collapse section ([A-Z]{3} \d{4}) - (.+)', title)
+        # Extract "ACG 2021 - Principles of Financial Accounting" (or
+        # "IDH 4030H - Honors Windows...") from title.
+        match = re.search(r'Collapse section ([A-Z]{3,4} \d{4}[A-Z]?) - (.+)', title)
         if not match:
             continue
 

@@ -77,7 +77,12 @@ Web Data → courses_{TERM}.json → buildings_derived_{TERM}.json → buildings
 
 - Python 3.11+ (developed against 3.14)
 - Install dependencies: `pip install -r requirements.txt`
-- `SUPABASE_URL` and `SUPABASE_KEY` must be available for `load_to_postgres.py`. The script uses `find_dotenv(".env.local")`, so it will pick up the existing `frontend/.env.local` automatically; you can also create a `pipeline/.env.local` if you prefer to keep pipeline credentials separate.
+- `SUPABASE_URL` and `SUPABASE_KEY` (service-role key) must be available for `load_to_postgres.py`. The script uses `find_dotenv(".env.local")` to discover a `.env.local`, but note that `frontend/.env.local` uses different variable names (`NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY`) and will NOT be picked up automatically. Create a `pipeline/.env.local` with the pipeline-specific names:
+
+  ```env
+  SUPABASE_URL=https://xxxxx.supabase.co
+  SUPABASE_KEY=your_service_role_key
+  ```
 
 ## Quick Run
 

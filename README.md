@@ -76,11 +76,10 @@ npm install
 Create `.env.local` in the `frontend/` directory with:
 
 ```env
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_key
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
 ```
 
 4. Run locally

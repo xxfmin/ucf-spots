@@ -100,30 +100,79 @@ def wait_for_page_load(driver: webdriver.Chrome, timeout: int = 30):
     time.sleep(0.3)
 
 
-# Career levels to search. PeopleSoft defaults to UGRD and "blank" is a no-op
-# (does not actually return all careers). We search twice per subject:
-#   1. UGRD (the default, captures undergraduate courses)
-#   2. GRAD (captures graduate courses; most grad-only subjects like NUR live here)
-# MED and OTHR careers are extremely rare and not covered.
-CAREER_LEVELS = ["UGRD", "GRAD"]
+# A single blank-career ("") pass returns ALL careers (UGRD + GRAD + MED + OTHR)
+# in one search, verified manually against UCF PeopleSoft with COP (223 sections,
+# including COP 5xxx/6xxx/7xxx grad courses). The blank option MUST be selected
+# LAST, after every other field, because PeopleSoft's onchange AJAX re-renders
+# the form and reverts the career dropdown to its UGRD default on subsequent
+# changes to location / open-only.
+CAREER_LEVELS = [""]
 
 
-def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "UGRD", debug: bool = False) -> str:
+def dismiss_overflow_confirmation(driver: webdriver.Chrome, subject_code: str, timeout: int = 8) -> bool:
+    """Click OK on the ">300 classes, continue?" modal if PeopleSoft shows it.
+
+    Returns True if the modal was found and dismissed, False otherwise. The
+    modal takes a few seconds to appear after clicking Search, but is not
+    guaranteed to appear at all (most subjects stay under the 300-class cap).
+    We poll briefly; if no modal appears we assume this subject is under the
+    cap and let the caller's results-wait do its job.
+    """
+    end = time.time() + timeout
+    while time.time() < end:
+        frames = driver.find_elements(By.ID, "ptModFrame_0")
+        if frames and frames[0].is_displayed():
+            try:
+                driver.switch_to.frame(frames[0])
+                # The OK button id literally contains a '#' prefix, which is
+                # invalid in CSS selectors -- use XPath with the exact id.
+                ok_buttons = driver.find_elements(By.XPATH, "//input[@id='#ICSave']")
+                if ok_buttons and ok_buttons[0].is_displayed():
+                    driver.execute_script("arguments[0].click();", ok_buttons[0])
+                    logger.info(
+                        "Dismissed '>300 classes' confirmation for %s",
+                        subject_code,
+                    )
+                    driver.switch_to.default_content()
+                    return True
+            except (NoSuchElementException, StaleElementReferenceException) as e:
+                logger.debug("Modal dismiss attempt failed: %s", e)
+            finally:
+                try:
+                    driver.switch_to.default_content()
+                except WebDriverException:
+                    pass
+        time.sleep(0.3)
+    return False
+
+
+def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "", debug: bool = False) -> str:
     """
     Execute search for a specific subject and return the results HTML.
-    
-    Steps:
-    1. Navigate to search page (first time) OR click "Modify Search" (subsequent)
-    2. Tick "Verify Search"
-    3. Add subject code to "Subject" field
-    4. Choose empty option for "Course Career"
-    5. Select "Main Campus (Orlando)" for Location
-    6. Untick "Show Open Classes Only"
+
+    Field-interaction order mirrors the user's verified manual click sequence
+    and MUST NOT be reordered casually:
+    1. Navigate fresh to the search page
+    2. Enter subject code
+    3. Tick "Verify Search"
+    4. Select "Main Campus (Orlando)" for Location
+    5. Untick "Show Open Classes Only"
+    6. Select Course Career (blank = all careers) -- LAST, no field touched after
     7. Click Search and wait for results
     """
     debug_dir = Path(__file__).parent / "debug"
     
     try:
+        # Clear cookies before each subject. PeopleSoft holds server-side
+        # session state that survives `driver.get(BASE_URL)` and leaves the
+        # form in a half-stale state for the second-and-subsequent subject in
+        # a session, causing the search to time out or return empty results.
+        # delete_all_cookies forces a clean PeopleSoft session per subject.
+        try:
+            driver.delete_all_cookies()
+        except WebDriverException as cookie_err:
+            logger.debug("delete_all_cookies failed (continuing): %s", cookie_err)
+
         # Always navigate fresh to the search page. The "Modify Search" path
         # has proved unreliable: for subjects with no results, the modify-search
         # page transition hangs and times out. Fresh navigation is ~2s slower
@@ -152,7 +201,17 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
             logger.error("Could not find search button!")
             return ""
 
-        # 1. Tick "Verify Search" checkbox
+        # 1. Enter subject code
+        try:
+            subject_field = driver.find_element(By.ID, "SSR_CLSRCH_WRK_SUBJECT$0")
+            subject_field.clear()
+            subject_field.send_keys(subject_code)
+            logger.info("Entered subject: %s", subject_code)
+        except NoSuchElementException:
+            logger.error("Could not find subject field!")
+            return ""
+
+        # 2. Tick "Verify Search" checkbox
         try:
             verify_checkbox = driver.find_element(By.ID, "FX_CLSSRCH_DER_FLAG")
             if not verify_checkbox.is_selected():
@@ -163,38 +222,8 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
 
         time.sleep(0.2)  # PeopleSoft checkbox AJAX buffer
 
-        # 2. Enter subject code
+        # 3. Select Location - Main Campus (Orlando)
         try:
-            subject_field = driver.find_element(By.ID, "SSR_CLSRCH_WRK_SUBJECT$0")
-            subject_field.clear()
-            subject_field.send_keys(subject_code)
-            logger.info("Entered subject: %s", subject_code)
-        except NoSuchElementException:
-            logger.error("Could not find subject field!")
-            return ""
-
-        # 3. Set Course Career. Only change it if different from current selection,
-        # since selecting the same value does not fire PeopleSoft's onchange AJAX
-        # and leaves the form in a stale state.
-        try:
-            career_dropdown = Select(driver.find_element(By.ID, "SSR_CLSRCH_WRK_ACAD_CAREER$3"))
-            current_career = career_dropdown.first_selected_option.get_attribute("value")
-            if current_career != career:
-                career_dropdown.select_by_value(career)
-                logger.info("Set career to: %s (was %s)", career, current_career or "blank")
-                # Wait for the PeopleSoft AJAX page refresh after career change
-                WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_SUBJECT$0"))
-                )
-                time.sleep(0.3)  # Additional buffer for AJAX
-            else:
-                logger.info("Career already %s, skipping re-selection", career)
-        except (NoSuchElementException, StaleElementReferenceException, TimeoutException) as e:
-            logger.warning("Career dropdown issue: %s", e)
-
-        # 4. Select Location - Main Campus (Orlando)
-        try:
-            # Re-find element after page update to avoid stale reference
             location_dropdown = Select(driver.find_element(By.ID, "SSR_CLSRCH_WRK_LOCATION$4"))
             for option in location_dropdown.options:
                 if 'Main' in option.text or 'Orlando' in option.text:
@@ -204,17 +233,48 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
             WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_SSR_OPEN_ONLY$6"))
             )
+            time.sleep(0.3)  # AJAX settle
         except (NoSuchElementException, StaleElementReferenceException, TimeoutException) as e:
             logger.warning("Location dropdown issue (may be okay): %s", e)
 
-        # 5. Untick "Show Open Classes Only"
+        # 4. Untick "Show Open Classes Only"
         try:
             open_checkbox = driver.find_element(By.ID, "SSR_CLSRCH_WRK_SSR_OPEN_ONLY$6")
             if open_checkbox.is_selected():
                 open_checkbox.click()
                 logger.info("Unchecked 'Show Open Classes Only'")
+                time.sleep(0.2)  # checkbox AJAX settle
         except NoSuchElementException:
             logger.warning("Open only checkbox not found")
+
+        # 5. Set Course Career LAST, so no subsequent AJAX re-renders it.
+        # PeopleSoft reverts the dropdown to UGRD on every form refresh, so
+        # this MUST come after every other field has been set. Only click the
+        # dropdown if the desired value differs from current; re-selecting the
+        # same value does not fire onchange and leaves form state stale.
+        try:
+            career_dropdown = Select(driver.find_element(By.ID, "SSR_CLSRCH_WRK_ACAD_CAREER$3"))
+            current_career = career_dropdown.first_selected_option.get_attribute("value")
+            if current_career != career:
+                career_dropdown.select_by_value(career)
+                logger.info("Set career to: %s (was %s)", career or "blank", current_career or "blank")
+                # Wait for PeopleSoft AJAX refresh, then verify selection stuck
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "SSR_CLSRCH_WRK_ACAD_CAREER$3"))
+                )
+                time.sleep(0.3)
+                post_career = Select(
+                    driver.find_element(By.ID, "SSR_CLSRCH_WRK_ACAD_CAREER$3")
+                ).first_selected_option.get_attribute("value")
+                if post_career != career:
+                    logger.warning(
+                        "Career dropdown reverted to %s after setting %s",
+                        post_career or "blank", career or "blank",
+                    )
+            else:
+                logger.info("Career already %s, skipping re-selection", career or "blank")
+        except (NoSuchElementException, StaleElementReferenceException, TimeoutException) as e:
+            logger.warning("Career dropdown issue: %s", e)
 
         # Debug: Save state before search
         if debug:
@@ -224,9 +284,17 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
         driver.execute_script("arguments[0].click();", search_button)
         logger.info("Clicked search...")
 
+        # Dismiss PeopleSoft's "Your search will return over 300 classes,
+        # would you like to continue?" confirmation modal if it appears. The
+        # modal is an iframe (`ptModFrame_0`) containing an OK button with
+        # id `#ICSave`. Without clicking OK, the search stalls indefinitely
+        # and the results wait times out -- which was the root cause of
+        # EEL/PHY/OCE "overflow" being silently dropped.
+        dismiss_overflow_confirmation(driver, subject_code)
+
         # Wait for results page to load - look for EITHER results OR no-results message
         try:
-            WebDriverWait(driver, 45).until(
+            WebDriverWait(driver, 60).until(
                 lambda d: (
                     d.find_elements(By.XPATH, "//*[contains(text(), 'class section')]")
                     or d.find_elements(By.ID, "DERIVED_CLSMSG_ERROR_TEXT")
@@ -237,12 +305,25 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
                 driver.save_screenshot(str(debug_dir / f"{subject_code}_no_results.png"))
                 with open(debug_dir / f"{subject_code}_no_results.html", "w", encoding="utf-8") as f:
                     f.write(driver.page_source)
-            logger.warning("Timeout waiting for results for %s", subject_code)
-            return ""
+            # A 45s timeout on the results wait strongly correlates with
+            # PeopleSoft's result-set cap for huge departments (EEL, PHY, OCE)
+            # where the cap-exceeded message never finishes rendering. Return
+            # OVERFLOW so scrape_subject_with_retry can retry with a narrower
+            # UGRD+GRAD split. If the timeout was actually a network hiccup,
+            # the split retry will simply time out again and the caller will
+            # fall back to the normal failure path.
+            logger.warning("Timeout waiting for results for %s (treating as overflow)", subject_code)
+            return OVERFLOW_SENTINEL
 
-        # Check if we got the no-results message
+        # Check if we got an error message. PeopleSoft uses the same element
+        # for both "no results" and "too many results (narrow your search)",
+        # so we must read the text to tell them apart.
         error_elements = driver.find_elements(By.ID, "DERIVED_CLSMSG_ERROR_TEXT")
         if error_elements:
+            err_text = (error_elements[0].text or "").strip().lower()
+            if "narrow" in err_text or "additional selection" in err_text:
+                logger.info("Too many results for %s (overflow, will retry with career split)", subject_code)
+                return OVERFLOW_SENTINEL
             logger.info("No classes found for %s", subject_code)
             return NO_RESULTS_SENTINEL
 
@@ -269,6 +350,11 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "U
             with open(debug_dir / f"{subject_code}_timeout.html", "w", encoding="utf-8") as f:
                 f.write(driver.page_source)
         return ""
+    except WebDriverException:
+        # Let driver crashes (invalid session id, etc.) propagate to the outer
+        # loop so it can restart the browser. Swallowing these causes every
+        # subsequent subject in the run to silently fail against a dead driver.
+        raise
     except Exception as e:
         logger.error("Error searching for %s: %s", subject_code, e)
         if debug:
@@ -344,6 +430,14 @@ BROWSER_RESTART_INTERVAL = 40
 # but PeopleSoft reported no matching classes (a legitimate empty result).
 NO_RESULTS_SENTINEL = "__NO_RESULTS__"
 
+# Sentinel returned when PeopleSoft's result set exceeds its cap and the UI
+# asks us to narrow the search ("Specify additional selection criteria..."),
+# or when the results wait times out on a huge department (which empirically
+# correlates with overflow). Caller must retry with narrower criteria --
+# scrape_subject_with_retry handles this by splitting a blank-career search
+# into explicit UGRD + GRAD passes.
+OVERFLOW_SENTINEL = "__OVERFLOW__"
+
 
 def _checkpoint_path(term_code: str) -> Path:
     return Path(__file__).parent / "archive" / f"checkpoint_{term_code}.json"
@@ -394,6 +488,10 @@ def _search_single_career_with_retry(
             raise  # Let caller handle driver crashes
         if html_content == NO_RESULTS_SENTINEL:
             return NO_RESULTS_SENTINEL
+        if html_content == OVERFLOW_SENTINEL:
+            # Don't retry overflow -- the result set won't shrink on its own.
+            # Let the caller decide whether to narrow the search.
+            return OVERFLOW_SENTINEL
         if html_content:
             return html_content
         if attempt < MAX_RETRIES:
@@ -414,13 +512,13 @@ def scrape_subject_with_retry(
 ) -> list:
     """Scrape a subject across the given career levels and merge the courses.
 
-    PeopleSoft's "blank career" filter does not actually mean "all careers" --
-    it filters to undergraduate only. So we must query each career level
-    separately and merge the results.
+    By default a single blank-career ("") search is issued; PeopleSoft treats
+    that as "all careers" and returns UGRD + GRAD + MED + OTHR in one pass,
+    provided the career dropdown is set LAST (see search_subject). The
+    multi-career loop is retained only as a debugging escape hatch.
 
     Args:
-        careers: Career levels to query. Defaults to CAREER_LEVELS (UGRD + GRAD).
-                 Pass ["GRAD"] for graduate-only subjects to skip wasted UGRD searches.
+        careers: Career levels to query. Defaults to CAREER_LEVELS ([""]).
 
     Returns:
         - List of Course objects (merged across all careers, deduped by number)
@@ -430,15 +528,21 @@ def scrape_subject_with_retry(
         careers = CAREER_LEVELS
     all_courses: dict = {}  # course_number -> Course
     any_results_or_no_results = False
+    hit_overflow = False
 
     for career in careers:
         result = _search_single_career_with_retry(driver, code, career, debug)
+        career_label = career or "blank"
         if result == NO_RESULTS_SENTINEL:
             any_results_or_no_results = True
-            logger.info("  [%s %s] No results", code, career)
+            logger.info("  [%s %s] No results", code, career_label)
+            continue
+        if result == OVERFLOW_SENTINEL:
+            hit_overflow = True
+            logger.info("  [%s %s] Overflow (too many results)", code, career_label)
             continue
         if not result:
-            logger.warning("  [%s %s] Failed after %d retries", code, career, MAX_RETRIES)
+            logger.warning("  [%s %s] Failed after %d retries", code, career_label, MAX_RETRIES)
             continue
 
         any_results_or_no_results = True
@@ -451,9 +555,23 @@ def scrape_subject_with_retry(
                 # (rare but possible)
                 existing = all_courses[course.number]
                 existing.sections.extend(course.sections)
-        logger.info("  [%s %s] %d courses parsed", code, career, len(courses))
+        logger.info("  [%s %s] %d courses parsed", code, career_label, len(courses))
 
-    if not any_results_or_no_results:
+    # Overflow fallback: a blank-career search that hit PeopleSoft's result
+    # cap returns nothing usable. Retry the same subject with explicit
+    # UGRD + GRAD splits, which each stay under the cap for every UCF subject
+    # we've observed (EEL, PHY, OCE). Only fall back once -- if the split
+    # also overflows (never seen), the caller just gets an empty result.
+    if hit_overflow and careers == [""] and not all_courses:
+        logger.info(
+            "  [%s] Falling back to UGRD+GRAD split after blank-career overflow",
+            code,
+        )
+        return scrape_subject_with_retry(
+            driver, code, debug=debug, careers=["UGRD", "GRAD"],
+        )
+
+    if not any_results_or_no_results and not hit_overflow:
         return []  # Total failure - nothing succeeded
     return list(all_courses.values())
 
@@ -635,9 +753,9 @@ if __name__ == "__main__":
                         help='Custom output file path (default: archive/courses_{term}.json). '
                              'Use this to scrape into a separate file without overwriting existing data.')
     parser.add_argument('--careers', nargs='+', default=None,
-                        choices=['UGRD', 'GRAD', 'MED', 'OTHR'],
-                        help='Career levels to query (default: UGRD GRAD). '
-                             'Pass --careers GRAD for graduate-only subjects.')
+                        choices=['', 'UGRD', 'GRAD', 'MED', 'OTHR'],
+                        help='Career levels to query (default: [""] blank = all careers). '
+                             'Override only for debugging a specific career.')
 
     args = parser.parse_args()
 

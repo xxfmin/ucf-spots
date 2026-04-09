@@ -1,12 +1,14 @@
-"""Live integration test: multi-career scraping must return all career levels.
+"""Live integration test: blank-career scraping must return all career levels.
 
-UCF PeopleSoft does NOT honor a blank Course Career as "all" -- it filters
-to undergraduate only. scraper.scrape_subject_with_retry works around this by
-querying each level in CAREER_LEVELS (UGRD + GRAD) and merging the results.
+UCF PeopleSoft's blank Course Career option ("") returns ALL careers in one
+search, BUT only if the dropdown is selected LAST, after every other field.
+Any subsequent form interaction triggers an AJAX re-render that reverts
+career to its UGRD default. scraper.search_subject enforces this ordering.
 
-This test verifies the merged behavior against UCF's live PeopleSoft search by
-scraping a multi-career subject and asserting that both undergraduate
-(course numbers 1xxx-4xxx) and graduate (5xxx-7xxx) courses come back.
+This test verifies the behavior against UCF's live PeopleSoft search by
+scraping a multi-career subject with CAREER_LEVELS = [""] and asserting that
+both undergraduate (1xxx-4xxx) and graduate (5xxx-7xxx) courses come back
+from a single blank pass.
 
 Run with:
     pytest tests/test_scraper_career.py -v -m integration
@@ -40,7 +42,7 @@ def _career_of(course_number: str) -> Optional[str]:
 @pytest.mark.integration
 @pytest.mark.slow
 def test_multi_career_scrape_returns_all_careers():
-    """scrape_subject_with_retry must merge UGRD and GRAD courses for mixed subjects."""
+    """Single blank-career pass must return both UGRD and GRAD courses."""
     try:
         driver = setup_driver(headless=True)
     except Exception as e:

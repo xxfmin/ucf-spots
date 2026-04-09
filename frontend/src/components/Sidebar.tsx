@@ -9,18 +9,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { ResponsivePopover } from "@/components/ui/responsive-popover";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Input } from "@/components/ui/input";
+
+const HIDE_TIME_PICKER_INDICATOR =
+  "[&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none";
 import {
   CircleQuestionMark,
   Search,
   ListFilter,
   CalendarClock,
   MessageSquare,
+  Clock,
 } from "lucide-react";
 import {
   formatBuildingName,
@@ -304,11 +305,7 @@ export default function Sidebar({
     let facilities = facilityData.facilities;
 
     // Apply filter criteria (time-based filters)
-    const hasFilters =
-      startTime ||
-      freeUntil ||
-      (minDuration && typeof minDuration === "number");
-    if (hasFilters) {
+    if (hasActiveFilter) {
       facilities = filterFacilities(facilities, filterCriteria);
     }
 
@@ -334,14 +331,7 @@ export default function Sidebar({
     });
 
     return filtered;
-  }, [
-    facilityData,
-    searchQuery,
-    filterCriteria,
-    startTime,
-    freeUntil,
-    minDuration,
-  ]);
+  }, [facilityData, searchQuery, filterCriteria, hasActiveFilter]);
 
   return (
     <div className="h-full flex flex-col p-4 sm:px-6 sm:py-4 overflow-hidden">
@@ -350,46 +340,50 @@ export default function Sidebar({
         <h1 className="text-2xl font-bold ml-0.5">
           <span className="text-gold">ucf</span>Spots
         </h1>
-        <Popover>
-          <PopoverTrigger asChild>
+        <ResponsivePopover
+          title="Important Notes"
+          desktopContentClassName="w-80 p-4 sm:p-3 rounded-lg bg-surface-raised border"
+          mobileContentClassName="w-[min(20rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] p-4 sm:p-3 rounded-lg bg-surface-raised border-border-muted text-zinc-200 [&>button]:top-3 [&>button]:right-3 !duration-200 data-[state=open]:!slide-in-from-top-0 data-[state=closed]:!slide-out-to-top-0 data-[state=open]:!slide-in-from-left-0 data-[state=closed]:!slide-out-to-left-0 data-[state=open]:!zoom-in-100 data-[state=closed]:!zoom-out-100"
+          trigger={
             <button
               className="group cursor-pointer"
               aria-label="Important notes"
             >
               <CircleQuestionMark className="h-5 w-5 mr-1 text-secondary group-hover:text-primary transition-colors duration-300" />
             </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80 bg-surface-raised border-border-muted">
-            <div className="space-y-4">
-              <h3 className="font-semibold text-base">Important Notes:</h3>
-              <ul className="space-y-2.5 text-sm text-primary pl-4 list-disc">
-                <li className="leading-relaxed">
-                  Building/room access may be restricted to specific colleges or
-                  departments
-                </li>
-                <li className="leading-relaxed">
-                  Displayed availability only reflects official class schedules
-                  and events
-                </li>
-                <li className="leading-relaxed">
-                  Rooms may be occupied by unofficial meetings or study groups
-                </li>
-                <li className="leading-relaxed">
-                  Different schedules may apply during exam periods
-                </li>
-              </ul>
-              <div className="pt-3 border-t space-y-1.5">
-                <button
-                  onClick={() => setFeedbackDialogOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary hover:bg-surface-hover rounded-md transition-colors cursor-pointer w-full"
-                >
-                  <MessageSquare className="h-4 w-4 text-secondary" />
-                  <span>Leave Feedback</span>
-                </button>
-              </div>
+          }
+        >
+          <div className="space-y-4">
+            <h3 className="font-semibold text-base">Important Notes:</h3>
+            <ul className="space-y-2.5 text-sm text-primary pl-4 list-disc">
+              <li className="leading-relaxed">
+                Building/room access may be restricted to specific colleges or
+                departments
+              </li>
+              <li className="leading-relaxed">
+                Displayed availability only reflects official class schedules
+              </li>
+              <li className="leading-relaxed">
+                Rooms may be occupied by unofficial meetings or study groups
+              </li>
+              <li className="leading-relaxed">
+                Different schedules may apply during exam periods
+              </li>
+              <li className="leading-relaxed">
+                Please leave rooms the way you found them for the next students
+              </li>
+            </ul>
+            <div className="pt-2 -my-1 border-t space-y-1.5">
+              <button
+                onClick={() => setFeedbackDialogOpen(true)}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary hover:bg-surface-hover rounded-md transition-colors cursor-pointer w-full"
+              >
+                <MessageSquare className="h-4 w-4 text-secondary" />
+                <span>Leave Feedback</span>
+              </button>
             </div>
-          </PopoverContent>
-        </Popover>
+          </div>
+        </ResponsivePopover>
       </div>
 
       {/* Search Bar, Date/Time Picker, and Filter */}
@@ -407,9 +401,17 @@ export default function Sidebar({
           />
         </div>
 
-        {/* Date/Time Picker */}
-        <Popover open={dateTimePickerOpen} onOpenChange={setDateTimePickerOpen}>
-          <PopoverTrigger asChild>
+        {/* Date/Time Picker — Popover on desktop, Dialog on mobile */}
+        <ResponsivePopover
+          title="Select date and time"
+          open={dateTimePickerOpen}
+          onOpenChange={setDateTimePickerOpen}
+          desktopAlign="end"
+          desktopSideOffset={8}
+          desktopCollisionPadding={8}
+          desktopContentClassName="w-auto p-0 bg-surface-raised border-border-muted"
+          mobileContentClassName="w-auto max-w-[calc(100vw-2rem)] p-0 bg-transparent border-0 shadow-none [&>button]:hidden !duration-200 data-[state=open]:!slide-in-from-top-0 data-[state=closed]:!slide-out-to-top-0 data-[state=open]:!slide-in-from-left-0 data-[state=closed]:!slide-out-to-left-0 data-[state=open]:!zoom-in-100 data-[state=closed]:!zoom-out-100"
+          trigger={
             <button
               className={`px-3 py-2 rounded-md border transition-colors duration-300 flex items-center gap-2 cursor-pointer ${
                 isCustomDateTime
@@ -429,31 +431,31 @@ export default function Sidebar({
                       .format("M/D h:mm A")}
               </span>
             </button>
-          </PopoverTrigger>
-          <PopoverContent
-            align="end"
-            sideOffset={8}
-            collisionPadding={8}
-            className="w-auto p-0 bg-surface-raised border-border-muted"
-          >
-            <DateTimePicker
-              initialDateTime={selectedDateTime}
-              onDateTimeChange={(dateTime: Date) => {
-                setSelectedDateTime(dateTime);
-              }}
-              closeContainer={() => setDateTimePickerOpen(false)}
-              minDate={moment().tz("America/New_York").toDate()}
-              maxDate={moment()
-                .tz("America/New_York")
-                .add(6, "months")
-                .endOf("month")
-                .toDate()}
-            />
-          </PopoverContent>
-        </Popover>
+          }
+        >
+          <DateTimePicker
+            initialDateTime={selectedDateTime}
+            onDateTimeChange={(dateTime: Date) => {
+              setSelectedDateTime(dateTime);
+            }}
+            closeContainer={() => setDateTimePickerOpen(false)}
+            minDate={moment().tz("America/New_York").toDate()}
+            maxDate={moment()
+              .tz("America/New_York")
+              .add(6, "months")
+              .endOf("month")
+              .toDate()}
+          />
+        </ResponsivePopover>
 
-        <Popover>
-          <PopoverTrigger asChild>
+        <ResponsivePopover
+          title="Filter Options"
+          desktopAlign="end"
+          desktopSideOffset={8}
+          desktopCollisionPadding={8}
+          desktopContentClassName="w-[min(20rem,calc(100vw-1rem))] max-h-[calc(100svh-5rem)] overflow-y-auto p-4 sm:p-3 rounded-lg bg-surface-raised border-border-muted text-zinc-200"
+          mobileContentClassName="w-[min(20rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] p-4 sm:p-3 rounded-lg bg-surface-raised border-border-muted text-zinc-200 [&>button]:top-3 [&>button]:right-3 !duration-200 data-[state=open]:!slide-in-from-top-0 data-[state=closed]:!slide-out-to-top-0 data-[state=open]:!slide-in-from-left-0 data-[state=closed]:!slide-out-to-left-0 data-[state=open]:!zoom-in-100 data-[state=closed]:!zoom-out-100"
+          trigger={
             <button
               className={`px-3 py-2 rounded-md border transition-colors duration-300 flex items-center gap-2 cursor-pointer ${
                 hasActiveFilter
@@ -467,109 +469,107 @@ export default function Sidebar({
               />
               <span className="text-sm">Filter</span>
             </button>
-          </PopoverTrigger>
-          <PopoverContent
-            align="end"
-            sideOffset={8}
-            collisionPadding={8}
-            className="w-[min(20rem,calc(100vw-1rem))] max-h-[calc(100svh-5rem)] overflow-y-auto bg-surface-raised border-border-muted text-zinc-200"
-          >
-            <div className="space-y-4">
-              <h3 className="font-semibold text-zinc-100 mb-3">
-                Filter Options
-              </h3>
+          }
+        >
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground mb-3">More Filters</h3>
 
-              {/* Available by this time */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-300">
-                  Available by this time
-                </label>
+            {/* Available by this time */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-primary">
+                Available by this time
+              </label>
+              <div className="relative">
+                <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none z-10" />
                 <Input
                   type="time"
                   value={startTime}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setStartTime(e.target.value)
                   }
-                  className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
+                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
                 />
-                {startTime && (
-                  <button
-                    onClick={() => setStartTime("")}
-                    className="text-xs text-zinc-400 hover:text-zinc-300 underline"
-                  >
-                    Clear
-                  </button>
-                )}
               </div>
+              {startTime && (
+                <button
+                  onClick={() => setStartTime("")}
+                  className="text-xs text-zinc-400 hover:text-zinc-300 underline cursor-pointer"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
 
-              {/* Available until this time */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-300">
-                  Available at least until this time today
-                </label>
+            {/* Available until this time */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-primary">
+                Available at least until this time today
+              </label>
+              <div className="relative">
+                <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none z-10" />
                 <Input
                   type="time"
                   value={freeUntil}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFreeUntil(e.target.value)
                   }
-                  className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
+                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
                 />
-                {freeUntil && (
-                  <button
-                    onClick={() => setFreeUntil("")}
-                    className="text-xs text-zinc-400 hover:text-zinc-300 underline"
-                  >
-                    Clear
-                  </button>
-                )}
               </div>
-
-              {/* Minimum Duration */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-zinc-300">
-                  Minimum Duration
-                </label>
-                <div className="flex gap-2">
-                  {[
-                    { label: "30m", value: 30 },
-                    { label: "1h", value: 60 },
-                    { label: "2h", value: 120 },
-                    { label: "4h", value: 240 },
-                  ].map(({ label, value }) => (
-                    <button
-                      key={value}
-                      onClick={() =>
-                        setMinDuration(minDuration === value ? "" : value)
-                      }
-                      className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        minDuration === value
-                          ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/40"
-                          : "bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Clear all filters */}
-              {hasActiveFilter && (
+              {freeUntil && (
                 <button
-                  onClick={() => {
-                    setStartTime("");
-                    setFreeUntil("");
-                    setMinDuration("");
-                  }}
-                  className="w-full mt-4 px-3 py-2 text-sm rounded-md border border-border-muted bg-surface-raised text-zinc-300 hover:bg-surface-hover transition-colors"
+                  onClick={() => setFreeUntil("")}
+                  className="text-xs text-zinc-400 hover:text-zinc-300 underline cursor-pointer"
                 >
-                  Clear All Filters
+                  Clear
                 </button>
               )}
             </div>
-          </PopoverContent>
-        </Popover>
+
+            {/* Minimum Duration */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-primary">
+                Minimum Duration
+              </label>
+              <div className="flex gap-2">
+                {[
+                  { label: "30m", value: 30 },
+                  { label: "1h", value: 60 },
+                  { label: "2h", value: 120 },
+                  { label: "4h", value: 240 },
+                ].map(({ label, value }) => (
+                  <button
+                    key={value}
+                    onClick={() =>
+                      setMinDuration(minDuration === value ? "" : value)
+                    }
+                    className={`flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+                      minDuration === value
+                        ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/40"
+                        : "bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Clear all filters */}
+            {hasActiveFilter && (
+              <button
+                onClick={() => {
+                  setStartTime("");
+                  setFreeUntil("");
+                  setMinDuration("");
+                }}
+                className="w-full mt-4 px-3 py-2 text-sm rounded-md border border-border-muted bg-surface-raised text-zinc-300 hover:bg-surface-hover transition-colors cursor-pointer"
+              >
+                Clear All Filters
+              </button>
+            )}
+          </div>
+        </ResponsivePopover>
       </div>
 
       {/* Building Cards Area  */}
@@ -580,13 +580,7 @@ export default function Sidebar({
         }`}
       >
         {isFetching ? (
-          <div className="flex flex-col items-center gap-3">
-            <div className="relative w-12 h-12">
-              <div className="absolute inset-0 border-4 border-zinc-700 rounded-full"></div>
-              <div className="absolute inset-0 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-            <p className="text-sm text-zinc-400">Loading...</p>
-          </div>
+          <LoadingSpinner />
         ) : facilityData ? (
           <>
             {Object.keys(filteredFacilities).length === 0 ? (
@@ -631,7 +625,7 @@ export default function Sidebar({
                           ref={(el) => {
                             buildingRefs.current[facility.id] = el;
                           }}
-                          className="bg-surface rounded-lg overflow-hidden border border-border-subtle data-[disabled]:opacity-60 data-[disabled]:hover:border-border-subtle hover:border-border-strong transition-colors duration-300"
+                          className="bg-surface rounded-lg overflow-hidden border border-border-subtle data-disabled:opacity-60 data-disabled:hover:border-border-subtle hover:border-border-strong transition-colors duration-300"
                           data-disabled={!facility.isOpen ? "" : undefined}
                           title={!facility.isOpen ? "Closed" : undefined}
                           aria-label={
@@ -641,13 +635,13 @@ export default function Sidebar({
                           }
                         >
                           <AccordionTrigger
-                            className="p-3 py-3 px-4 cursor-pointer data-[disabled]:cursor-not-allowed data-[disabled]:[&>svg]:hidden"
+                            className="p-3 py-3 px-4 cursor-pointer data-disabled:cursor-not-allowed data-disabled:[&>svg]:hidden"
                             onClick={() => {
                               if (!facility.isOpen) return;
                               handleToggle(facility.id);
                             }}
                           >
-                            <div className="flex justify-between items-center w-full mr-2 text-left">
+                            <div className="flex justify-between items-center w-full mr-1 sm:mr-2 text-left">
                               <div className="font-normal flex flex-col sm:block min-w-0">
                                 <span className="font-mono font-semibold text-[13px]">
                                   {facility.name}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MarkerData, MapProps } from "@/types";
@@ -20,7 +20,7 @@ const getDefaultZoom = (): number => {
 
   // Mobile (portrait): < 640px width
   if (width < 640) {
-    return 14.6;
+    return 14.7;
   }
 
   // Mobile (landscape) / Small tablet: 640px - 768px
@@ -60,11 +60,6 @@ export default function Map({
   const activePopupRef = useRef<mapboxgl.Popup | null>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  const handleMarkerClick = useCallback(
-    (id: string) => onMarkerClick(id),
-    [onMarkerClick]
-  );
-
   // Initialize map
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -95,7 +90,7 @@ export default function Map({
     // Add navigation controls
     map.current.addControl(
       new mapboxgl.NavigationControl({ showCompass: false }),
-      "top-right"
+      "top-right",
     );
 
     // Add geolocation control
@@ -105,7 +100,7 @@ export default function Map({
         trackUserLocation: true,
         showUserHeading: true,
       }),
-      "top-right"
+      "top-right",
     );
 
     return () => {
@@ -179,14 +174,14 @@ export default function Map({
           <div class="p-3 min-w-45 bg-zinc-900 rounded-lg">
             <div class="flex items-center gap-2 mb-2">
               <div class="w-2.5 h-2.5 rounded-full ${dotColor} shrink-0 shadow-[0_0_4px_rgba(0,0,0,0.3)]"></div>
-              <div class="font-semibold text-sm text-zinc-100">${buildingName}</div>
+              <div class="font-semibold text-sm text-foreground">${buildingName}</div>
             </div>
             <div class="text-xs text-zinc-500">
               <span class="text-zinc-400">Closed</span>
               ${
                 data.hours.open
                   ? `<span class="mx-1 text-zinc-600">·</span><span class="text-zinc-500">Opens ${formatTime(
-                      data.hours.open
+                      data.hours.open,
                     )}</span>`
                   : ""
               }
@@ -199,7 +194,7 @@ export default function Map({
         <div class="p-3 min-w-45 bg-zinc-900 rounded-lg">
           <div class="flex items-center gap-2 mb-3">
             <div class="w-2.5 h-2.5 rounded-full ${dotColor} shrink-0 shadow-[0_0_4px_rgba(0,0,0,0.3)]"></div>
-            <div class="font-semibold text-sm text-zinc-100">${buildingName}</div>
+            <div class="font-semibold text-sm text-foreground">${buildingName}</div>
           </div>
           <div class="flex items-center justify-between text-xs mb-2">
             <span class="text-zinc-500">Rooms available</span>
@@ -207,10 +202,10 @@ export default function Map({
               data.available
             }/${data.total}</span>
           </div>
-          <div class="h-1.5 bg-zinc-800 rounded-full overflow-hidden border border-zinc-700/50">
+          <div class="h-1.5 bg-zinc-800 rounded-full overflow-hidden border border-zinc-700">
             <div class="h-full ${dotColor} rounded-full transition-all shadow-sm" style="width: ${
-        (data.available / data.total) * 100
-      }%"></div>
+              (data.available / data.total) * 100
+            }%"></div>
           </div>
         </div>
       `;
@@ -253,7 +248,7 @@ export default function Map({
           essential: true,
         });
 
-        handleMarkerClick(data.id);
+        onMarkerClick(data.id);
       });
     };
 
@@ -296,7 +291,7 @@ export default function Map({
     Object.values(facilityData.facilities).forEach((facility) => {
       if (!facility.coordinates || !facility.roomCounts) {
         console.warn(
-          `Facility ${facility.id} missing coordinates or roomCounts`
+          `Facility ${facility.id} missing coordinates or roomCounts`,
         );
         return;
       }
@@ -429,7 +424,7 @@ export default function Map({
             essential: true,
           });
 
-          handleMarkerClick(id);
+          onMarkerClick(id);
         });
 
         // Change cursor on hover
@@ -449,7 +444,7 @@ export default function Map({
       activePopupRef.current?.remove();
       activePopupRef.current = null;
     };
-  }, [facilityData, handleMarkerClick, isMapLoaded]);
+  }, [facilityData, onMarkerClick, isMapLoaded]);
 
   return (
     <div ref={mapContainer} className="w-full h-full">

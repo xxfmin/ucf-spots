@@ -8,14 +8,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-yellow-400 text-zinc-900 hover:bg-yellow-500",
-        destructive:
-          "bg-red-500 text-zinc-100 hover:bg-red-600",
+        default: "bg-yellow-400 text-zinc-900 hover:bg-yellow-500",
+        destructive: "bg-red-500 text-zinc-50 hover:bg-red-600",
         outline:
           "border border-zinc-800 bg-zinc-900 text-zinc-200 hover:bg-zinc-800",
-        secondary:
-          "bg-zinc-800 text-zinc-200 hover:bg-zinc-700",
+        secondary: "bg-zinc-800 text-zinc-200 hover:bg-zinc-700",
         ghost: "hover:bg-zinc-800 text-zinc-200",
         link: "text-zinc-200 underline-offset-4 hover:underline",
       },
@@ -30,7 +27,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -48,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

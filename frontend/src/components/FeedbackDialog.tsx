@@ -91,11 +91,12 @@ export default function FeedbackDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-125 bg-zinc-900 border text-zinc-200">
+      <DialogContent className="sm:max-w-125 bg-surface-raised border-border-muted data-[state=open]:slide-in-from-left-0! data-[state=open]:slide-in-from-top-0! data-[state=closed]:slide-out-to-left-0! data-[state=closed]:slide-out-to-top-0!">
         <DialogHeader>
           <DialogTitle>Leave Feedback</DialogTitle>
-          <DialogDescription>
-            We&apos;d love to hear your thoughts, suggestions, or report any issues.
+          <DialogDescription className="text-secondary">
+            We&apos;d love to hear your thoughts, suggestions, or report any
+            issues.
           </DialogDescription>
         </DialogHeader>
         {submitSuccess ? (
@@ -112,11 +113,11 @@ export default function FeedbackDialog({
                 name="feedback"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel className="text-primary">Description</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Share your feedback here..."
-                        className="min-h-30 resize-none"
+                        className="min-h-30 resize-none bg-transparent"
                         {...field}
                       />
                     </FormControl>
@@ -130,6 +131,7 @@ export default function FeedbackDialog({
                   variant="outline"
                   onClick={() => onOpenChange(false)}
                   disabled={isSubmitting}
+                  className="bg-surface-raised border-border-muted text-zinc-300 hover:bg-surface-hover hover:text-zinc-300"
                 >
                   Cancel
                 </Button>

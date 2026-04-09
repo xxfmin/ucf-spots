@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Clock, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { RotateCcw, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import moment from "moment-timezone";
 
@@ -22,22 +22,24 @@ export function DateTimePicker({
   minDate,
   maxDate,
 }: DateTimePickerProps) {
-  const [selectedDate, setSelectedDate] = useState<Date>(
-    moment(initialDateTime).tz(TIMEZONE).toDate()
+  const initialMoment = useMemo(
+    () => moment(initialDateTime).tz(TIMEZONE),
+    [initialDateTime],
   );
-  const [currentMonth, setCurrentMonth] = useState(
-    moment(initialDateTime).tz(TIMEZONE)
+
+  const [selectedDate, setSelectedDate] = useState<Date>(() =>
+    initialMoment.toDate(),
   );
-  const [timeValue, setTimeValue] = useState(
-    moment(initialDateTime).tz(TIMEZONE).format("HH:mm")
+  const [currentMonth, setCurrentMonth] = useState(() => initialMoment.clone());
+  const [timeValue, setTimeValue] = useState(() =>
+    initialMoment.format("HH:mm"),
   );
 
   useEffect(() => {
-    const initial = moment(initialDateTime).tz(TIMEZONE);
-    setSelectedDate(initial.toDate());
-    setCurrentMonth(initial);
-    setTimeValue(initial.format("HH:mm"));
-  }, [initialDateTime]);
+    setSelectedDate(initialMoment.toDate());
+    setCurrentMonth(initialMoment.clone());
+    setTimeValue(initialMoment.format("HH:mm"));
+  }, [initialMoment]);
 
   const getCombinedDateTime = (date: Date, time: string): Date => {
     const [hours, minutes] = time.split(":").map(Number);
@@ -57,14 +59,13 @@ export function DateTimePicker({
     setTimeValue(e.target.value);
   };
 
+  const commit = (dateTime: Date) => {
+    onDateTimeChange?.(dateTime);
+    closeContainer?.();
+  };
+
   const handleConfirm = () => {
-    const dateTime = getCombinedDateTime(selectedDate, timeValue);
-    if (onDateTimeChange) {
-      onDateTimeChange(dateTime);
-    }
-    if (closeContainer) {
-      closeContainer();
-    }
+    commit(getCombinedDateTime(selectedDate, timeValue));
   };
 
   const handleReset = () => {
@@ -72,12 +73,7 @@ export function DateTimePicker({
     setSelectedDate(now.toDate());
     setCurrentMonth(now);
     setTimeValue(now.format("HH:mm"));
-    if (onDateTimeChange) {
-      onDateTimeChange(now.toDate());
-    }
-    if (closeContainer) {
-      closeContainer();
-    }
+    commit(now.toDate());
   };
 
   const minDateMoment = minDate
@@ -100,7 +96,6 @@ export function DateTimePicker({
   };
 
   const canGoPrevious = () => {
-    if (!minDateMoment) return true;
     const prevMonth = currentMonth.clone().subtract(1, "month");
     return prevMonth.isSameOrAfter(minDateMoment, "month");
   };
@@ -156,26 +151,26 @@ export function DateTimePicker({
     .format("M/D/YY h:mm A");
 
   return (
-    <div className="w-[min(280px,calc(100vw-1rem))] max-h-[calc(100svh-5rem)] overflow-y-auto bg-surface-raised rounded-lg border border-border-muted">
+    <div className="w-[min(280px,calc(100vw-1rem))] bg-surface-raised rounded-lg border border-border-muted">
       {/* Calendar Section */}
-      <div className="p-3">
+      <div className="p-2 sm:p-3">
         {/* Month Header */}
         <div className="flex items-center justify-between mb-2">
           <button
             onClick={previousMonth}
             disabled={!canGoPrevious()}
-            className="p-1 hover:bg-zinc-800 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1 hover:bg-zinc-800 rounded transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous month"
           >
             <ChevronLeft className="h-4 w-4 text-zinc-300" />
           </button>
-          <h3 className="text-sm font-medium text-zinc-100">
+          <h3 className="text-sm font-medium text-foreground">
             {currentMonth.format("MMMM YYYY")}
           </h3>
           <button
             onClick={nextMonth}
             disabled={!canGoNext()}
-            className="p-1 hover:bg-zinc-800 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-1 hover:bg-zinc-800 rounded transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next month"
           >
             <ChevronRight className="h-4 w-4 text-zinc-300" />
@@ -201,7 +196,7 @@ export function DateTimePicker({
               return (
                 <div
                   key={index}
-                  className="h-9 flex items-center justify-center text-zinc-600 text-sm"
+                  className="h-8 flex items-center justify-center text-zinc-600 text-sm"
                 >
                   {day}
                 </div>
@@ -217,20 +212,17 @@ export function DateTimePicker({
                 key={index}
                 onClick={() => !dayIsDisabled && handleDateSelect(day)}
                 disabled={dayIsDisabled}
-                className={`h-9 rounded-md text-sm transition-colors relative ${
+                className={`h-8 rounded-md text-sm transition-colors relative ${
                   dayIsDisabled
                     ? "text-zinc-600 cursor-not-allowed opacity-50"
                     : dayIsSelected
-                    ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/40"
-                    : dayIsToday
-                    ? "bg-zinc-800 text-zinc-200"
-                    : "text-zinc-300 hover:bg-zinc-800"
+                      ? "cursor-pointer bg-yellow-500/20 text-yellow-400 border border-yellow-500/40"
+                      : dayIsToday
+                        ? "cursor-pointer bg-zinc-800 text-zinc-200"
+                        : "cursor-pointer text-zinc-300 hover:bg-zinc-800"
                 }`}
               >
                 {day}
-                {dayIsSelected && (
-                  <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-zinc-900 rounded-full" />
-                )}
               </button>
             );
           })}
@@ -238,37 +230,37 @@ export function DateTimePicker({
       </div>
 
       {/* Time Input Section */}
-      <div className="border-t border-border-muted p-3">
+      <div className="border-t border-border-muted p-2 sm:p-3">
         <div className="flex items-center gap-3">
           <label className="text-xs text-zinc-300 whitespace-nowrap">
             Enter time
           </label>
-          <div className="relative flex-1">
-            <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400" />
+          <div className="flex-1 relative">
+            <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none z-10" />
             <Input
               type="time"
               value={timeValue}
               onChange={handleTimeChange}
-              className="pl-9 bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600"
+              className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
             />
           </div>
         </div>
       </div>
 
       {/* Bottom Section */}
-      <div className="border-t border-border-muted p-3 flex items-center justify-between">
+      <div className="border-t border-border-muted p-2 sm:p-3 flex items-center justify-between">
         <p className="text-xs text-zinc-400">{previewText}</p>
         <div className="flex items-center gap-2">
           <button
             onClick={handleReset}
-            className="h-7 px-2 flex items-center gap-1 rounded-md bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover text-xs font-medium transition-colors"
+            className="h-7 px-2 flex items-center gap-1 rounded-md bg-surface-raised border border-border-muted text-zinc-300 hover:bg-surface-hover text-xs font-medium transition-colors cursor-pointer"
           >
             <RotateCcw className="h-3 w-3" />
             Now
           </button>
           <button
             onClick={handleConfirm}
-            className="h-7 px-3 rounded-md bg-surface-raised text-zinc-200 hover:bg-surface-hover border border-border-muted text-xs font-medium transition-colors"
+            className="h-7 px-3 rounded-md bg-surface-raised text-zinc-200 hover:bg-surface-hover border border-border-muted text-xs font-medium transition-colors cursor-pointer"
           >
             Confirm
           </button>

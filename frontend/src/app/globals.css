@@ -192,3 +192,22 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* iOS time-input fixes: WebKit renders time values inside shadow DOM
+   pseudo-elements that don't inherit parent text-align or color. */
+input[type="time"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="time"]::-webkit-date-and-time-value {
+  text-align: right;
+}
+
+input[type="time"]::-webkit-datetime-edit {
+  text-align: right;
+}
+
+input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  text-align: right;
+}

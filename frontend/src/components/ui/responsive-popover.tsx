@@ -107,6 +107,7 @@ export function ResponsivePopover({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
         className={
           mobileContentClassName ??
           `w-[min(20rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] ${MOBILE_DIALOG_CLASS}`

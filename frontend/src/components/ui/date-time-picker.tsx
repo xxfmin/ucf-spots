@@ -241,7 +241,7 @@ export function DateTimePicker({
               type="time"
               value={timeValue}
               onChange={handleTimeChange}
-              className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+              className="bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-base sm:text-sm text-right cursor-pointer [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
             />
           </div>
         </div>

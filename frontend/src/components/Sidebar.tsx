@@ -487,7 +487,7 @@ export default function Sidebar({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setStartTime(e.target.value)
                   }
-                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
+                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 h-11 sm:h-9 text-base sm:text-sm text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
                 />
               </div>
               {startTime && (
@@ -513,7 +513,7 @@ export default function Sidebar({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFreeUntil(e.target.value)
                   }
-                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
+                  className={`bg-surface-raised border-border-muted text-zinc-200 focus-visible:ring-zinc-600 pl-9 h-11 sm:h-9 text-base sm:text-sm text-right cursor-pointer ${HIDE_TIME_PICKER_INDICATOR}`}
                 />
               </div>
               {freeUntil && (

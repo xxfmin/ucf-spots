@@ -76,6 +76,12 @@ TERM_LABELS = {
     'FA25': 'Fall 2025',
 }
 
+TERM_TO_STRM = {
+    'SP25': '1830', 'SU25': '1840', 'FA25': '1850',
+    'SP26': '1860', 'SU26': '1870', 'FA26': '1880',
+    'SP27': '1890',
+}
+
 
 def setup_driver(headless: bool = True) -> webdriver.Chrome:
     """Initialize Chrome WebDriver with options."""
@@ -98,6 +104,42 @@ def wait_for_page_load(driver: webdriver.Chrome, timeout: int = 30):
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
     time.sleep(0.3)
+
+
+def select_term(driver: webdriver.Chrome, term_code: str) -> None:
+    """Select the correct term from PeopleSoft's term dropdown.
+
+    The dropdown element is CLASS_SRCH_WRK2_STRM$35$. If the desired term
+    is already selected, this is a no-op. Otherwise, selects by STRM value
+    and waits for the AJAX refresh.
+    """
+    strm = TERM_TO_STRM.get(term_code)
+    if strm is None:
+        raise ValueError(
+            f"Unknown term code '{term_code}'. "
+            f"Known codes: {', '.join(sorted(TERM_TO_STRM))}"
+        )
+
+    try:
+        term_dropdown = Select(
+            driver.find_element(By.ID, "CLASS_SRCH_WRK2_STRM$35$")
+        )
+        current = term_dropdown.first_selected_option.get_attribute("value")
+        if current == strm:
+            return
+
+        term_dropdown.select_by_value(strm)
+        logger.info("Selected term: %s (STRM %s)", term_code, strm)
+
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located(
+                (By.ID, "CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH")
+            )
+        )
+        time.sleep(0.5)
+    except (NoSuchElementException, TimeoutException) as e:
+        logger.error("Failed to select term %s: %s", term_code, e)
+        raise
 
 
 # A single blank-career ("") pass returns ALL careers (UGRD + GRAD + MED + OTHR)
@@ -146,7 +188,7 @@ def dismiss_overflow_confirmation(driver: webdriver.Chrome, subject_code: str, t
     return False
 
 
-def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "", debug: bool = False) -> str:
+def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = "", debug: bool = False, term_code: str = "SP26") -> str:
     """
     Execute search for a specific subject and return the results HTML.
 
@@ -193,6 +235,9 @@ def search_subject(driver: webdriver.Chrome, subject_code: str, career: str = ""
             EC.element_to_be_clickable((By.ID, "CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH"))
         )
         time.sleep(0.5)  # PeopleSoft JS initialization buffer
+
+        # 0. Select term FIRST, before any other field interaction
+        select_term(driver, term_code)
 
         # Find elements with correct UCF PeopleSoft IDs
         try:
@@ -479,11 +524,12 @@ def _search_single_career_with_retry(
     code: str,
     career: str,
     debug: bool,
+    term_code: str = "SP26",
 ) -> str:
     """Search a single career level with exponential backoff on failure."""
     for attempt in range(MAX_RETRIES + 1):
         try:
-            html_content = search_subject(driver, code, career=career, debug=debug)
+            html_content = search_subject(driver, code, career=career, debug=debug, term_code=term_code)
         except WebDriverException:
             raise  # Let caller handle driver crashes
         if html_content == NO_RESULTS_SENTINEL:
@@ -509,6 +555,7 @@ def scrape_subject_with_retry(
     code: str,
     debug: bool,
     careers: Optional[List[str]] = None,
+    term_code: str = "SP26",
 ) -> list:
     """Scrape a subject across the given career levels and merge the courses.
 
@@ -531,7 +578,7 @@ def scrape_subject_with_retry(
     hit_overflow = False
 
     for career in careers:
-        result = _search_single_career_with_retry(driver, code, career, debug)
+        result = _search_single_career_with_retry(driver, code, career, debug, term_code=term_code)
         career_label = career or "blank"
         if result == NO_RESULTS_SENTINEL:
             any_results_or_no_results = True
@@ -569,6 +616,7 @@ def scrape_subject_with_retry(
         )
         return scrape_subject_with_retry(
             driver, code, debug=debug, careers=["UGRD", "GRAD"],
+            term_code=term_code,
         )
 
     if not any_results_or_no_results and not hit_overflow:
@@ -663,7 +711,7 @@ def scrape_all_subjects(
                 driver = setup_driver(headless=headless)
 
             try:
-                courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers)
+                courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers, term_code=term_code)
             except WebDriverException as e:
                 logger.error("Driver crashed while scraping %s: %s. Restarting...", code, e)
                 try:
@@ -673,7 +721,7 @@ def scrape_all_subjects(
                 driver = setup_driver(headless=headless)
                 # Retry this subject once with the fresh driver
                 try:
-                    courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers)
+                    courses = scrape_subject_with_retry(driver, code, debug=debug, careers=careers, term_code=term_code)
                 except WebDriverException as e2:
                     logger.error("Driver crashed again for %s: %s", code, e2)
                     courses = None  # Signal total failure

@@ -29,6 +29,12 @@
     "SAT": "LOCKED",
     "SUN": "LOCKED"
   },
+  "CHEM": {
+    "M-TH": "7:30AM-10:00PM",
+    "F": "7:30AM-6:00PM",
+    "SAT": "LOCKED",
+    "SUN": "LOCKED"
+  },
   "CB1": {
     "M-TH": "7:30AM-10:00PM",
     "F": "7:30AM-6:00PM",

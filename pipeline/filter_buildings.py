@@ -25,6 +25,8 @@ class BuildingDataFilter:
             "PAC",
             "BIO",
             "HPH",
+            "CHEM",
+            "HS2",
         }
         # Minimum number of rooms (inclusive)
         self.min_rooms = 4

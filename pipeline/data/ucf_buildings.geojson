@@ -150,6 +150,26 @@
         "coordinates": [-81.20317253774803, 28.602861724000036],
         "type": "Point"
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "HS2"
+      },
+      "geometry": {
+        "coordinates": [-81.19826, 28.60263],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "CHEM"
+      },
+      "geometry": {
+        "coordinates": [-81.20010, 28.60118],
+        "type": "Point"
+      }
     }
   ]
 }

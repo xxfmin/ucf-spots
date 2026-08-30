@@ -25,3 +25,9 @@ CLAUDE.md
 .env.local
 .env.*.local
 .vercel
+
+.agents
+.claude
+docs
+skills-lock.json
+CONTEXT.md

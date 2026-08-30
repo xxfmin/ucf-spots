@@ -98,6 +98,16 @@ def run_load(term: str, dry_run: bool = False) -> None:
     load_data(term=term, dry_run=dry_run)
 
 
+def run_refresh(term: str, dry_run: bool = False) -> None:
+    """Step 7: Force a room availability cache refresh for today.
+
+    The term is not used: the cache is keyed by date, not by term.
+    """
+    from load_to_postgres import refresh_availability_cache
+
+    refresh_availability_cache(dry_run=dry_run)
+
+
 STEP_RUNNERS = {
     "scrape": run_scrape,
     "transform": run_transform,
@@ -105,6 +115,7 @@ STEP_RUNNERS = {
     "hours": run_hours,
     "coordinates": run_coordinates,
     "load": run_load,
+    "refresh": run_refresh,
 }
 
 
@@ -132,7 +143,7 @@ def validate_step_input(term: str, step: str) -> None:
 def run_pipeline(
     term: str,
     start_from: str = "scrape",
-    stop_after: str = "load",
+    stop_after: str = "refresh",
     dry_run: bool = False,
 ) -> None:
     """Run the pipeline from start_from through stop_after."""
@@ -185,8 +196,8 @@ def main():
     parser.add_argument(
         "--stop-after",
         choices=STEP_NAMES,
-        default="load",
-        help="Stop after this step (default: load)",
+        default="refresh",
+        help="Stop after this step (default: refresh)",
     )
     parser.add_argument(
         "--skip-scrape",

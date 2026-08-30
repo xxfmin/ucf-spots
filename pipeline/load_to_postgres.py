@@ -9,9 +9,15 @@ Output: Populates buildings, rooms, class_schedule, and academic_terms tables
 from pathlib import Path
 import json
 from typing import List, Dict, Set, Optional
-from datetime import datetime
+from datetime import date, datetime
 import os
 import sys
+from zoneinfo import ZoneInfo
+
+
+# All availability is evaluated in Eastern Time. Using the UTC date here would
+# refresh the wrong day's cache after 20:00 ET, when UTC has already rolled over.
+EASTERN = ZoneInfo("America/New_York")
 
 
 # Number of records to insert per batch
@@ -550,6 +556,34 @@ def load_data(
     print(f"  Class schedules: {len(schedules)}")
     if academic_terms_data:
         print(f"  Academic terms: {len(academic_terms_data)}")
+
+
+def refresh_availability_cache(
+    target_date: Optional[date] = None, dry_run: bool = False
+) -> str:
+    """Force a room_availability_cache rebuild for a single date.
+
+    load_data replaces class_schedule wholesale, so any cache rows already
+    computed for today still reflect the schedule that was just deleted. The
+    daily pg_cron job (refresh-room-cache-daily, 06:00 ET) does not correct
+    this until the next morning, so a load is followed by an explicit refresh
+    of the current date.
+
+    Returns the ISO date that was refreshed.
+    """
+    if target_date is None:
+        target_date = datetime.now(EASTERN).date()
+    target_iso = target_date.isoformat()
+
+    if dry_run:
+        print(f"  DRY RUN - would refresh availability cache for {target_iso}")
+        return target_iso
+
+    get_supabase().rpc(
+        "refresh_room_availability_cache", {"target_date": target_iso}
+    ).execute()
+    print(f"  ✓ Refreshed availability cache for {target_iso}")
+    return target_iso
 
 
 def main():

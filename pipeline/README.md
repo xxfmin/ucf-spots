@@ -4,7 +4,7 @@ This directory contains scripts for collecting and processing UCF course and bui
 
 ## Orchestrator
 
-`run_pipeline.py` runs all 6 implemented steps in order (`scrape` → `transform` → `filter` → `hours` → `coordinates` → `load`) with shared logging, input/output validation, and partial-run support. Step config (file paths, step names) lives in `pipeline_config.py`; reusable scraping/parsing helpers live in `parsers.py`.
+`run_pipeline.py` runs all 7 implemented steps in order (`scrape` → `transform` → `filter` → `hours` → `coordinates` → `load` → `refresh`) with shared logging, input/output validation, and partial-run support. Step config (file paths, step names) lives in `pipeline_config.py`; reusable scraping/parsing helpers live in `parsers.py`.
 
 ```bash
 python run_pipeline.py --term SP26                              # Run all steps
@@ -14,7 +14,7 @@ python run_pipeline.py --term SP26 --dry-run                    # Validate witho
 python run_pipeline.py --term SP26 --verbose                    # Debug logging
 ```
 
-Step names: `scrape`, `transform`, `filter`, `hours`, `coordinates`, `load`. Individual step scripts below remain runnable standalone.
+Step names: `scrape`, `transform`, `filter`, `hours`, `coordinates`, `load`, `refresh`. Individual step scripts below remain runnable standalone.
 
 ## Scripts & Data Flow
 

@@ -10,7 +10,7 @@ from pipeline_config import STEP_NAMES, input_file, output_file
 
 class TestGetStepsToRun:
     def test_all_steps(self):
-        steps = get_steps_to_run("scrape", "load")
+        steps = get_steps_to_run("scrape", "refresh")
         assert steps == STEP_NAMES
 
     def test_skip_scrape(self):
@@ -204,9 +204,65 @@ class TestStepRunners:
 
 class TestStepNames:
     def test_step_count(self):
-        assert len(STEP_NAMES) == 6
+        assert len(STEP_NAMES) == 7
 
     def test_step_order(self):
         assert STEP_NAMES == [
-            "scrape", "transform", "filter", "hours", "coordinates", "load"
+            "scrape", "transform", "filter", "hours", "coordinates",
+            "load", "refresh",
         ]
+
+
+class TestRefreshStep:
+    """The refresh step forces a room_availability_cache rebuild after load.
+
+    Needed because load_to_postgres replaces class_schedule wholesale, leaving
+    today's cache rows derived from schedules that no longer exist. The daily
+    pg_cron job only runs at 06:00 ET, so a mid-day load would otherwise serve
+    stale availability until the next morning.
+    """
+
+    def test_refresh_is_last_step(self):
+        assert STEP_NAMES[-1] == "refresh"
+        assert STEP_NAMES.index("refresh") == STEP_NAMES.index("load") + 1
+
+    def test_refresh_has_no_file_input_or_output(self):
+        assert input_file("SP26", "refresh") is None
+        assert output_file("SP26", "refresh") is None
+
+    def test_full_pipeline_range_includes_refresh(self):
+        assert get_steps_to_run("scrape", "refresh") == STEP_NAMES
+
+    def test_refresh_calls_rpc_with_eastern_today(self):
+        from datetime import date
+
+        with patch("load_to_postgres.get_supabase") as mock_client:
+            from load_to_postgres import refresh_availability_cache
+
+            used = refresh_availability_cache(target_date=date(2026, 8, 24))
+
+        assert used == "2026-08-24"
+        mock_client.return_value.rpc.assert_called_once_with(
+            "refresh_room_availability_cache", {"target_date": "2026-08-24"}
+        )
+
+    def test_refresh_defaults_to_eastern_date(self):
+        """Must use America/New_York, not UTC: after 20:00 ET the UTC date has
+        already rolled over and would refresh tomorrow's cache instead."""
+        with patch("load_to_postgres.get_supabase"):
+            from load_to_postgres import refresh_availability_cache
+
+            used = refresh_availability_cache()
+
+        from datetime import datetime as dt
+        from zoneinfo import ZoneInfo
+
+        assert used == dt.now(ZoneInfo("America/New_York")).date().isoformat()
+
+    def test_refresh_dry_run_does_not_call_rpc(self):
+        with patch("load_to_postgres.get_supabase") as mock_client:
+            from load_to_postgres import refresh_availability_cache
+
+            refresh_availability_cache(dry_run=True)
+
+        mock_client.return_value.rpc.assert_not_called()

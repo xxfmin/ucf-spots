@@ -15,11 +15,12 @@ STEP_NAMES = [
     "hours",
     "coordinates",
     "load",
+    "refresh",
 ]
 
 # Steps that have no file input or output (None means N/A for that step)
-_NO_INPUT_STEPS = {"scrape"}
-_NO_OUTPUT_STEPS = {"load"}
+_NO_INPUT_STEPS = {"scrape", "refresh"}
+_NO_OUTPUT_STEPS = {"load", "refresh"}
 
 
 def input_file(term: str, step: str) -> Optional[Path]:

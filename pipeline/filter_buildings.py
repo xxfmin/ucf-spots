@@ -27,6 +27,12 @@ class BuildingDataFilter:
             "HPH",
             "CHEM",
             "HS2",
+            # Off main campus (UCF Downtown / Health Sciences). First appeared
+            # in FA26; no entry in ucf_buildings.geojson or building_hours.json.
+            "CMB",
+            "CON",
+            "OTC5",
+            "WDPC",
         }
         # Minimum number of rooms (inclusive)
         self.min_rooms = 4
